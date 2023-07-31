@@ -1,0 +1,48 @@
+@import "./styles/var.scss";
+
+html,
+body,
+#app {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
+}
+
+body {
+  color: var(--color-text-primary);
+  background: var(--color-background);
+}
+
+.scroll-x {
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.icon-btn {
+  flex: 0 0 auto;
+  margin: 0;
+  display: inline-block;
+  padding: 0;
+  width: 27px;
+  height: 27px;
+  border: 0;
+  appearance: none;
+  background: var(--icon-btn-color, var(--color-text-secondary));
+  mask-size: var(--icon-btn-image-size, 28px 26px);
+  mask-position: center;
+  mask-image: var(--icon-btn-image);
+  mask-repeat: no-repeat;
+
+  &:hover {
+    background: var(--icon-btn-color, var(--color-text-primary));
+  }
+
+  &:checked {
+    background: var(--icon-btn-color, var(--legacy-accent-color));
+  }
+}

@@ -1,0 +1,62 @@
+.treeNode {
+  display: flex;
+  align-items: center;
+  word-break: break-all;
+
+  &::before {
+    content: "";
+    display: inline-block;
+    flex: 0 0 auto;
+    width: 13px;
+    height: 12px;
+  }
+}
+
+.expandable {
+  &::before {
+    background: var(--color-text-secondary);
+    mask-image: url("../../../../assets/triangles.svg");
+    mask-size: 32px 24px;
+    mask-position: 0 0;
+  
+    .expanded > & {
+      mask-position: -16px 0;
+    }
+  }
+}
+
+.root {
+  font-style: italic;
+  white-space: pre-wrap;
+}
+
+.focused {
+  background: var(--item-hover-color);
+}
+
+.children {
+  display: none;
+  padding-left: 12px;
+  white-space: pre;
+
+  .expanded > & {
+    display: block;
+  }
+}
+
+.propertyName {
+  font-weight: 700;
+  color: var(--color-token-tag);
+}
+
+.previewPropertyName {
+  color: var(--color-text-secondary);
+}
+
+.numberValue {
+  color: var(--color-syntax-3);
+}
+
+.stringValue {
+  color: var(--color-token-string-special);
+}

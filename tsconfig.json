@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "strict": true,
+    "skipLibCheck": true,
+    "target": "ES2019",
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  },
+  "include": [
+    "packages/**/*",
+    "packages/**/*.vue"
+  ]
+}

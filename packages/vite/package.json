@@ -1,0 +1,30 @@
+{
+  "name": "@tuner-proxy/vite",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "git clean -dfx dist && tsc",
+    "dev": "tsc -w",
+    "lint": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@tuner-proxy/core": "workspace:^",
+    "@tuner-proxy/util": "workspace:^",
+    "@types/node": "^20.4.5",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.8"
+  },
+  "peerDependencies": {
+    "@tuner-proxy/core": "workspace:^",
+    "vite": "^4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gzzhanghao/tuner.git",
+    "directory": "packages/vite"
+  }
+}
