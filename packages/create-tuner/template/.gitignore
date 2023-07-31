@@ -1,0 +1,8 @@
+/dist
+/ssl
+
+node_modules
+.DS_store
+package-lock.json
+yarn-error.log
+.history
