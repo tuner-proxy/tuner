@@ -1,0 +1,26 @@
+name: Node.js Package
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+-*'
+
+jobs:
+  publish-npm:
+    permissions:
+      id-token: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm run build
+      - run: pnpm run test
+
+      - run: pnpm run pub
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}

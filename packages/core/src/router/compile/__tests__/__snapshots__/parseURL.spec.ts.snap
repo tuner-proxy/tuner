@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parseURL dns wildcard 1`] = `
+Object {
+  "hostname": "*.*.example.com",
+  "path": undefined,
+  "pathname": undefined,
+  "port": undefined,
+  "protocol": undefined,
+  "search": undefined,
+}
+`;
+
+exports[`parseURL full 1`] = `
+Object {
+  "hostname": "*.*.example.com",
+  "path": "/example-path/name?foo&bar=baz",
+  "pathname": "/example-path/name",
+  "port": "80|443",
+  "protocol": "https|wss:",
+  "search": "?foo&bar=baz",
+}
+`;
+
+exports[`parseURL hostname 1`] = `
+Object {
+  "hostname": "example.com",
+  "path": undefined,
+  "pathname": undefined,
+  "port": undefined,
+  "protocol": undefined,
+  "search": undefined,
+}
+`;
+
+exports[`parseURL multiple protocol 1`] = `
+Object {
+  "hostname": undefined,
+  "path": undefined,
+  "pathname": undefined,
+  "port": undefined,
+  "protocol": "https|wss:",
+  "search": undefined,
+}
+`;
+
+exports[`parseURL pathname 1`] = `
+Object {
+  "hostname": undefined,
+  "path": "/example-path/name",
+  "pathname": "/example-path/name",
+  "port": undefined,
+  "protocol": undefined,
+  "search": undefined,
+}
+`;
+
+exports[`parseURL pathname with route params 1`] = `
+Object {
+  "hostname": undefined,
+  "path": "/example-path/:param/::longParam",
+  "pathname": "/example-path/:param/::longParam",
+  "port": undefined,
+  "protocol": undefined,
+  "search": undefined,
+}
+`;
+
+exports[`parseURL port 1`] = `
+Object {
+  "hostname": undefined,
+  "path": undefined,
+  "pathname": undefined,
+  "port": "80|443",
+  "protocol": undefined,
+  "search": undefined,
+}
+`;
+
+exports[`parseURL protocol 1`] = `
+Object {
+  "hostname": undefined,
+  "path": undefined,
+  "pathname": undefined,
+  "port": undefined,
+  "protocol": "https:",
+  "search": undefined,
+}
+`;
+
+exports[`parseURL query 1`] = `
+Object {
+  "hostname": undefined,
+  "path": "?foo&bar=baz",
+  "pathname": undefined,
+  "port": undefined,
+  "protocol": undefined,
+  "search": "?foo&bar=baz",
+}
+`;
