@@ -1,0 +1,32 @@
+{
+  "name": "@tuner-proxy/util",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "git clean -dfx dist && tsc",
+    "dev": "tsc -w",
+    "prepack": "pnpm build",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "event-to-promise": "^0.8.0",
+    "mime-types": "^2.1.35",
+    "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "@tuner-proxy/core": "^0.1.0",
+    "@types/event-to-promise": "^0.7.2",
+    "@types/mime-types": "^2.1.1",
+    "@types/node": "^20.4.5",
+    "@types/ws": "^8.5.5",
+    "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "@tuner-proxy/core": "^0.1.0"
+  }
+}

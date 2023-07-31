@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`flatten common 1`] = `
+Array [
+  Object {
+    "handlers": Array [
+      Object {
+        "status": 200,
+      },
+    ],
+    "patterns": Array [
+      "//example.com",
+    ],
+  },
+]
+`;
+
+exports[`flatten disable fragment 1`] = `
+Array [
+  Object {
+    "handlers": Array [
+      Object {
+        "status": 200,
+      },
+    ],
+    "patterns": Array [
+      "//example.com",
+    ],
+  },
+]
+`;
+
+exports[`flatten disable fragment 2`] = `Array []`;
+
+exports[`flatten multiple handlers 1`] = `
+Array [
+  Object {
+    "handlers": Array [
+      [Function],
+    ],
+    "patterns": Array [
+      "//example.com",
+    ],
+  },
+  Object {
+    "handlers": Array [
+      Object {
+        "status": 404,
+      },
+    ],
+    "patterns": Array [
+      "//example.com",
+    ],
+  },
+]
+`;
+
+exports[`flatten with child routes 1`] = `
+Array [
+  Object {
+    "handlers": Array [
+      Object {
+        "status": 200,
+      },
+    ],
+    "patterns": Array [
+      "//example.com",
+      "//demo.com",
+    ],
+  },
+  Object {
+    "handlers": Array [
+      Object {
+        "status": 404,
+      },
+    ],
+    "patterns": Array [
+      "//example.com/not-found",
+      "//demo.com/not-found",
+    ],
+  },
+]
+`;

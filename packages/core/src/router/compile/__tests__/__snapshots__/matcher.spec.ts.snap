@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matcher full 'http|https://*.*.example.com:80|443/pathname/::param?foo&bar=baz' match {"protocol":"http:","hostname":"foo.example.com","port":443,"pathname":"/pathname/with/param","searchParams":"foo=baz&bar=baz"} 1`] = `
+Object {
+  "param": "with/param",
+}
+`;
+
+exports[`matcher full 'http|https://*.*.example.com:80|443/pathname/::param?foo&bar=baz' not match {"protocol":"http:","port":21} 1`] = `undefined`;
+
+exports[`matcher full 'http|https://*.*.example.com:80|443/pathname/::param?foo&bar=baz' not match {"protocol":"http:","port":443,"hostname":"foo.com"} 1`] = `undefined`;
+
+exports[`matcher full 'http|https://*.*.example.com:80|443/pathname/::param?foo&bar=baz' not match {"protocol":"http:","port":443,"hostname":"foo.example.com","searchParams":"foo=&bar=bak"} 1`] = `undefined`;
+
+exports[`matcher full 'http|https://*.*.example.com:80|443/pathname/::param?foo&bar=baz' not match {"protocol":"ws:"} 1`] = `undefined`;
+
+exports[`matcher hostname '' match {"hostname":"example.com"} 1`] = `true`;
+
+exports[`matcher hostname '*.*.example.com' match {"hostname":"foo.bar.baz.example.com"} 1`] = `true`;
+
+exports[`matcher hostname '*.*.example.com' match {"hostname":"foo.bar.example.com"} 1`] = `true`;
+
+exports[`matcher hostname '*.*.example.com' match {"hostname":"foo.example.com"} 1`] = `true`;
+
+exports[`matcher hostname '*.*.example.com' not match {"hostname":"example.com"} 1`] = `false`;
+
+exports[`matcher hostname '*.*.example.com' not match {"hostname":"foo.com"} 1`] = `false`;
+
+exports[`matcher hostname '*.*.example.com' not match {"hostname":"foo.example.com.net"} 1`] = `false`;
+
+exports[`matcher hostname '*.example.com' match {"hostname":"foo.example.com"} 1`] = `true`;
+
+exports[`matcher hostname '*.example.com' not match {"hostname":"example.com"} 1`] = `false`;
+
+exports[`matcher hostname '*.example.com' not match {"hostname":"foo.bar.example.com"} 1`] = `false`;
+
+exports[`matcher hostname '*.example.com' not match {"hostname":"foo.com"} 1`] = `false`;
+
+exports[`matcher hostname 'example.com' match {"hostname":"example.com"} 1`] = `true`;
+
+exports[`matcher hostname 'example.com' not match {"hostname":"foo.com"} 1`] = `false`;
+
+exports[`matcher hostname 'example.com' not match {"hostname":"foo.example.com"} 1`] = `false`;
+
+exports[`matcher pathname '' match {"pathname":"/"} 1`] = `Object {}`;
+
+exports[`matcher pathname '' match {"pathname":"/foo/bar"} 1`] = `Object {}`;
+
+exports[`matcher pathname '/absolute/path-name' match {"pathname":"/absolute/path-name"} 1`] = `Object {}`;
+
+exports[`matcher pathname '/absolute/path-name' not match {"pathname":"/absolute"} 1`] = `undefined`;
+
+exports[`matcher pathname '/absolute/path-name' not match {"pathname":"/absolute/path-name/"} 1`] = `undefined`;
+
+exports[`matcher pathname '/absolute/path-name' not match {"pathname":"/absolute/path-name/child"} 1`] = `undefined`;
+
+exports[`matcher pathname '/with/::longParam' match {"pathname":"/with/long/param/value"} 1`] = `
+Object {
+  "longParam": "long/param/value",
+}
+`;
+
+exports[`matcher pathname '/with/::longParam' match {"pathname":"/with/param-value"} 1`] = `
+Object {
+  "longParam": "param-value",
+}
+`;
+
+exports[`matcher pathname '/with/::longParam' not match {"pathname":"/not-match/"} 1`] = `undefined`;
+
+exports[`matcher pathname '/with/::longParam' not match {"pathname":"/with"} 1`] = `undefined`;
+
+exports[`matcher pathname '/with/::longParam' not match {"pathname":"/with/"} 1`] = `undefined`;
+
+exports[`matcher pathname '/with/:param' match {"pathname":"/with/param-value"} 1`] = `
+Object {
+  "param": "param-value",
+}
+`;
+
+exports[`matcher pathname '/with/:param' not match {"pathname":"/with"} 1`] = `undefined`;
+
+exports[`matcher pathname '/with/:param' not match {"pathname":"/with/"} 1`] = `undefined`;
+
+exports[`matcher pathname '/with/:param' not match {"pathname":"/with/param/child"} 1`] = `undefined`;
+
+exports[`matcher port '' match {"port":"80"} 1`] = `true`;
+
+exports[`matcher port '' match {"port":80} 1`] = `true`;
+
+exports[`matcher port '80' match {"port":"80"} 1`] = `true`;
+
+exports[`matcher port '80' match {"port":80} 1`] = `true`;
+
+exports[`matcher port '80' not match {"port":"443"} 1`] = `false`;
+
+exports[`matcher port '80' not match {"port":443} 1`] = `false`;
+
+exports[`matcher port '80|443' match {"port":"80"} 1`] = `true`;
+
+exports[`matcher port '80|443' match {"port":"443"} 1`] = `true`;
+
+exports[`matcher port '80|443' match {"port":80} 1`] = `true`;
+
+exports[`matcher port '80|443' match {"port":443} 1`] = `true`;
+
+exports[`matcher port '80|443' not match {"port":"21"} 1`] = `false`;
+
+exports[`matcher port '80|443' not match {"port":21} 1`] = `false`;
+
+exports[`matcher protocol '' match {"protocol":"http:"} 1`] = `true`;
+
+exports[`matcher protocol 'http:' match {"protocol":"http:"} 1`] = `true`;
+
+exports[`matcher protocol 'http:' not match {"protocol":"https:"} 1`] = `false`;
+
+exports[`matcher protocol 'http|https:' match {"protocol":"http:"} 1`] = `true`;
+
+exports[`matcher protocol 'http|https:' match {"protocol":"https:"} 1`] = `true`;
+
+exports[`matcher protocol 'http|https:' not match {"protocol":"ws:"} 1`] = `false`;
+
+exports[`matcher protocol 'http|https:' not match {"protocol":"wss:"} 1`] = `false`;
+
+exports[`matcher search '' match {"searchParams":""} 1`] = `true`;
+
+exports[`matcher search '' match {"searchParams":"foo=bar&baz="} 1`] = `true`;
+
+exports[`matcher search '?foo' match {"searchParams":"foo="} 1`] = `true`;
+
+exports[`matcher search '?foo' match {"searchParams":"foo=&baz="} 1`] = `true`;
+
+exports[`matcher search '?foo' match {"searchParams":"foo=bar"} 1`] = `true`;
+
+exports[`matcher search '?foo' match {"searchParams":"foo=bar&baz="} 1`] = `true`;
+
+exports[`matcher search '?foo' not match {"searchParams":""} 1`] = `false`;
+
+exports[`matcher search '?foo' not match {"searchParams":"bar="} 1`] = `false`;
+
+exports[`matcher search '?foo=bar' match {"searchParams":"foo=bar"} 1`] = `true`;
+
+exports[`matcher search '?foo=bar' match {"searchParams":"foo=bar&baz="} 1`] = `true`;
+
+exports[`matcher search '?foo=bar' not match {"searchParams":""} 1`] = `false`;
+
+exports[`matcher search '?foo=bar' not match {"searchParams":"foo="} 1`] = `false`;
+
+exports[`matcher search '?foo=bar' not match {"searchParams":"foo=baz"} 1`] = `false`;

@@ -1,0 +1,28 @@
+.wrap {
+  display: flex;
+}
+
+.resizer {
+  position: relative;
+  flex: 0 0 auto;
+  width: 0;
+  border-right: 1px solid var(--color-details-hairline);
+}
+
+.resizeHandle {
+  position: absolute;
+  top: 0;
+  left: -3px;
+  width: 1px;
+  padding: 0 3px;
+  height: 100%;
+  cursor: ew-resize;
+  z-index: 2;
+}
+
+.item {
+  flex: 1 1 auto;
+  width: 1px;
+  min-width: 50px;
+  z-index: 1;
+}
