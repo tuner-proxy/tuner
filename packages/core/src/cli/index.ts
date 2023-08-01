@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import { program } from 'commander';
 
+import { version } from '../../package.json';
 import { log } from '../utils';
 
 import { run } from './run';
@@ -14,8 +15,7 @@ process.on('unhandledRejection', (error: any) => {
 });
 
 program
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  .version(require('../../package.json').version)
+  .version(version)
   .arguments('[entry]')
   .option('-p, --port <port>', 'proxy server port', '8123')
   .option('-k, --key <path>', 'ssl private key path', 'ssl/key.pem')
