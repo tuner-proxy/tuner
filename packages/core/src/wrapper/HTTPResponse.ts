@@ -27,7 +27,7 @@ export class HTTPResponse {
 
   headers: http.IncomingHttpHeaders;
 
-  private body: httpStream.BodyInfo;
+  protected body: httpStream.BodyInfo;
 
   constructor(options: HTTPResponseOptions) {
     this.raw = options.raw;

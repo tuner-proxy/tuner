@@ -1,5 +1,8 @@
+import * as dns from 'dns';
 import * as http from 'http';
 import * as net from 'net';
+import * as os from 'os';
+import { promisify } from 'util';
 
 import chalk from 'chalk';
 import waitFor from 'event-to-promise';
@@ -9,6 +12,7 @@ import { Router } from './router';
 import { ConnectResult, HTTPResult } from './router/handler';
 import { Upstream } from './upstream';
 import { log } from './utils';
+import { BaseRequest } from './wrapper/BaseRequest';
 import { ConnectRequest } from './wrapper/ConnectRequest';
 import { HTTPRequest } from './wrapper/HTTPRequest';
 import { HTTPResponse } from './wrapper/HTTPResponse';
@@ -18,6 +22,8 @@ export interface ServerOptions {
   rootCA: Certificate;
   router: Router;
 }
+
+const resolve = promisify(dns.resolve);
 
 export class Server {
   rootCA: Certificate;
@@ -119,7 +125,7 @@ export class Server {
         req.originalUrl,
         req,
         async () => {
-          if (!(await req.isLoopBack())) {
+          if (!(await isLoopBack(req))) {
             return req.send();
           }
           log(chalk.red(req.method), chalk.red('loop back'), req.originalUrl);
@@ -174,7 +180,7 @@ export class Server {
         req.originalUrl,
         req,
         async () => {
-          if (!(await req.isLoopBack())) {
+          if (!(await isLoopBack(req))) {
             return req.connect();
           }
           log(chalk.red('UPGRADE'), chalk.red('loop back'), req.originalUrl);
@@ -217,4 +223,23 @@ export class Server {
       req.socket.destroy();
     }
   }
+}
+
+async function isLoopBack(req: BaseRequest) {
+  const interfaces = os.networkInterfaces();
+  let address = req.hostname;
+  if (!net.isIP(address)) {
+    [address] = await resolve(address);
+  }
+  const hasLoopBack = Object.values(interfaces).some(
+    (list) => list?.some((item) => item.address === address),
+  );
+  if (!hasLoopBack) {
+    return false;
+  }
+  const addr = req.svr.proxySvr.address();
+  if (!addr || typeof addr === 'string') {
+    return false;
+  }
+  return addr.port === req.port;
 }

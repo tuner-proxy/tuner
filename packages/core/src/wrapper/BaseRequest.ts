@@ -1,8 +1,3 @@
-import * as dns from 'dns';
-import * as net from 'net';
-import * as os from 'os';
-import { promisify } from 'util';
-
 import { Server } from '../Server';
 import { parseHost, stringifyHost } from '../utils';
 
@@ -27,8 +22,6 @@ export type UpReadOptions = ConnectUpReadOptions | PacUpReadOptions;
 
 export type UpstreamType = null | false | undefined | string | UpReadOptions;
 
-const resolve = promisify(dns.resolve);
-
 export interface BaseRequestOptions {
   encrypted: boolean;
   method: string;
@@ -37,24 +30,54 @@ export interface BaseRequestOptions {
 }
 
 export abstract class BaseRequest {
+  /**
+   * Request type
+   */
   abstract readonly type: string;
 
+  /**
+   * Original request URL
+   */
   abstract readonly originalUrl: string;
 
+  /**
+   * Request protocol
+   */
   abstract protocol: string;
 
+  /**
+   * Upstream proxy list
+   */
   upstream?: UpstreamType | UpstreamType[];
 
+  /**
+   * HTTP request method
+   */
   method: string;
 
+  /**
+   * `true` if the underlying connection is TLS encrypted
+   */
   encrypted: boolean;
 
+  /**
+   * Request hostname
+   */
   hostname!: string;
 
+  /**
+   * Request port
+   */
   port!: number;
 
+  /**
+   * Pathname of the request URL
+   */
   pathname!: string;
 
+  /**
+   * Request params resolved from named route parameter
+   */
   params: Record<string, string> = {};
 
   protected lazySearchParams = new LazyURLSearchParams();
@@ -69,10 +92,16 @@ export abstract class BaseRequest {
     this.path = options.path || '';
   }
 
+  /**
+   * A stringifier that returns a string containing the whole request URL
+   */
   get href() {
     return `${this.protocol}//${this.host}${this.path}`;
   }
 
+  /**
+   * Request host
+   */
   get host() {
     return stringifyHost(this.hostname, this.port, this.encrypted ? 443 : 80);
   }
@@ -83,6 +112,9 @@ export abstract class BaseRequest {
     this.port = Number(port ?? (this.encrypted ? 443 : 80));
   }
 
+  /**
+   * Request path
+   */
   get path() {
     return this.pathname + this.search;
   }
@@ -93,6 +125,9 @@ export abstract class BaseRequest {
     this.search = url.search;
   }
 
+  /**
+   * Search string section of the request URL
+   */
   get search() {
     return String(this.lazySearchParams);
   }
@@ -101,6 +136,9 @@ export abstract class BaseRequest {
     this.lazySearchParams = new LazyURLSearchParams(String(init));
   }
 
+  /**
+   * The URLSearchParams object representing the query parameters of the request URL
+   */
   get searchParams(): LazyURLSearchParams {
     return this.lazySearchParams;
   }
@@ -109,6 +147,9 @@ export abstract class BaseRequest {
     this.lazySearchParams = new LazyURLSearchParams(init);
   }
 
+  /**
+   * The query object representing the query parameters of the request URL
+   */
   get query() {
     const result: Record<string, string> = {};
     for (const [key, value] of this.lazySearchParams) {
@@ -119,24 +160,5 @@ export abstract class BaseRequest {
 
   set query(init) {
     this.lazySearchParams = new LazyURLSearchParams({ ...init });
-  }
-
-  async isLoopBack() {
-    const interfaces = os.networkInterfaces();
-    let address = this.hostname;
-    if (!net.isIP(address)) {
-      [address] = await resolve(address);
-    }
-    const hasLoopBack = Object.values(interfaces).some(
-      (list) => list?.some((item) => item.address === address),
-    );
-    if (!hasLoopBack) {
-      return false;
-    }
-    const addr = this.svr.proxySvr.address();
-    if (!addr || typeof addr === 'string') {
-      return false;
-    }
-    return addr.port === this.port;
   }
 }
