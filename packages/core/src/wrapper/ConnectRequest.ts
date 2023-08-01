@@ -6,15 +6,27 @@ import { Server } from '../Server';
 
 import { BaseRequest } from './BaseRequest';
 
+/**
+ * HTTP connect request instance
+ */
 export class ConnectRequest extends BaseRequest {
   readonly type = 'connect';
 
   readonly originalUrl: string;
 
+  /**
+   * HTTP request headers
+   */
   headers: http.IncomingHttpHeaders;
 
+  /**
+   * Whether the request should be hidden from the request list in tuner/ui
+   */
   hidden = false;
 
+  /**
+   * Whether the response headers has been sent
+   */
   responseHeaderSent = false;
 
   constructor(
@@ -38,6 +50,9 @@ export class ConnectRequest extends BaseRequest {
     return 'connect:';
   }
 
+  /**
+   * Create connection to target host
+   */
   async connect() {
     const proxyList = await this.svr.upstream.resolveProxyList(this);
     return this.svr.upstream.connect(proxyList, {

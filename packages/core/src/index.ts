@@ -13,9 +13,12 @@ export {
 } from './wrapper/URLSearchParams';
 
 export {
+  BaseRequestOptions,
   BaseRequest,
-  ConnectUpReadOptions,
-  PacUpReadOptions,
+  UpstreamType,
+  UpstreamOptions,
+  ConnectUpstreamOptions,
+  PacUpstreamOptions,
 } from './wrapper/BaseRequest';
 
 export { ConnectRequest } from './wrapper/ConnectRequest';

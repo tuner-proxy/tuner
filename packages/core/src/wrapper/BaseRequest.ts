@@ -6,26 +6,38 @@ import {
   LazyURLSearchParamsInit,
 } from './URLSearchParams';
 
-export interface ConnectUpReadOptions {
+export interface ConnectUpstreamOptions {
   type: string;
   hostname: string;
   port: string | number;
   auth?: string;
 }
 
-export interface PacUpReadOptions {
+export interface PacUpstreamOptions {
   type: 'pac';
   url: string;
 }
 
-export type UpReadOptions = ConnectUpReadOptions | PacUpReadOptions;
+export type UpstreamOptions = ConnectUpstreamOptions | PacUpstreamOptions;
 
-export type UpstreamType = null | false | undefined | string | UpReadOptions;
+export type UpstreamType = null | false | undefined | string | UpstreamOptions;
 
 export interface BaseRequestOptions {
+  /**
+   * Whether the underlying connection is TLS encrypted
+   */
   encrypted: boolean;
+  /**
+   * Request method
+   */
   method: string;
+  /**
+   * Request host
+   */
   host: string;
+  /**
+   * Request path
+   */
   path?: string;
 }
 
@@ -51,12 +63,12 @@ export abstract class BaseRequest {
   upstream?: UpstreamType | UpstreamType[];
 
   /**
-   * HTTP request method
+   * Request method
    */
   method: string;
 
   /**
-   * `true` if the underlying connection is TLS encrypted
+   * Whether the underlying connection is TLS encrypted
    */
   encrypted: boolean;
 
