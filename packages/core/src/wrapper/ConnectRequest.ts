@@ -15,7 +15,7 @@ export class ConnectRequest extends BaseRequest {
   readonly originalUrl: string;
 
   /**
-   * HTTP request headers
+   * Request headers
    */
   headers: http.IncomingHttpHeaders;
 
@@ -51,7 +51,7 @@ export class ConnectRequest extends BaseRequest {
   }
 
   /**
-   * Create connection to target host
+   * Create socket connection with target server
    */
   async connect() {
     const proxyList = await this.svr.upstream.resolveProxyList(this);

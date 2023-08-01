@@ -7,31 +7,57 @@ import waitFor from 'event-to-promise';
 
 import { Server } from '../Server';
 import { ContentEncodingType, normalizeContentEncoding } from '../encoding';
-import * as httpStream from '../stream';
+import {
+  BodyContent,
+  BodyInfo,
+  ReadOptions,
+  readBuffer,
+  readJson,
+  readStream,
+  readText,
+} from '../stream';
 
 import { BaseRequest } from './BaseRequest';
 import { HTTPResponse, HTTPResponseOptions } from './HTTPResponse';
 
 export interface HTTPSendOptions {
+  /**
+   * Consume the underlying request body
+   */
   consume?: boolean;
 }
 
+/**
+ * Normal HTTP request instance
+ */
 export class HTTPRequest extends BaseRequest {
   readonly type = 'common';
 
   readonly originalUrl: string;
 
+  /**
+   * Request headers
+   */
   headers: http.IncomingHttpHeaders | http2.IncomingHttpHeaders;
 
+  /**
+   * The server certificate is verified against the list of supplied CAs if the value is not `false`.
+   */
   rejectUnauthorized = true;
 
-  protected body: httpStream.BodyInfo;
+  protected body: BodyInfo;
 
   protected customAgent?: http.Agent | false;
 
   constructor(
     svr: Server,
+    /**
+     * The original IncomingMessage object
+     */
     public readonly raw: http.IncomingMessage | http2.Http2ServerRequest,
+    /**
+     * The original ServerResponse object
+     */
     public readonly res: http.ServerResponse | http2.Http2ServerResponse,
   ) {
     const authority =
@@ -73,6 +99,9 @@ export class HTTPRequest extends BaseRequest {
     this.encrypted = value === 'https:';
   }
 
+  /**
+   * Default Agent for the request
+   */
   get defaultAgent() {
     if (!this.encrypted) {
       return this.svr.upstream.httpAgent;
@@ -80,6 +109,9 @@ export class HTTPRequest extends BaseRequest {
     return this.svr.upstream.httpsAgent;
   }
 
+  /**
+   * Customized Agent
+   */
   get agent() {
     if (this.customAgent) {
       return this.customAgent;
@@ -94,6 +126,9 @@ export class HTTPRequest extends BaseRequest {
     this.customAgent = agent;
   }
 
+  /**
+   * Send the request to target server
+   */
   async send(options: HTTPSendOptions = {}) {
     const client = this.encrypted ? https : http;
 
@@ -117,9 +152,12 @@ export class HTTPRequest extends BaseRequest {
     return new HTTPResponse({ raw: await waitFor(req, 'response') });
   }
 
+  /**
+   * Respond to the request
+   */
   async respondWith(
     responseOptions: HTTPResponse | HTTPResponseOptions,
-    options?: httpStream.ReadOptions,
+    options?: ReadOptions,
   ) {
     const res = HTTPResponse.from(responseOptions);
     const headers = { ...res.headers };
@@ -130,32 +168,47 @@ export class HTTPRequest extends BaseRequest {
     await waitFor(res.stream(options).pipe(this.res), 'close');
   }
 
-  setBody(content: httpStream.BodyContent, encoding?: ContentEncodingType) {
+  /**
+   * Replace the request body
+   */
+  setBody(content: BodyContent, encoding?: ContentEncodingType) {
     this.body = {
       content,
       encoding: normalizeContentEncoding(encoding),
     };
   }
 
-  stream(options: httpStream.ReadOptions = {}) {
-    return httpStream.readStream(this.body, {
+  /**
+   * Obtain the request body as a readable stream
+   */
+  stream(options: ReadOptions = {}) {
+    return readStream(this.body, {
       encoding: this.headers['content-encoding'],
       ...options,
     });
   }
 
-  buffer(options: httpStream.ReadOptions = {}) {
-    return httpStream.readBuffer(this.body, {
+  /**
+   * Obtain the request body as a Buffer
+   */
+  buffer(options: ReadOptions = {}) {
+    return readBuffer(this.body, {
       encoding: this.headers['content-encoding'],
       ...options,
     });
   }
 
-  text(options: Omit<httpStream.ReadOptions, 'decode' | 'encoding'> = {}) {
-    return httpStream.readText(this.body, options);
+  /**
+   * Obtain the request body as a string
+   */
+  text(options: Omit<ReadOptions, 'decode' | 'encoding'> = {}) {
+    return readText(this.body, options);
   }
 
-  json(options: Omit<httpStream.ReadOptions, 'decode' | 'encoding'> = {}) {
-    return httpStream.readJson(this.body, options);
+  /**
+   * Obtain the request body as a JSON object
+   */
+  json(options: Omit<ReadOptions, 'decode' | 'encoding'> = {}) {
+    return readJson(this.body, options);
   }
 }

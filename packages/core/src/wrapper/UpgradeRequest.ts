@@ -11,8 +11,14 @@ export class UpgradeRequest extends BaseRequest {
 
   readonly originalUrl: string;
 
+  /**
+   * Request headers
+   */
   headers: http.IncomingHttpHeaders;
 
+  /**
+   * Options for the TLSSocket
+   */
   tlsOptions: tls.TLSSocketOptions = {};
 
   constructor(
@@ -40,6 +46,9 @@ export class UpgradeRequest extends BaseRequest {
     this.originalUrl = this.href;
   }
 
+  /**
+   * Value of the `Upgrade` header
+   */
   get upgradeType() {
     return this.headers.upgrade!.toUpperCase();
   }
@@ -55,6 +64,9 @@ export class UpgradeRequest extends BaseRequest {
     this.encrypted = ['wss:', 'https:'].includes(value);
   }
 
+  /**
+   * Create socket (tls) connection with target server
+   */
   async connect() {
     const proxyList = await this.svr.upstream.resolveProxyList(this);
     const socket = await this.svr.upstream.connect(proxyList, {

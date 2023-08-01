@@ -2,7 +2,15 @@ import * as http from 'http';
 import * as stream from 'stream';
 
 import { ContentEncodingType, normalizeContentEncoding } from '../encoding';
-import * as httpStream from '../stream';
+import {
+  BodyContent,
+  BodyInfo,
+  ReadOptions,
+  readBuffer,
+  readJson,
+  readStream,
+  readText,
+} from '../stream';
 
 export interface HTTPResponseOptions {
   raw?: http.IncomingMessage;
@@ -14,6 +22,9 @@ export interface HTTPResponseOptions {
 }
 
 export class HTTPResponse {
+  /**
+   * Create HTTPResponse object from HTTPResponseOptions
+   */
   static from(options: HTTPResponse | HTTPResponseOptions) {
     if (options instanceof HTTPResponse) {
       return options;
@@ -21,13 +32,22 @@ export class HTTPResponse {
     return new HTTPResponse(options);
   }
 
+  /**
+   * The original IncomingMessage object
+   */
   readonly raw?: http.IncomingMessage;
 
+  /**
+   * Response status code
+   */
   statusCode: number;
 
+  /**
+   * Response headers
+   */
   headers: http.IncomingHttpHeaders;
 
-  protected body: httpStream.BodyInfo;
+  protected body: BodyInfo;
 
   constructor(options: HTTPResponseOptions) {
     this.raw = options.raw;
@@ -48,7 +68,10 @@ export class HTTPResponse {
     };
   }
 
-  setBody(content: httpStream.BodyContent, encoding?: ContentEncodingType) {
+  /**
+   * Replace the response body
+   */
+  setBody(content: BodyContent, encoding?: ContentEncodingType) {
     this.body = {
       content,
       encoding: normalizeContentEncoding(encoding),
@@ -57,25 +80,37 @@ export class HTTPResponse {
     delete this.headers['transfer-encoding'];
   }
 
-  stream(options: httpStream.ReadOptions = {}) {
-    return httpStream.readStream(this.body, {
+  /**
+   * Obtain the response body as a readable stream
+   */
+  stream(options: ReadOptions = {}) {
+    return readStream(this.body, {
       encoding: this.headers['content-encoding'],
       ...options,
     });
   }
 
-  buffer(options: httpStream.ReadOptions = {}) {
-    return httpStream.readBuffer(this.body, {
+  /**
+   * Obtain the response body as a Buffer
+   */
+  buffer(options: ReadOptions = {}) {
+    return readBuffer(this.body, {
       encoding: this.headers['content-encoding'],
       ...options,
     });
   }
 
-  text(options: Omit<httpStream.ReadOptions, 'decode' | 'encoding'> = {}) {
-    return httpStream.readText(this.body, options);
+  /**
+   * Obtain the response body as a string
+   */
+  text(options: Omit<ReadOptions, 'decode' | 'encoding'> = {}) {
+    return readText(this.body, options);
   }
 
-  json(options: Omit<httpStream.ReadOptions, 'decode' | 'encoding'> = {}) {
-    return httpStream.readJson(this.body, options);
+  /**
+   * Obtain the response body as a JSON object
+   */
+  json(options: Omit<ReadOptions, 'decode' | 'encoding'> = {}) {
+    return readJson(this.body, options);
   }
 }
