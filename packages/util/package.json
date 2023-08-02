@@ -9,8 +9,8 @@
   "scripts": {
     "build": "git clean -dfx dist && tsc",
     "dev": "tsc -w",
-    "prepack": "pnpm build",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "prepack": "pnpm build"
   },
   "dependencies": {
     "chalk": "^4.1.2",
