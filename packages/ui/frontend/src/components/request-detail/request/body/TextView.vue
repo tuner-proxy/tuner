@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { format } from 'prettier';
 import * as parserBabel from 'prettier/plugins/babel';
+import * as pluginEstree from 'prettier/plugins/estree';
 import * as parserHtml from 'prettier/plugins/html';
 import * as parserCss from 'prettier/plugins/postcss';
 import { computed, ref, watch } from 'vue';
@@ -51,14 +52,24 @@ const rawBody = useBodyAsText(computed(() => props.message.body));
 
 const formatted = ref(false);
 
+const safeFormat = async (code: string, parser: string) => {
+  try {
+    return await format(code, {
+      parser,
+      plugins: [parserBabel, parserHtml, parserCss, pluginEstree],
+    });
+  } catch (error) {
+    console.error('Prettify body failed:', error);
+    return code;
+  }
+};
+
 const bodyPromise = computed(() => {
   if (!formatted.value || !lang.value) {
     return rawBody.value;
   }
-  return format(rawBody.value, {
-    parser: lang.value.parser,
-    plugins: [parserBabel, parserHtml, parserCss],
-  });
+  const value = rawBody.value;
+  return safeFormat(value, lang.value.parser);
 });
 
 const displayBody = ref('');
@@ -66,11 +77,7 @@ const displayBody = ref('');
 watch(
   bodyPromise,
   async () => {
-    try {
-      displayBody.value = await bodyPromise.value;
-    } catch (error) {
-      displayBody.value = '';
-    }
+    displayBody.value = await bodyPromise.value;
   },
   {
     immediate: true,
