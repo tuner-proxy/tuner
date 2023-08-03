@@ -5,17 +5,17 @@
 With NPM:
 
 ```bash
-npm create vite@latest
+npm create tuner
 ```
 
 With Yarn:
 
 ```bash
-yarn create vite
+yarn create tuner
 ```
 
 With PNPM:
 
 ```bash
-pnpm create vite
+pnpm create tuner
 ```
