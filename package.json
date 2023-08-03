@@ -6,7 +6,6 @@
   ],
   "scripts": {
     "build": "pnpm run -r --stream build",
-    "commitlint": "commitlint --edit",
     "dev": "pnpm run -r --parallel dev",
     "lint": "eslint --ext .js,.ts,.vue . && pnpm run -r --parallel lint",
     "postinstall": "husky install",
@@ -23,7 +22,11 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-vue": "^9.16.1",
     "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
     "prettier": "^3.0.0",
     "typescript": "^5.1.6"
+  },
+  "lint-staged": {
+    "*.{js,ts,cjs}": ["eslint"]
   }
 }
