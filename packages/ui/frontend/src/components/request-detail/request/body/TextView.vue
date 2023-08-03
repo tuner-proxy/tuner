@@ -63,13 +63,19 @@ const bodyPromise = computed(() => {
 
 const displayBody = ref('');
 
-watch(bodyPromise, async () => {
-  try {
-    displayBody.value = await bodyPromise.value;
-  } catch (error) {
-    displayBody.value = '';
-  }
-});
+watch(
+  bodyPromise,
+  async () => {
+    try {
+      displayBody.value = await bodyPromise.value;
+    } catch (error) {
+      displayBody.value = '';
+    }
+  },
+  {
+    immediate: true,
+  },
+);
 </script>
 
 <template>
