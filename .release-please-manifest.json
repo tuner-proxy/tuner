@@ -1,3 +1,5 @@
 {
-  ".": "0.0.0"
+  ".": "0.0.0",
+  "packages/create-tuner": "1.0.0",
+  "packages/ui": "1.0.0"
 }
