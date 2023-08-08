@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "workspaces": [
     "packages/*"
@@ -27,6 +27,8 @@
     "typescript": "^5.1.6"
   },
   "lint-staged": {
-    "*.{js,ts,cjs}": ["eslint"]
+    "*.{js,ts,cjs}": [
+      "eslint"
+    ]
   }
 }
