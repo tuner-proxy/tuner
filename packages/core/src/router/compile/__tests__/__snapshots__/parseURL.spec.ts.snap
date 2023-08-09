@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`parseURL dns wildcard 1`] = `
-Object {
+{
   "hostname": "*.*.example.com",
   "path": undefined,
   "pathname": undefined,
@@ -12,7 +12,7 @@ Object {
 `;
 
 exports[`parseURL full 1`] = `
-Object {
+{
   "hostname": "*.*.example.com",
   "path": "/example-path/name?foo&bar=baz",
   "pathname": "/example-path/name",
@@ -23,7 +23,7 @@ Object {
 `;
 
 exports[`parseURL hostname 1`] = `
-Object {
+{
   "hostname": "example.com",
   "path": undefined,
   "pathname": undefined,
@@ -34,7 +34,7 @@ Object {
 `;
 
 exports[`parseURL multiple protocol 1`] = `
-Object {
+{
   "hostname": undefined,
   "path": undefined,
   "pathname": undefined,
@@ -45,7 +45,7 @@ Object {
 `;
 
 exports[`parseURL pathname 1`] = `
-Object {
+{
   "hostname": undefined,
   "path": "/example-path/name",
   "pathname": "/example-path/name",
@@ -56,7 +56,7 @@ Object {
 `;
 
 exports[`parseURL pathname with route params 1`] = `
-Object {
+{
   "hostname": undefined,
   "path": "/example-path/:param/::longParam",
   "pathname": "/example-path/:param/::longParam",
@@ -67,7 +67,7 @@ Object {
 `;
 
 exports[`parseURL port 1`] = `
-Object {
+{
   "hostname": undefined,
   "path": undefined,
   "pathname": undefined,
@@ -78,7 +78,7 @@ Object {
 `;
 
 exports[`parseURL protocol 1`] = `
-Object {
+{
   "hostname": undefined,
   "path": undefined,
   "pathname": undefined,
@@ -89,7 +89,7 @@ Object {
 `;
 
 exports[`parseURL query 1`] = `
-Object {
+{
   "hostname": undefined,
   "path": "?foo&bar=baz",
   "pathname": undefined,
