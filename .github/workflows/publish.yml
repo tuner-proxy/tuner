@@ -23,6 +23,10 @@ jobs:
 
       - run: pnpm build
 
+      - run: pnpm lint
+
+      - run: pnpm test
+
       - run: pnpm publish -r
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
