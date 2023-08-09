@@ -2,7 +2,6 @@ name: Pull Check
 
 on:
   pull_request:
-    types: [synchronize]
 
 jobs:
   setup:
