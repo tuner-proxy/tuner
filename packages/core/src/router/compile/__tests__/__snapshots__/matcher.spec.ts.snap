@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matcher full 'http|https://*.*.example.com:80|443/pathname/::param?foo&bar=baz' match {"protocol":"http:","hostname":"foo.example.com","port":443,"pathname":"/pathname/with/param","searchParams":"foo=baz&bar=baz"} 1`] = `
-Object {
+{
   "param": "with/param",
 }
 `;
@@ -42,11 +42,11 @@ exports[`matcher hostname 'example.com' not match {"hostname":"foo.com"} 1`] = `
 
 exports[`matcher hostname 'example.com' not match {"hostname":"foo.example.com"} 1`] = `false`;
 
-exports[`matcher pathname '' match {"pathname":"/"} 1`] = `Object {}`;
+exports[`matcher pathname '' match {"pathname":"/"} 1`] = `{}`;
 
-exports[`matcher pathname '' match {"pathname":"/foo/bar"} 1`] = `Object {}`;
+exports[`matcher pathname '' match {"pathname":"/foo/bar"} 1`] = `{}`;
 
-exports[`matcher pathname '/absolute/path-name' match {"pathname":"/absolute/path-name"} 1`] = `Object {}`;
+exports[`matcher pathname '/absolute/path-name' match {"pathname":"/absolute/path-name"} 1`] = `{}`;
 
 exports[`matcher pathname '/absolute/path-name' not match {"pathname":"/absolute"} 1`] = `undefined`;
 
@@ -55,13 +55,13 @@ exports[`matcher pathname '/absolute/path-name' not match {"pathname":"/absolute
 exports[`matcher pathname '/absolute/path-name' not match {"pathname":"/absolute/path-name/child"} 1`] = `undefined`;
 
 exports[`matcher pathname '/with/::longParam' match {"pathname":"/with/long/param/value"} 1`] = `
-Object {
+{
   "longParam": "long/param/value",
 }
 `;
 
 exports[`matcher pathname '/with/::longParam' match {"pathname":"/with/param-value"} 1`] = `
-Object {
+{
   "longParam": "param-value",
 }
 `;
@@ -73,7 +73,7 @@ exports[`matcher pathname '/with/::longParam' not match {"pathname":"/with"} 1`]
 exports[`matcher pathname '/with/::longParam' not match {"pathname":"/with/"} 1`] = `undefined`;
 
 exports[`matcher pathname '/with/:param' match {"pathname":"/with/param-value"} 1`] = `
-Object {
+{
   "param": "param-value",
 }
 `;
