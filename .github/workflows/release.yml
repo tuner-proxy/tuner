@@ -14,8 +14,31 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          registry-url: 'https://registry.npmjs.org/'
+
       - uses: pnpm/action-setup@v2
         with:
           version: 8
 
-      - uses: gzzhanghao/pnpm-workspace-release-action@v1.0
+      - id: release
+        uses: gzzhanghao/pnpm-workspace-release-action@v1.0
+
+      - if: ${{ steps.release.outputs.release != null }}
+        run: pnpm install --frozen-lockfile
+
+      - if: ${{ steps.release.outputs.release != null }}
+        run: pnpm lint
+
+      - if: ${{ steps.release.outputs.release != null }}
+        run: pnpm build
+
+      - if: ${{ steps.release.outputs.release != null }}
+        run: pnpm test
+
+      - if: ${{ steps.release.outputs.release != null }}
+        run: pnpm publish -r
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
