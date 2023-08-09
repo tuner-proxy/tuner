@@ -4,7 +4,7 @@ on:
   pull_request:
 
 jobs:
-  setup:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -20,23 +20,8 @@ jobs:
 
       - run: pnpm i --frozen-lockfile
 
-  build:
-    needs:
-      - setup
-    runs-on: ubuntu-latest
-    steps:
       - run: pnpm build
 
-  lint:
-    needs:
-      - setup
-    runs-on: ubuntu-latest
-    steps:
       - run: pnpm lint
 
-  test:
-    needs:
-      - setup
-    runs-on: ubuntu-latest
-    steps:
       - run: pnpm test
