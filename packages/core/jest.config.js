@@ -5,7 +5,4 @@ module.exports = {
   transform: {
     '^.+\\.(t|j)sx?$': '@swc/jest',
   },
-  snapshotFormat: {
-    printBasicPrototype: false,
-  },
 };
