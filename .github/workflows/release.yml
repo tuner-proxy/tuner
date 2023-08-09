@@ -25,20 +25,16 @@ jobs:
 
       - id: release
         uses: gzzhanghao/pnpm-workspace-release-action@v1.0
+        with:
+          latest: ${{ github.event.ref == 'refs/heads/main' }}
 
-      - if: ${{ steps.release.outputs.release != null }}
+      - if: ${{ steps.release.outputs.release_created }}
         run: pnpm install --frozen-lockfile
 
-      - if: ${{ steps.release.outputs.release != null }}
-        run: pnpm lint
-
-      - if: ${{ steps.release.outputs.release != null }}
+      - if: ${{ steps.release.outputs.release_created }}
         run: pnpm build
 
-      - if: ${{ steps.release.outputs.release != null }}
-        run: pnpm test
-
-      - if: ${{ steps.release.outputs.release != null }}
+      - if: ${{ steps.release.outputs.release_created }}
         run: pnpm publish -r
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
