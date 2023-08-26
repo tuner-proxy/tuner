@@ -15,6 +15,7 @@
     "chalk": "^4.1.2",
     "event-to-promise": "^0.8.0",
     "mime-types": "^2.1.35",
+    "sni": "^1.0.0",
     "ws": "^8.13.0"
   },
   "devDependencies": {
