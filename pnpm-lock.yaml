@@ -149,10 +149,10 @@ importers:
   packages/ui:
     dependencies:
       '@tuner-proxy/util':
-        specifier: workspace:^
+        specifier: ^0.2.0
         version: link:../util
       '@tuner-proxy/vite':
-        specifier: workspace:^
+        specifier: ^0.2.0
         version: link:../vite
       busboy:
         specifier: ^1.6.0
@@ -186,7 +186,7 @@ importers:
         specifier: ^6.16.0
         version: 6.16.0
       '@tuner-proxy/core':
-        specifier: workspace:^
+        specifier: ^0.2.0
         version: link:../core
       '@types/busboy':
         specifier: ^1.5.0
@@ -251,12 +251,15 @@ importers:
       mime-types:
         specifier: ^2.1.35
         version: 2.1.35
+      sni:
+        specifier: ^1.0.0
+        version: 1.0.0
       ws:
         specifier: ^8.13.0
         version: 8.13.0
     devDependencies:
       '@tuner-proxy/core':
-        specifier: workspace:^
+        specifier: ^0.2.0
         version: link:../core
       '@types/event-to-promise':
         specifier: ^0.7.2
@@ -277,10 +280,10 @@ importers:
   packages/vite:
     devDependencies:
       '@tuner-proxy/core':
-        specifier: workspace:^
+        specifier: ^0.2.0
         version: link:../core
       '@tuner-proxy/util':
-        specifier: workspace:^
+        specifier: ^0.2.0
         version: link:../util
       '@types/node':
         specifier: ^20.4.5
@@ -5831,6 +5834,10 @@ packages:
   /smart-buffer@4.2.0:
     resolution: {integrity: sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==}
     engines: {node: '>= 6.0.0', npm: '>= 3.0.0'}
+    dev: false
+
+  /sni@1.0.0:
+    resolution: {integrity: sha512-YMN2SdbrNjA4OWzpMUe7sZzUvvfEKl2JToyBLfFJMK+EpkU4bJEAkePqYE3YjZtgdLCoUaK0Lo84MjM8UqF38w==}
     dev: false
 
   /socks@2.7.1:

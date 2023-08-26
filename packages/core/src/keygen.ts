@@ -1,4 +1,5 @@
 import * as crypto from 'crypto';
+import * as net from 'net';
 import * as os from 'os';
 import * as util from 'util';
 
@@ -209,7 +210,17 @@ export async function generateHostCertificate(
       ...ServerExtensions,
       {
         name: 'subjectAltName',
-        altNames: hosts.map((host) => ({ type: 2, value: host })),
+        altNames: hosts.map((host) =>
+          net.isIP(host)
+            ? {
+                type: 7,
+                ip: host,
+              }
+            : {
+                type: 2,
+                value: host,
+              },
+        ),
       },
     ],
     privateKey: forge.pki.privateKeyFromPem(ca.key),
