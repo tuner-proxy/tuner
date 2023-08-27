@@ -1,6 +1,6 @@
 {
   "name": "@tuner-proxy/ui",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -16,7 +16,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tuner-proxy/util": "workspace:~",
+    "@tuner-proxy/util": "~0.2.1",
     "@tuner-proxy/vite": "~0.2.0",
     "busboy": "^1.6.0",
     "monaco-editor": "^0.40.0"
