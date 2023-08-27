@@ -35,4 +35,9 @@ export const decode = () =>
     },
   );
 
-export { decode as decrypt };
+/**
+ * Decrypt https request
+ *
+ * @deprecated use `decode` instead
+ */
+export const decrypt = decode;
