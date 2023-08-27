@@ -1,3 +1,14 @@
+## 0.2.1 (2023-08-27)
+
+### Bug Fixes
+
+* **util:** support h2 & ws with unencrypted connection ([#15](https://github.com/gzzhanghao/tuner/issues/15)) ([7f7443e](https://github.com/gzzhanghao/tuner/commit/7f7443e28ee305de327414ac2926d516b5a7e10a))
+
+### Features
+
+* **core:** support ip matching ([5c59319](https://github.com/gzzhanghao/tuner/commit/5c5931974518671a51792d9f6eab2873971ad686))
+* support tls for ip address ([30d49b0](https://github.com/gzzhanghao/tuner/commit/30d49b0756c0f5d6bb40da4475a73fe5ead83c99))
+
 # 0.2.0 (2023-08-09)
 
 ### Bug Fixes
