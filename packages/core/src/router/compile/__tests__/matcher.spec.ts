@@ -58,6 +58,33 @@ describe('matcher', () => {
         'foo.example.com.net',
       ]),
     },
+    {
+      pattern: '[1.0.0.0/16]',
+      toMatch: createCases('hostname', ['1.0.0.0', '1.0.0.1', '1.0.1.1']),
+      toNotMatch: createCases('hostname', [
+        '1.1.1.1',
+        '2.0.0.0',
+        'example.com',
+      ]),
+    },
+    {
+      pattern: '[192.168.1.128-192.168.1.255]',
+      toMatch: createCases('hostname', ['192.168.1.128', '192.168.1.255']),
+      toNotMatch: createCases('hostname', [
+        '192.168.1.1',
+        '192.168.2.0',
+        'example.com',
+      ]),
+    },
+    {
+      pattern: '[2001::abc-2001::1:ffff]',
+      toMatch: createCases('hostname', ['2001::bbb', '2001::1:1']),
+      toNotMatch: createCases('hostname', [
+        '0.0.0.0',
+        '2001::2:1',
+        'example.com',
+      ]),
+    },
   ]);
 
   match('port', createPortMatcher, [

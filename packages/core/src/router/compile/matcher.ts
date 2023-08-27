@@ -1,3 +1,7 @@
+import * as net from 'net';
+
+import { getMatch } from 'ip-matching';
+
 import { parseURL } from './parseURL';
 
 export interface MatchInfo {
@@ -58,6 +62,15 @@ export function createProtocolMatcher(pattern?: string) {
 export function createHostnameMatcher(pattern?: string) {
   if (!pattern) {
     return () => true;
+  }
+  if (pattern[0] === '[' && pattern.endsWith(']')) {
+    const match = getMatch(pattern.slice(1, -1));
+    return function matchIP(info: MatchInfo) {
+      if (!net.isIP(info.hostname)) {
+        return false;
+      }
+      return match.matches(info.hostname);
+    };
   }
   const domain = pattern.replace(/^\*(\.\*)?/, '');
   const strict = !pattern.startsWith('*.*.');

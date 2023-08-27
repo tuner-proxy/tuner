@@ -36,6 +36,38 @@ exports[`matcher hostname '*.example.com' not match {"hostname":"foo.bar.example
 
 exports[`matcher hostname '*.example.com' not match {"hostname":"foo.com"} 1`] = `false`;
 
+exports[`matcher hostname '[1.0.0.0/16]' match {"hostname":"1.0.0.0"} 1`] = `true`;
+
+exports[`matcher hostname '[1.0.0.0/16]' match {"hostname":"1.0.0.1"} 1`] = `true`;
+
+exports[`matcher hostname '[1.0.0.0/16]' match {"hostname":"1.0.1.1"} 1`] = `true`;
+
+exports[`matcher hostname '[1.0.0.0/16]' not match {"hostname":"1.1.1.1"} 1`] = `false`;
+
+exports[`matcher hostname '[1.0.0.0/16]' not match {"hostname":"2.0.0.0"} 1`] = `false`;
+
+exports[`matcher hostname '[1.0.0.0/16]' not match {"hostname":"example.com"} 1`] = `false`;
+
+exports[`matcher hostname '[192.168.1.128-192.168.1.255]' match {"hostname":"192.168.1.128"} 1`] = `true`;
+
+exports[`matcher hostname '[192.168.1.128-192.168.1.255]' match {"hostname":"192.168.1.255"} 1`] = `true`;
+
+exports[`matcher hostname '[192.168.1.128-192.168.1.255]' not match {"hostname":"192.168.1.1"} 1`] = `false`;
+
+exports[`matcher hostname '[192.168.1.128-192.168.1.255]' not match {"hostname":"192.168.2.0"} 1`] = `false`;
+
+exports[`matcher hostname '[192.168.1.128-192.168.1.255]' not match {"hostname":"example.com"} 1`] = `false`;
+
+exports[`matcher hostname '[2001::abc-2001::1:ffff]' match {"hostname":"2001::1:1"} 1`] = `true`;
+
+exports[`matcher hostname '[2001::abc-2001::1:ffff]' match {"hostname":"2001::bbb"} 1`] = `true`;
+
+exports[`matcher hostname '[2001::abc-2001::1:ffff]' not match {"hostname":"0.0.0.0"} 1`] = `false`;
+
+exports[`matcher hostname '[2001::abc-2001::1:ffff]' not match {"hostname":"2001::2:1"} 1`] = `false`;
+
+exports[`matcher hostname '[2001::abc-2001::1:ffff]' not match {"hostname":"example.com"} 1`] = `false`;
+
 exports[`matcher hostname 'example.com' match {"hostname":"example.com"} 1`] = `true`;
 
 exports[`matcher hostname 'example.com' not match {"hostname":"foo.com"} 1`] = `false`;
