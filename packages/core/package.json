@@ -23,6 +23,7 @@
     "chokidar": "^3.5.3",
     "commander": "^11.0.0",
     "event-to-promise": "^0.8.0",
+    "ip-matching": "^2.1.2",
     "lodash.debounce": "^4.0.8",
     "lodash.flatmap": "^4.5.0",
     "lodash.flatten": "^4.4.0",
