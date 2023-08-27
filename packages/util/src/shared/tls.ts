@@ -2,7 +2,7 @@ import * as tls from 'tls';
 
 import { Server, generateHostCertificate } from '@tuner-proxy/core';
 
-import { persist } from '../../helpers/persist';
+import { persist } from '../helpers/persist';
 
 export async function getTlsOptions(
   svr: Server,
@@ -34,16 +34,17 @@ const getTLSCertificateGenerator = persist(
     const hostKeys = new Map<string, Promise<SecureContextInfo>>();
     return (servername: string) => {
       if (!hostKeys.has(servername)) {
-        const promise = generateHostCertificate(svr.rootCA, [servername])
-          .then((res) => ({
+        const promise = generateHostCertificate(svr.rootCA, [servername]).then(
+          (res) => ({
             cert: res.cert,
             key: res.key,
             context: tls.createSecureContext(res),
-          }))
-          .catch((error) => {
-            hostKeys.delete(servername);
-            throw error;
-          });
+          }),
+        );
+        promise.catch((error) => {
+          hostKeys.delete(servername);
+          throw error;
+        });
         hostKeys.set(servername, promise);
       }
       return hostKeys.get(servername)!;
