@@ -1,5 +1,5 @@
 export * from './helpers/h2';
-export * from './helpers/https';
+export * from './helpers/connect';
 export * from './helpers/persist';
 export * from './helpers/request';
 export * from './helpers/response-factory';

@@ -1,22 +1,26 @@
 import * as http2 from 'http2';
-import * as tls from 'tls';
 
 import { HTTPRequest, Server } from '@tuner-proxy/core';
 
-import { forwardTlsSvr } from '../shared/tls/forward';
+import { forwardHttpSvr } from '../shared/forward';
+import { getTlsOptions } from '../shared/tls';
 
 /**
- * Decrypt http/2 request
+ * Decode http/2 request
  */
 export const h2 = () =>
-  forwardTlsSvr((svr: Server, tlsOptions: tls.TlsOptions) => {
-    const h2Svr = http2.createSecureServer(tlsOptions);
+  forwardHttpSvr(
+    async (svr) => bindH2Svr(svr, http2.createServer()),
+    async (svr, servername) => {
+      const tlsOptions = await getTlsOptions(svr, servername);
+      return bindH2Svr(svr, http2.createSecureServer(tlsOptions));
+    },
+  );
 
-    h2Svr.on('request', (req, res) => {
-      svr.handleHTTPRequest(new HTTPRequest(svr, req, res));
-    });
-
-    h2Svr.listen();
-
-    return h2Svr;
+function bindH2Svr(svr: Server, h2Svr: http2.Http2Server) {
+  h2Svr.on('request', (req, res) => {
+    svr.handleHTTPRequest(new HTTPRequest(svr, req, res));
   });
+  h2Svr.listen();
+  return h2Svr;
+}
