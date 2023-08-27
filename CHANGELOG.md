@@ -1,3 +1,9 @@
+## 0.2.2 (2023-08-27)
+
+### Features
+
+* **util:** deprecate decrypt ([90d6186](https://github.com/gzzhanghao/tuner/commit/90d61864e54cb0679fe4cdd8956c03b67e2f8a42))
+
 ## 0.2.1 (2023-08-27)
 
 ### Bug Fixes
