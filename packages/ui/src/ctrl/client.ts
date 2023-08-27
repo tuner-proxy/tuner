@@ -1,7 +1,7 @@
 import path from 'path';
 
 import { defineRoute, httpHandler, HTTPResponse } from '@tuner-proxy/core';
-import { decrypt, ensecure, fileIn, responseAll } from '@tuner-proxy/util';
+import { decode, ensecure, fileIn, responseAll } from '@tuner-proxy/util';
 import { vite } from '@tuner-proxy/vite';
 
 import { composeApis } from './compose-apis';
@@ -13,7 +13,7 @@ const monacoEditorPath = path.dirname(
 
 export function uiClient() {
   return defineRoute([
-    decrypt(),
+    decode(),
     ensecure(),
 
     '/__tuner_ui',

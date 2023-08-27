@@ -1,15 +1,15 @@
 import * as net from 'net';
-import * as tls from 'tls';
 
 import { ConnectRequest, Server, connectHandler } from '@tuner-proxy/core';
 import waitFor from 'event-to-promise';
 import extractSNI from 'sni';
 
-import { persist } from '../../helpers/persist';
+import { persist } from '../helpers/persist';
 
-import { getTlsOptions } from './tls';
-
-export type CreateSvrFn = (svr: Server, opts: tls.TlsOptions) => net.Server;
+export type CreateSvrFn = (
+  svr: Server,
+  servername: string | undefined,
+) => Promise<net.Server>;
 
 const getSvrFactory = persist('tuner-util:tls-svr-factory', (svr) => {
   const svrCache = new WeakMap<
@@ -21,28 +21,41 @@ const getSvrFactory = persist('tuner-util:tls-svr-factory', (svr) => {
       svrCache.set(createSvrFn, new Map());
     }
     const cache = svrCache.get(createSvrFn)!;
-    const createServer = () =>
-      getTlsOptions(svr, servername)
-        .then((options) => createSvrFn(svr, options))
-        .catch((error) => {
-          cache.delete(servername);
-          throw error;
-        });
     if (!cache.has(servername)) {
-      cache.set(servername, createServer());
+      const promise = createSvrFn(svr, servername);
+      promise.catch(() => {
+        cache.delete(servername);
+      });
+      cache.set(servername, promise);
     }
     return cache.get(servername)!;
   };
 });
 
-export const forwardTlsSvr = (createSvrFn: CreateSvrFn) =>
+export const forwardHttpSvr = (
+  createSvrFn: CreateSvrFn,
+  createTlsSvrFn: CreateSvrFn,
+) =>
   connectHandler(async (req, next) => {
     req.hidden = true;
 
-    const servername = await getServerName(req);
+    if (!req.head.byteLength) {
+      req.responseHeaderSent = true;
+      const headPromise = waitFor(req.socket, 'data');
+      req.socket.write('HTTP/1.1 200 OK\r\n\r\n');
+      req.socket.resume();
+      req.head = await headPromise;
+      req.socket.pause();
+    }
+
+    const servername = getServerName(req);
 
     const getSvr = getSvrFactory(req.svr);
-    const targetSvr = await getSvr(createSvrFn, servername);
+
+    const targetSvr = await getSvr(
+      isTLS(req.head) ? createTlsSvrFn : createSvrFn,
+      servername,
+    );
 
     if (!targetSvr.listening) {
       await waitFor(targetSvr, 'listening');
@@ -64,14 +77,7 @@ export const forwardTlsSvr = (createSvrFn: CreateSvrFn) =>
     return socket;
   });
 
-async function getServerName(req: ConnectRequest) {
-  if (!req.head.byteLength) {
-    req.responseHeaderSent = true;
-    req.socket.write('HTTP/1.1 200 OK\r\n\r\n');
-    req.socket.resume();
-    req.head = await waitFor(req.socket, 'data');
-    req.socket.pause();
-  }
+function getServerName(req: ConnectRequest) {
   const sni = extractSNI(req.head);
   if (!sni) {
     return req.hostname;
@@ -79,4 +85,8 @@ async function getServerName(req: ConnectRequest) {
   if (net.isIP(sni)) {
     return sni;
   }
+}
+
+function isTLS(head: Buffer) {
+  return head[0] === 0x16 || head[0] === 0x80 || head[0] === 0x00;
 }
