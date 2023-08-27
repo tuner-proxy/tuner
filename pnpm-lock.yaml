@@ -152,7 +152,7 @@ importers:
   packages/ui:
     dependencies:
       '@tuner-proxy/util':
-        specifier: workspace:~
+        specifier: ~0.2.1
         version: link:../util
       '@tuner-proxy/vite':
         specifier: ~0.2.0
@@ -286,7 +286,7 @@ importers:
         specifier: ~0.2.0
         version: link:../core
       '@tuner-proxy/util':
-        specifier: workspace:~
+        specifier: ~0.2.1
         version: link:../util
       '@types/node':
         specifier: ^20.4.5
