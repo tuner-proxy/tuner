@@ -4,10 +4,10 @@ import * as net from 'net';
 import * as os from 'os';
 import { promisify } from 'util';
 
+import { Certificate } from '@tuner-proxy/ca';
 import chalk from 'chalk';
 import waitFor from 'event-to-promise';
 
-import { Certificate } from './keygen';
 import { Router } from './router';
 import { ConnectResult, HTTPResult } from './router/handler';
 import { Upstream } from './upstream';

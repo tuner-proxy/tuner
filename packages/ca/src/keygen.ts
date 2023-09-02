@@ -41,95 +41,6 @@ const CAAttrs = [
   },
 ];
 
-const CAExtensions = [
-  {
-    name: 'basicConstraints',
-    cA: true,
-  },
-  {
-    name: 'keyUsage',
-    keyCertSign: true,
-    digitalSignature: true,
-    nonRepudiation: true,
-    keyEncipherment: true,
-    dataEncipherment: true,
-  },
-  {
-    name: 'extKeyUsage',
-    serverAuth: true,
-    clientAuth: true,
-    codeSigning: true,
-    emailProtection: true,
-    timeStamping: true,
-  },
-  {
-    name: 'nsCertType',
-    client: true,
-    server: true,
-    email: true,
-    objsign: true,
-    sslCA: true,
-    emailCA: true,
-    objCA: true,
-  },
-];
-
-const ServerAttrs = [
-  {
-    name: 'countryName',
-    value: 'Internet',
-  },
-  {
-    shortName: 'ST',
-    value: 'Internet',
-  },
-  {
-    name: 'localityName',
-    value: 'Internet',
-  },
-  {
-    name: 'organizationName',
-    value: `${hostname}.tuner`,
-  },
-  {
-    shortName: 'OU',
-    value: `${hostname}.tuner`,
-  },
-];
-
-const ServerExtensions = [
-  {
-    name: 'basicConstraints',
-    cA: false,
-  },
-  {
-    name: 'keyUsage',
-    keyCertSign: false,
-    digitalSignature: true,
-    nonRepudiation: false,
-    keyEncipherment: true,
-    dataEncipherment: true,
-  },
-  {
-    name: 'extKeyUsage',
-    serverAuth: true,
-    clientAuth: true,
-    codeSigning: false,
-    emailProtection: false,
-    timeStamping: false,
-  },
-  {
-    name: 'nsCertType',
-    client: true,
-    server: true,
-    email: false,
-    objsign: false,
-    sslCA: false,
-    emailCA: false,
-    objCA: false,
-  },
-];
-
 function randomSerialNumber() {
   return crypto.randomBytes(16).toString('hex');
 }
@@ -186,7 +97,38 @@ export async function generateRootCA() {
     expires: 10 * 365 * DAY,
     subject: CAAttrs,
     issuer: CAAttrs,
-    extensions: CAExtensions,
+    extensions: [
+      {
+        name: 'basicConstraints',
+        cA: true,
+      },
+      {
+        name: 'keyUsage',
+        keyCertSign: true,
+        digitalSignature: true,
+        nonRepudiation: true,
+        keyEncipherment: true,
+        dataEncipherment: true,
+      },
+      {
+        name: 'extKeyUsage',
+        serverAuth: true,
+        clientAuth: true,
+        codeSigning: true,
+        emailProtection: true,
+        timeStamping: true,
+      },
+      {
+        name: 'nsCertType',
+        client: true,
+        server: true,
+        email: true,
+        objsign: true,
+        sslCA: true,
+        emailCA: true,
+        objCA: true,
+      },
+    ],
   });
 }
 
@@ -203,11 +145,59 @@ export async function generateHostCertificate(
         name: 'commonName',
         value: hosts[0],
       },
-      ...ServerAttrs,
+      {
+        name: 'countryName',
+        value: 'Internet',
+      },
+      {
+        shortName: 'ST',
+        value: 'Internet',
+      },
+      {
+        name: 'localityName',
+        value: 'Internet',
+      },
+      {
+        name: 'organizationName',
+        value: `${hostname}.tuner`,
+      },
+      {
+        shortName: 'OU',
+        value: `${hostname}.tuner`,
+      },
     ],
     issuer: forge.pki.certificateFromPem(ca.cert).issuer.attributes,
     extensions: [
-      ...ServerExtensions,
+      {
+        name: 'basicConstraints',
+        cA: false,
+      },
+      {
+        name: 'keyUsage',
+        keyCertSign: false,
+        digitalSignature: true,
+        nonRepudiation: false,
+        keyEncipherment: true,
+        dataEncipherment: true,
+      },
+      {
+        name: 'extKeyUsage',
+        serverAuth: true,
+        clientAuth: true,
+        codeSigning: false,
+        emailProtection: false,
+        timeStamping: false,
+      },
+      {
+        name: 'nsCertType',
+        client: true,
+        server: true,
+        email: false,
+        objsign: false,
+        sslCA: false,
+        emailCA: false,
+        objCA: false,
+      },
       {
         name: 'subjectAltName',
         altNames: hosts.map((host) =>
