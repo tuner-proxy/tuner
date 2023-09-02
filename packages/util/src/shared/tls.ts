@@ -1,6 +1,7 @@
 import * as tls from 'tls';
 
-import { Server, generateHostCertificate } from '@tuner-proxy/core';
+import { generateHostCertificate } from '@tuner-proxy/ca';
+import { Server } from '@tuner-proxy/core';
 
 import { persist } from '../helpers/persist';
 

@@ -3,7 +3,6 @@ import { RouteElement } from './router/handler';
 export { ServerOptions, Server } from './Server';
 export { Upstream } from './upstream';
 export { Router } from './router';
-export { Certificate, generateHostCertificate } from './keygen';
 
 export * from './router/handler';
 
