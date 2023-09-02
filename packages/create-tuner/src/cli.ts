@@ -2,8 +2,10 @@ import path from 'path';
 
 import * as fs from 'fs-extra';
 import inquirer from 'inquirer';
+import klaw from 'klaw';
 
 const cwd = process.cwd();
+const templatePath = path.join(__dirname, '../template');
 
 init();
 
@@ -45,8 +47,16 @@ async function init() {
 
   console.log(`\nScaffolding project in ${projectRoot}...`);
 
-  await fs.mkdirp(path.dirname(projectRoot));
-  await fs.copy(path.join(__dirname, '../template'), projectRoot);
+  for await (const file of klaw(templatePath)) {
+    if (!file.stats.isFile()) {
+      continue;
+    }
+    const basename = path.basename(file.path).replace(/^_/, '.');
+    const relative = path.relative(templatePath, file.path);
+    const targetPath = path.join(projectRoot, path.dirname(relative), basename);
+    await fs.mkdirp(path.dirname(targetPath));
+    await fs.copyFile(file.path, targetPath);
+  }
 
   console.log(`\nDone. Now run:\n`);
 
