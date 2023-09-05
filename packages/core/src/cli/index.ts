@@ -3,7 +3,7 @@ import { program } from 'commander';
 
 import { log } from '../utils';
 
-import { run } from './run';
+import { start } from './run';
 
 process.on('uncaughtException', (error: any) => {
   log(chalk.red('Uncaught exception'), '\n', error.stack);
@@ -21,7 +21,7 @@ program
   .option('-k, --key <path>', 'ssl private key path', 'ssl/key.pem')
   .option('-c, --cert <path>', 'ssl certificate path', 'ssl/cert.pem')
   .action((entry, args) => {
-    run(entry, args);
+    start(entry, args);
   });
 
 program.parse(process.argv);
