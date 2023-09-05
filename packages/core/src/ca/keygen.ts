@@ -5,6 +5,8 @@ import * as util from 'util';
 
 import forge from 'node-forge';
 
+import { Certificate } from './types';
+
 const generateKeyPair = util.promisify(forge.pki.rsa.generateKeyPair);
 
 const hostname = os
@@ -84,11 +86,6 @@ function generateCertificate({
     cert: forge.pki.certificateToPem(cert),
     key: forge.pki.privateKeyToPem(keys.privateKey),
   };
-}
-
-export interface Certificate {
-  key: string;
-  cert: string;
 }
 
 export async function generateRootCA() {

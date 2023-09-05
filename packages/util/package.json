@@ -19,7 +19,6 @@
     "ws": "^8.13.0"
   },
   "devDependencies": {
-    "@tuner-proxy/ca": "workspace:~",
     "@tuner-proxy/core": "~0.2.0",
     "@types/event-to-promise": "^0.7.2",
     "@types/mime-types": "^2.1.1",

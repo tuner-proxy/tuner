@@ -4,12 +4,11 @@ import * as net from 'net';
 import * as os from 'os';
 import { promisify } from 'util';
 
-import { Certificate } from '@tuner-proxy/ca';
 import chalk from 'chalk';
 import waitFor from 'event-to-promise';
 
-import { HandleRequestFn } from './router';
-import { ConnectResult, HTTPResult } from './router/handler';
+import { Certificate } from './ca';
+import { ConnectResult, HTTPResult, HandleRequestFn } from './router';
 import { Upstream } from './upstream';
 import { log } from './utils';
 import { BaseRequest } from './wrapper/BaseRequest';
