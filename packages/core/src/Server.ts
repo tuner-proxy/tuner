@@ -8,7 +8,7 @@ import { Certificate } from '@tuner-proxy/ca';
 import chalk from 'chalk';
 import waitFor from 'event-to-promise';
 
-import { Router } from './router';
+import { HandleRequestFn } from './router';
 import { ConnectResult, HTTPResult } from './router/handler';
 import { Upstream } from './upstream';
 import { log } from './utils';
@@ -20,21 +20,22 @@ import { UpgradeRequest } from './wrapper/UpgradeRequest';
 
 export interface ServerOptions {
   rootCA: Certificate;
-  router: Router;
+  handleRequest: HandleRequestFn;
 }
 
 const resolve = promisify(dns.resolve);
 
 export class Server {
   rootCA: Certificate;
-  router: Router;
   upstream: Upstream;
+  handleRequest: HandleRequestFn;
+
   proxySvr: http.Server;
 
   constructor(options: ServerOptions) {
     this.rootCA = options.rootCA;
-    this.router = options.router;
     this.upstream = new Upstream();
+    this.handleRequest = options.handleRequest;
 
     this.proxySvr = http.createServer();
 
@@ -71,7 +72,7 @@ export class Server {
     try {
       req.socket.pause();
 
-      const upstreamSocket = await this.router.handleRequest<ConnectResult>(
+      const upstreamSocket = await this.handleRequest<ConnectResult>(
         'connect',
         req.originalUrl,
         req,
@@ -120,7 +121,7 @@ export class Server {
     log(chalk.cyan(req.method), req.originalUrl);
 
     try {
-      const routerRes = await this.router.handleRequest<HTTPResult>(
+      const routerRes = await this.handleRequest<HTTPResult>(
         'common',
         req.originalUrl,
         req,
@@ -175,7 +176,7 @@ export class Server {
     log(chalk.cyan('UPGRADE'), req.originalUrl);
 
     try {
-      const upstreamSocket = await this.router.handleRequest<ConnectResult>(
+      const upstreamSocket = await this.handleRequest<ConnectResult>(
         'upgrade',
         req.originalUrl,
         req,
