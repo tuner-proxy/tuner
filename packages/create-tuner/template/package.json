@@ -1,9 +1,11 @@
 {
+  "private": true,
   "name": "tuner-routes",
   "version": "0.1.0",
   "scripts": {
     "build": "swc src -d dist --copy-files",
     "dev": "swc src -d dist -w --copy-files",
+    "init": "tuner init --install",
     "mock": "tuner dist",
     "start": "npm run build && concurrently -k -r npm:dev npm:mock"
   },
