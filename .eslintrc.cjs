@@ -36,4 +36,12 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    {
+      files: ['packages/create-tuner/template/**/*'],
+      rules: {
+        'prettier/prettier': 'off',
+      },
+    },
+  ],
 };
