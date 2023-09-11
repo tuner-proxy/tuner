@@ -6,7 +6,7 @@
     "build": "swc src -d dist --copy-files",
     "dev": "swc src -d dist -w --copy-files",
     "init": "tuner init --install",
-    "mock": "tuner dist",
+    "mock": "tuner start dist",
     "start": "npm run build && concurrently -k -r npm:dev npm:mock"
   },
   "dependencies": {
