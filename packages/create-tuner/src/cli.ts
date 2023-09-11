@@ -73,10 +73,12 @@ async function init() {
   const pkgManager = pkgInfo ? pkgInfo.name : 'npm';
 
   console.log(`  ${pkgManager} install`);
-  if (pkgManager === 'yarn') {
-    console.log('  yarn run init --install');
-  } else {
-    console.log(`  ${pkgManager} run init -- --install`);
+  if (['win32', 'darwin'].includes(process.platform)) {
+    if (pkgManager === 'yarn') {
+      console.log('  yarn run init --install');
+    } else {
+      console.log(`  ${pkgManager} run init -- --install`);
+    }
   }
   console.log(`  ${pkgManager} run start`);
 
