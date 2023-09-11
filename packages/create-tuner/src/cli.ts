@@ -72,16 +72,13 @@ async function init() {
   const pkgInfo = pkgFromUserAgent(process.env.npm_config_user_agent);
   const pkgManager = pkgInfo ? pkgInfo.name : 'npm';
 
-  switch (pkgManager) {
-    case 'yarn':
-      console.log('  yarn');
-      console.log('  yarn start');
-      break;
-    default:
-      console.log(`  ${pkgManager} install`);
-      console.log(`  ${pkgManager} run start`);
-      break;
+  console.log(`  ${pkgManager} install`);
+  if (pkgManager === 'yarn') {
+    console.log('  yarn run init --install');
+  } else {
+    console.log(`  ${pkgManager} run init -- --install`);
   }
+  console.log(`  ${pkgManager} run start`);
 
   console.log();
 }
