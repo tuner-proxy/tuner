@@ -16,7 +16,7 @@ export async function start(entry: string, args: StartParams) {
       cert: path.resolve(args.cert),
       key: path.resolve(args.key),
     }),
-    handleRequest: loadHotRouter(path.resolve(entry || '.')),
+    handleRequest: loadHotRouter(path.resolve(entry)),
   });
   server.listen(Number(args.port));
 }

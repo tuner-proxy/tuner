@@ -20,7 +20,7 @@ program
 
 program
   .command('start')
-  .arguments('[entry]')
+  .argument('[entry]', 'path to the proxy rules', './')
   .option('-p, --port <port>', 'proxy server port', '8123')
   .option('-k, --key <path>', 'private key path', 'ssl/key.pem')
   .option('-c, --cert <path>', 'certificate path', 'ssl/cert.pem')
