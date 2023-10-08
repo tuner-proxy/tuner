@@ -22,7 +22,7 @@ export const basicAuth = (
       if (req.encrypted || req.type === 'connect') {
         return next();
       }
-      if (await verify(req.headers['proxy-authorization'])) {
+      if (await verify(req.raw.headers['proxy-authorization'])) {
         return next();
       }
       return authRequired(req);
