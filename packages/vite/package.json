@@ -1,6 +1,6 @@
 {
   "name": "@tuner-proxy/vite",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -12,14 +12,14 @@
     "lint": "tsc --noEmit"
   },
   "devDependencies": {
-    "@tuner-proxy/core": "workspace:~",
-    "@tuner-proxy/util": "workspace:~",
+    "@tuner-proxy/core": "~0.3.0",
+    "@tuner-proxy/util": "~0.3.0",
     "@types/node": "^20.4.5",
     "typescript": "^5.1.6",
     "vite": "^4.4.8"
   },
   "peerDependencies": {
-    "@tuner-proxy/core": "workspace:~",
+    "@tuner-proxy/core": "~0.3.0",
     "vite": "^4"
   },
   "repository": {
