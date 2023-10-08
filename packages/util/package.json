@@ -16,15 +16,15 @@
     "event-to-promise": "^0.8.0",
     "mime-types": "^2.1.35",
     "sni": "^1.0.0",
-    "ws": "^8.13.0"
+    "ws": "^8.14.2"
   },
   "devDependencies": {
-    "@tuner-proxy/core": "~0.3.0",
-    "@types/event-to-promise": "^0.7.2",
-    "@types/mime-types": "^2.1.1",
-    "@types/node": "^20.4.5",
-    "@types/ws": "^8.5.5",
-    "typescript": "^5.1.6"
+    "@tuner-proxy/core": "workspace:~",
+    "@types/event-to-promise": "^0.7.3",
+    "@types/mime-types": "^2.1.2",
+    "@types/node": "^20.8.3",
+    "@types/ws": "^8.5.6",
+    "typescript": "^5.2.2"
   },
   "peerDependencies": {
     "@tuner-proxy/core": "~0.3.0"

@@ -12,11 +12,11 @@
     "lint": "tsc --noEmit"
   },
   "devDependencies": {
-    "@tuner-proxy/core": "~0.3.0",
-    "@tuner-proxy/util": "~0.3.0",
-    "@types/node": "^20.4.5",
-    "typescript": "^5.1.6",
-    "vite": "^4.4.8"
+    "@tuner-proxy/core": "workspace:~",
+    "@tuner-proxy/util": "workspace:~",
+    "@types/node": "^20.8.3",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.11"
   },
   "peerDependencies": {
     "@tuner-proxy/core": "~0.3.0",
