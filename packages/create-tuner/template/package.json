@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "tuner-routes",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "scripts": {
     "build": "swc src -d dist --copy-files",
     "dev": "swc src -d dist -w --copy-files",
@@ -12,8 +12,8 @@
   "dependencies": {
     "@swc/cli": "^0.1.62",
     "@swc/core": "^1.3.74",
-    "@tuner-proxy/core": "workspace:~",
-    "@tuner-proxy/util": "workspace:~",
+    "@tuner-proxy/core": "~0.3.0",
+    "@tuner-proxy/util": "~0.3.0",
     "chokidar": "^3.5.3",
     "concurrently": "^8.2.0"
   }

@@ -1,6 +1,6 @@
 {
   "name": "@tuner-proxy/util",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -19,7 +19,7 @@
     "ws": "^8.13.0"
   },
   "devDependencies": {
-    "@tuner-proxy/core": "workspace:~",
+    "@tuner-proxy/core": "~0.3.0",
     "@types/event-to-promise": "^0.7.2",
     "@types/mime-types": "^2.1.1",
     "@types/node": "^20.4.5",
@@ -27,7 +27,7 @@
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
-    "@tuner-proxy/core": "workspace:~"
+    "@tuner-proxy/core": "~0.3.0"
   },
   "repository": {
     "type": "git",

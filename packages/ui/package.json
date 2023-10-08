@@ -1,6 +1,6 @@
 {
   "name": "@tuner-proxy/ui",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -16,8 +16,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tuner-proxy/util": "workspace:~",
-    "@tuner-proxy/vite": "workspace:~",
+    "@tuner-proxy/util": "~0.3.0",
+    "@tuner-proxy/vite": "~0.3.0",
     "busboy": "^1.6.0",
     "monaco-editor": "^0.40.0"
   },
@@ -30,7 +30,7 @@
     "@codemirror/state": "^6.2.1",
     "@codemirror/theme-one-dark": "^6.1.2",
     "@codemirror/view": "^6.16.0",
-    "@tuner-proxy/core": "workspace:~",
+    "@tuner-proxy/core": "~0.3.0",
     "@types/busboy": "^1.5.0",
     "@types/mime-types": "^2.1.1",
     "@types/node": "^20.4.5",
@@ -50,7 +50,7 @@
     "ws": "^8.13.0"
   },
   "peerDependencies": {
-    "@tuner-proxy/core": "workspace:~"
+    "@tuner-proxy/core": "~0.3.0"
   },
   "repository": {
     "type": "git",
