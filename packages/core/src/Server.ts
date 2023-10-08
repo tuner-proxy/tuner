@@ -18,52 +18,54 @@ import { HTTPResponse } from './wrapper/HTTPResponse';
 import { UpgradeRequest } from './wrapper/UpgradeRequest';
 
 export interface ServerOptions {
+  /**
+   * Root CA certificate
+   */
   rootCA: Certificate;
+  /**
+   * HTTP proxy server
+   */
+  proxySvr: http.Server;
+  /**
+   * Request handler
+   */
   handleRequest: HandleRequestFn;
 }
 
 const resolve = promisify(dns.resolve);
 
 export class Server {
+  /**
+   * Root CA certificate
+   */
   rootCA: Certificate;
-  upstream: Upstream;
-  handleRequest: HandleRequestFn;
 
+  /**
+   * Upstream manager instance
+   */
+  upstream: Upstream;
+
+  /**
+   * HTTP proxy server
+   */
   proxySvr: http.Server;
+
+  /**
+   * Request handler
+   */
+  handleRequest: HandleRequestFn;
 
   constructor(options: ServerOptions) {
     this.rootCA = options.rootCA;
+    this.proxySvr = options.proxySvr;
+
     this.upstream = new Upstream();
     this.handleRequest = options.handleRequest;
-
-    this.proxySvr = http.createServer();
-
-    this.proxySvr.on('connect', (req, socket, head) => {
-      this.handleConnectRequest(new ConnectRequest(this, req, socket, head));
-    });
-
-    this.proxySvr.on('request', (req, rawRes) => {
-      this.handleHTTPRequest(new HTTPRequest(this, req, rawRes));
-    });
-
-    this.proxySvr.on('upgrade', (req, socket, head) => {
-      this.handleUpgradeRequest(new UpgradeRequest(this, req, socket, head));
-    });
-
-    this.proxySvr.on('listening', () => {
-      const addr = this.proxySvr.address() as net.AddressInfo;
-      log(chalk.green(`Server listening at ${addr.port}`));
-    });
-
-    this.proxySvr.on('clientError', (error) => {
-      log(chalk.red('Client error'), '\n', error);
-    });
   }
 
-  listen(port: string | number) {
-    this.proxySvr.listen(port);
-  }
-
+  /**
+   * Handle connect request with tuner routes
+   */
   async handleConnectRequest(req: ConnectRequest) {
     log(chalk.cyan('CONNECT'), req.originalUrl);
 
@@ -116,6 +118,9 @@ export class Server {
     }
   }
 
+  /**
+   * Handle HTTP request with tuner routes
+   */
   async handleHTTPRequest(req: HTTPRequest) {
     log(chalk.cyan(req.method), req.originalUrl);
 
@@ -171,6 +176,9 @@ export class Server {
     }
   }
 
+  /**
+   * Handle upgrade request with tuner routes
+   */
   async handleUpgradeRequest(req: UpgradeRequest) {
     log(chalk.cyan('UPGRADE'), req.originalUrl);
 
