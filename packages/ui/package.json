@@ -1,6 +1,6 @@
 {
   "name": "@tuner-proxy/ui",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -16,8 +16,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tuner-proxy/util": "workspace:~",
-    "@tuner-proxy/vite": "workspace:~",
+    "@tuner-proxy/util": "~0.3.1",
+    "@tuner-proxy/vite": "~0.3.1",
     "busboy": "^1.6.0",
     "monaco-editor": "^0.44.0"
   },
@@ -30,7 +30,7 @@
     "@codemirror/state": "^6.2.1",
     "@codemirror/theme-one-dark": "^6.1.2",
     "@codemirror/view": "^6.21.3",
-    "@tuner-proxy/core": "workspace:~",
+    "@tuner-proxy/core": "~0.3.1",
     "@types/busboy": "^1.5.1",
     "@types/mime-types": "^2.1.2",
     "@types/node": "^20.8.3",

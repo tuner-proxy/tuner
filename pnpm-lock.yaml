@@ -164,10 +164,10 @@ importers:
         specifier: ^1.3.92
         version: 1.3.92
       '@tuner-proxy/core':
-        specifier: workspace:~
+        specifier: ~0.3.1
         version: link:../../core
       '@tuner-proxy/util':
-        specifier: workspace:~
+        specifier: ~0.3.1
         version: link:../../util
       chokidar:
         specifier: ^3.5.3
@@ -179,10 +179,10 @@ importers:
   packages/ui:
     dependencies:
       '@tuner-proxy/util':
-        specifier: workspace:~
+        specifier: ~0.3.1
         version: link:../util
       '@tuner-proxy/vite':
-        specifier: workspace:~
+        specifier: ~0.3.1
         version: link:../vite
       busboy:
         specifier: ^1.6.0
@@ -216,7 +216,7 @@ importers:
         specifier: ^6.21.3
         version: 6.21.3
       '@tuner-proxy/core':
-        specifier: workspace:~
+        specifier: ~0.3.1
         version: link:../core
       '@types/busboy':
         specifier: ^1.5.1
@@ -289,7 +289,7 @@ importers:
         version: 8.14.2
     devDependencies:
       '@tuner-proxy/core':
-        specifier: workspace:~
+        specifier: ~0.3.1
         version: link:../core
       '@types/event-to-promise':
         specifier: ^0.7.3
@@ -310,10 +310,10 @@ importers:
   packages/vite:
     devDependencies:
       '@tuner-proxy/core':
-        specifier: workspace:~
+        specifier: ~0.3.1
         version: link:../core
       '@tuner-proxy/util':
-        specifier: workspace:~
+        specifier: ~0.3.1
         version: link:../util
       '@types/node':
         specifier: ^20.8.3

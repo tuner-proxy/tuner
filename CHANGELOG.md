@@ -1,3 +1,9 @@
+## 0.3.1 (2023-10-18)
+
+### Bug Fixes
+
+* **core:** delete require cache when hot reload ([983a830](https://github.com/tuner-proxy/tuner/commit/983a83044e59785886b8a0922a535a1414db0e6c))
+
 # 0.3.0 (2023-10-08)
 
 ### Bug Fixes
