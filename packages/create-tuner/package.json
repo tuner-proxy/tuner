@@ -1,6 +1,6 @@
 {
   "name": "create-tuner",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Scaffolding your Tuner project",
   "bin": {
     "create-tuner": "./bin/index.js"
