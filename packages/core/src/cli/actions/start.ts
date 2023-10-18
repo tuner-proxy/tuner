@@ -64,6 +64,11 @@ function loadHotRouter(entry: string): HandleRequestFn {
 
   const onChange = () => {
     dispatchReloadEvent();
+    for (const path of Object.keys(require.cache)) {
+      if (!path.includes('node_modules') && path.startsWith(entry)) {
+        delete require.cache[path];
+      }
+    }
     handleRequest = loadRouter(entry);
   };
 
