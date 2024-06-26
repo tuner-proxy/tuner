@@ -1,5 +1,11 @@
 # @tuner-proxy/util
 
+## 0.3.4
+
+### Patch Changes
+
+- 23ddcdd: Support forwarding request to unspecific address
+
 ## 0.3.3
 
 ### Patch Changes
