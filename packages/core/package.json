@@ -24,9 +24,9 @@
   },
   "dependencies": {
     "axios": "^1.7.2",
-    "chalk": "^5.3.0",
+    "chalk": "^4.1.2",
     "chokidar": "^3.6.0",
-    "commander": "^12.1.0",
+    "commander": "^11.1.0",
     "event-to-promise": "^0.8.0",
     "ip-matching": "^2.1.2",
     "lodash.debounce": "^4.0.8",
