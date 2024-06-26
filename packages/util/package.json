@@ -1,6 +1,11 @@
 {
   "name": "@tuner-proxy/util",
   "version": "0.3.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gzzhanghao/tuner",
+    "directory": "packages/util"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -12,26 +17,21 @@
     "lint": "tsc --noEmit"
   },
   "dependencies": {
-    "chalk": "^4.1.2",
+    "chalk": "^5.3.0",
     "event-to-promise": "^0.8.0",
     "mime-types": "^2.1.35",
     "sni": "^1.0.0",
-    "ws": "^8.14.2"
+    "ws": "^8.17.1"
   },
   "devDependencies": {
-    "@tuner-proxy/core": "~0.3.1",
-    "@types/event-to-promise": "^0.7.3",
-    "@types/mime-types": "^2.1.2",
-    "@types/node": "^20.8.3",
-    "@types/ws": "^8.5.6",
-    "typescript": "^5.2.2"
+    "@tuner-proxy/core": "workspace:~",
+    "@types/event-to-promise": "^0.7.5",
+    "@types/mime-types": "^2.1.4",
+    "@types/node": "^20.14.9",
+    "@types/ws": "^8.5.10",
+    "typescript": "^5.5.2"
   },
   "peerDependencies": {
-    "@tuner-proxy/core": "~0.3.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gzzhanghao/tuner.git",
-    "directory": "packages/util"
+    "@tuner-proxy/core": "workspace:~"
   }
 }

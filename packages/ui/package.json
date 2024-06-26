@@ -1,6 +1,11 @@
 {
   "name": "@tuner-proxy/ui",
   "version": "0.3.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gzzhanghao/tuner",
+    "directory": "packages/ui"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -9,52 +14,47 @@
   ],
   "scripts": {
     "build": "concurrently npm:build:*",
-    "build:frontend": "cd frontend && vue-tsc --noEmit && vite build",
+    "build:frontend": "cd frontend && vite build",
     "build:proxy": "git clean -dfx dist && tsc",
     "dev": "tsc -w",
-    "lint": "tsc --noEmit",
+    "lint": "tsc --noEmit && cd frontend && vue-tsc --noEmit",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tuner-proxy/util": "~0.3.1",
-    "@tuner-proxy/vite": "~0.3.1",
+    "@tuner-proxy/util": "workspace:~",
+    "@tuner-proxy/vite": "workspace:~",
     "busboy": "^1.6.0",
-    "monaco-editor": "^0.44.0"
+    "monaco-editor": "^0.50.0"
   },
   "devDependencies": {
     "@codemirror/lang-css": "^6.2.1",
-    "@codemirror/lang-html": "^6.4.6",
-    "@codemirror/lang-javascript": "^6.2.1",
+    "@codemirror/lang-html": "^6.4.9",
+    "@codemirror/lang-javascript": "^6.2.2",
     "@codemirror/lang-json": "^6.0.1",
-    "@codemirror/language": "^6.9.1",
-    "@codemirror/state": "^6.2.1",
+    "@codemirror/language": "^6.10.2",
+    "@codemirror/state": "^6.4.1",
     "@codemirror/theme-one-dark": "^6.1.2",
-    "@codemirror/view": "^6.21.3",
-    "@tuner-proxy/core": "~0.3.1",
-    "@types/busboy": "^1.5.1",
-    "@types/mime-types": "^2.1.2",
-    "@types/node": "^20.8.3",
-    "@types/ws": "^8.5.6",
-    "@vitejs/plugin-vue": "^4.4.0",
-    "@vitejs/plugin-vue-jsx": "^3.0.2",
-    "autoprefixer": "^10.4.16",
-    "concurrently": "^8.2.1",
+    "@codemirror/view": "^6.28.2",
+    "@tuner-proxy/core": "workspace:~",
+    "@types/busboy": "^1.5.4",
+    "@types/mime-types": "^2.1.4",
+    "@types/node": "^20.14.9",
+    "@types/ws": "^8.5.10",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
     "mime-types": "^2.1.35",
-    "pinia": "^2.1.6",
-    "sass": "^1.69.0",
-    "typescript": "^5.2.2",
-    "vite": "^4.4.11",
+    "pinia": "^2.1.7",
+    "sass": "^1.77.6",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1",
     "vscode-loader": "^1.0.2",
-    "vue": "^3.3.4",
-    "vue-tsc": "^1.8.16",
-    "ws": "^8.14.2"
+    "vue": "^3.4.30",
+    "vue-tsc": "^2.0.22",
+    "ws": "^8.17.1"
   },
   "peerDependencies": {
-    "@tuner-proxy/core": "~0.3.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gzzhanghao/tuner.git",
-    "directory": "packages/ui"
+    "@tuner-proxy/core": "workspace:~"
   }
 }
