@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "tuner-routes",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "scripts": {
     "build": "swc src -d dist --copy-files",
     "dev": "swc src -d dist -w --copy-files",
