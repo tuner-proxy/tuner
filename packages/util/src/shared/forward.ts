@@ -71,7 +71,7 @@ export const forwardHttpSvr = (
       if (address === '::' || address === '0.0.0.0') {
         address = 'localhost';
       }
-      socket = net.connect(addr.port, addr.address);
+      socket = net.connect(addr.port, address);
     }
     if (!socket) {
       return next();
