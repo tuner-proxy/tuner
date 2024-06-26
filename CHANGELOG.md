@@ -1,3 +1,9 @@
+## 0.3.2 (2024-06-26)
+
+### Bug Fixes
+
+* **util:** support forward request to unspecified address ([3269fe0](https://github.com/tuner-proxy/tuner/commit/3269fe077331c4faf6fde01f7ab855486e6e7972))
+
 ## 0.3.1 (2023-10-18)
 
 ### Bug Fixes
