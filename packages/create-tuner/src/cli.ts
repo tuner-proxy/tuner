@@ -5,7 +5,7 @@ import inquirer from 'inquirer';
 import klaw from 'klaw';
 
 const cwd = process.cwd();
-const templatePath = path.join(__dirname, '../template');
+const templatePath = path.join(import.meta.dirname, '../template');
 
 init();
 

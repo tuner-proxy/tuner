@@ -2,6 +2,7 @@
   "name": "create-tuner",
   "version": "0.3.2",
   "description": "Scaffolding your Tuner project",
+  "type": "module",
   "bin": {
     "create-tuner": "./bin/index.js"
   },
@@ -26,5 +27,8 @@
     "@types/klaw": "^3.0.6",
     "@types/node": "^20.14.9",
     "typescript": "^5.5.2"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 /* eslint-env node */
 
-require('../dist/cli');
+import '../dist/cli.js';
