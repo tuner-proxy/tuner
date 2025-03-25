@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref, watchEffect } from 'vue';
 
-import { CommonRequest } from '../../../../store/request';
+import type { CommonRequest } from '../../../../store/request';
 
 const props = defineProps<{
   message: CommonRequest['request'] | CommonRequest['response'];
@@ -76,7 +76,8 @@ onBeforeUnmount(() => {
 
   $grid-size: 12px;
 
-  background-image: linear-gradient(45deg, #fff 25%, transparent 25%),
+  background-image:
+    linear-gradient(45deg, #fff 25%, transparent 25%),
     linear-gradient(-45deg, #fff 25%, transparent 25%),
     linear-gradient(45deg, transparent 75%, #fff 75%),
     linear-gradient(-45deg, #ddd 75%, #fff 75%);

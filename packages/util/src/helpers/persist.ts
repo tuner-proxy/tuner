@@ -1,4 +1,4 @@
-import { Server } from '@tuner-proxy/core';
+import type { Server } from '@tuner-proxy/core';
 
 interface PersistItem {
   version?: string | number;

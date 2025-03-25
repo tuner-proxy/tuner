@@ -1,5 +1,5 @@
-import { NextFn, ProcessFn } from './handler';
-import { MatchedRoute } from './match';
+import type { NextFn, ProcessFn } from './handler';
+import type { MatchedRoute } from './match';
 
 export function execRoutes<T>(
   targetType: string,

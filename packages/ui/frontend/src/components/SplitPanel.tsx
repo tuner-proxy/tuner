@@ -1,4 +1,5 @@
-import { defineComponent, ref, VNode } from 'vue';
+import type { VNode } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 import { useWindowEvent } from '../lib/window-event';
 
@@ -13,7 +14,11 @@ const PANEL_MIN_WIDTH = 50;
 
 export default defineComponent({
   setup({}, { slots }) {
-    const resizeState = ref<{ targetIndex: number, startX: number, startWidths: WidthRecord[] }>();
+    const resizeState = ref<{
+      targetIndex: number;
+      startX: number;
+      startWidths: WidthRecord[];
+    }>();
     const resizeStyles = ref<Record<number, Record<string, string>>>({});
 
     const panelRefs = new Map<number, HTMLElement>();
@@ -36,7 +41,7 @@ export default defineComponent({
       }
       startWidths.sort((a, b) => a.index - b.index);
       resizeState.value = {
-        targetIndex: startWidths.findIndex(item => item.index === index),
+        targetIndex: startWidths.findIndex((item) => item.index === index),
         startX: event.pageX,
         startWidths,
       };
@@ -89,16 +94,18 @@ export default defineComponent({
       if (typeof vnode.type === 'symbol') {
         return null;
       }
-      return <>
-        {renderResizer(index)}
-        <div
-          class={style.item}
-          style={resizeStyles.value[index]}
-          ref={el => onPanelRef(index, el as any)}
-        >
-          {vnode}
-        </div>
-      </>;
+      return (
+        <>
+          {renderResizer(index)}
+          <div
+            class={style.item}
+            style={resizeStyles.value[index]}
+            ref={(el) => onPanelRef(index, el as any)}
+          >
+            {vnode}
+          </div>
+        </>
+      );
     }
 
     function renderResizer(index: number) {
@@ -109,7 +116,7 @@ export default defineComponent({
         <div class={style.resizer}>
           <div
             class={style.resizeHandle}
-            onMousedown={event => onResizeStart(event, index)}
+            onMousedown={(event) => onResizeStart(event, index)}
             onDblclick={onResetResize}
           />
         </div>
@@ -121,21 +128,23 @@ export default defineComponent({
       if (!vnodes) {
         return <div class={style.wrap} />;
       }
-      const currentCount = vnodes.filter(vnode => typeof vnode.type !== 'symbol').length;
+      const currentCount = vnodes.filter(
+        (vnode) => typeof vnode.type !== 'symbol',
+      ).length;
       const resizeCount = Object.keys(resizeStyles.value).length;
       if (resizeCount && currentCount !== resizeCount) {
         resizeStyles.value = {};
       }
-      return (
-        <div class={style.wrap}>
-          {vnodes.map(renderItem)}
-        </div>
-      );
+      return <div class={style.wrap}>{vnodes.map(renderItem)}</div>;
     };
   },
 });
 
-function forEach<T>(list: T[], direction: number, callback: (val: T, index: number) => void) {
+function forEach<T>(
+  list: T[],
+  direction: number,
+  callback: (val: T, index: number) => void,
+) {
   if (direction >= 0) {
     for (let i = 0, ii = list.length; i < ii; i++) {
       callback(list[i], i);

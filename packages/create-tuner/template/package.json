@@ -1,7 +1,7 @@
 {
-  "private": true,
   "name": "tuner-routes",
   "version": "0.3.2",
+  "private": true,
   "scripts": {
     "build": "swc src -d dist --copy-files",
     "dev": "swc src -d dist -w --copy-files",
@@ -10,11 +10,11 @@
     "start": "npm run build && concurrently -k -r npm:dev npm:mock"
   },
   "dependencies": {
-    "@swc/cli": "^0.3.14",
-    "@swc/core": "^1.6.5",
+    "@swc/cli": "^0.6.0",
+    "@swc/core": "^1.11.13",
     "@tuner-proxy/core": "workspace:~",
     "@tuner-proxy/util": "workspace:~",
-    "chokidar": "^3.6.0",
-    "concurrently": "^8.2.2"
+    "chokidar": "^4.0.3",
+    "concurrently": "^9.1.2"
   }
 }

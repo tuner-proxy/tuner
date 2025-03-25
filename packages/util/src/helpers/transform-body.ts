@@ -1,7 +1,8 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
-import { HTTPResponse, HTTPRequest, httpHandler } from '@tuner-proxy/core';
+import type { HTTPResponse, HTTPRequest } from '@tuner-proxy/core';
+import { httpHandler } from '@tuner-proxy/core';
 import waitFor from 'event-to-promise';
 
 import { transformRes } from './response';

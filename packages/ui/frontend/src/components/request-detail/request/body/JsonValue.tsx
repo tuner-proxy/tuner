@@ -1,5 +1,3 @@
-/* eslint-disable vue/no-setup-props-destructure, vue/require-prop-types, vue/one-component-per-file */
-
 import { computed, defineComponent } from 'vue';
 
 import ContextMenu from '../../../ContextMenu.vue';

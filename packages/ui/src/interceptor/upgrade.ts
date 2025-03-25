@@ -1,6 +1,7 @@
-import { TLSSocket } from 'tls';
+import type { TLSSocket } from 'node:tls';
 
-import { ConnectResult, upgradeHandler } from '@tuner-proxy/core';
+import type { ConnectResult } from '@tuner-proxy/core';
+import { upgradeHandler } from '@tuner-proxy/core';
 
 import { broadcast } from '../ctrl/server';
 import { genUID, getRemoteInfo } from '../shared';

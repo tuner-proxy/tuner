@@ -1,15 +1,11 @@
 <script setup lang="ts">
+import type { LanguageSupport } from '@codemirror/language';
 import {
   defaultHighlightStyle,
-  LanguageSupport,
   syntaxHighlighting,
 } from '@codemirror/language';
-import {
-  Compartment,
-  EditorSelection,
-  EditorState,
-  Extension,
-} from '@codemirror/state';
+import type { Extension } from '@codemirror/state';
+import { Compartment, EditorSelection, EditorState } from '@codemirror/state';
 import { oneDark } from '@codemirror/theme-one-dark';
 import {
   EditorView,

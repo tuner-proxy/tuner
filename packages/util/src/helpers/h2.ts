@@ -1,6 +1,7 @@
-import * as http2 from 'http2';
+import * as http2 from 'node:http2';
 
-import { HTTPRequest, Server } from '@tuner-proxy/core';
+import type { Server } from '@tuner-proxy/core';
+import { HTTPRequest } from '@tuner-proxy/core';
 
 import { forwardHttpSvr } from '../shared/forward';
 import { getTlsOptions } from '../shared/tls';

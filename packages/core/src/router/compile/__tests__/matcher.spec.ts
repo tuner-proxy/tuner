@@ -1,5 +1,7 @@
+import { describe, expect, it } from 'vitest';
+
+import type { MatchInfo } from '../matcher';
 import {
-  MatchInfo,
   createHostnameMatcher,
   createPathnameMatcher,
   createPortMatcher,

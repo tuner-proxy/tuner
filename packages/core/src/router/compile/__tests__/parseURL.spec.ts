@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import { parseURL } from '../parseURL';
 
 describe('parseURL', () => {

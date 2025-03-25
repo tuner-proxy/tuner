@@ -1,5 +1,6 @@
-import { UpgradeRequest } from '@tuner-proxy/core';
-import WebSocket, { WebSocketServer } from 'ws';
+import type { UpgradeRequest } from '@tuner-proxy/core';
+import type WebSocket from 'ws';
+import { WebSocketServer } from 'ws';
 
 const wss = new WebSocketServer({ noServer: true });
 

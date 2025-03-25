@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { computed, ref, shallowRef } from 'vue';
 
-import ContextMenu, { MenuItem } from './components/ContextMenu.vue';
+import type { MenuItem } from './components/ContextMenu.vue';
+import ContextMenu from './components/ContextMenu.vue';
 import FlexHead from './components/FlexHead.vue';
 import RequestDetail from './components/RequestDetail.vue';
 import RequestList from './components/RequestList.vue';
 import SplitPanel from './components/SplitPanel';
 import { copyTextData } from './lib/clipboard';
 import { getRequestHref } from './lib/request-href';
-import { FilterItem, FILTER_TYPES } from './lib/request-type';
+import type { FilterItem } from './lib/request-type';
+import { FILTER_TYPES } from './lib/request-type';
 import { stringifyHost } from './lib/util';
 import { useConnectionStore } from './store/connection';
 import { useRequestStore } from './store/request';

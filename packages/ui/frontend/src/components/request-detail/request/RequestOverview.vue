@@ -3,7 +3,7 @@ import { computed } from 'vue';
 
 import { getRequestHref } from '../../../lib/request-href';
 import { formatBodySize, getBodySize } from '../../../lib/util';
-import { BodyState, CommonRequest } from '../../../store/request';
+import type { BodyState, CommonRequest } from '../../../store/request';
 import DetailItem from '../common/DetailItem.vue';
 import DetailSection from '../common/DetailSection.vue';
 import ErrorView from '../common/ErrorView.vue';

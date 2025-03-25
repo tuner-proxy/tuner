@@ -1,9 +1,10 @@
-import * as stream from 'stream';
+import type { Readable } from 'node:stream';
+import { PassThrough } from 'node:stream';
 
 import waitFor from 'event-to-promise';
 
+import type { ContentEncodingType } from '../encoding';
 import {
-  ContentEncodingType,
   createCompressStream,
   createDecompressStream,
   normalizeContentEncoding,
@@ -11,7 +12,7 @@ import {
 
 import { StreamManager } from './StreamManager';
 
-export type BodyContent = string | Buffer | stream.Readable;
+export type BodyContent = string | Buffer | Readable;
 
 export interface BodyInfo {
   /**
@@ -44,7 +45,7 @@ export interface ReadOptions {
 }
 
 export function readStream(body: BodyInfo, options: ReadOptions = {}) {
-  let input: stream.Readable;
+  let input: Readable;
   if (
     !body.content ||
     typeof body.content === 'string' ||
@@ -106,7 +107,7 @@ export async function readJson(
 }
 
 function createPassThrough(content?: string | Buffer) {
-  const pass = new stream.PassThrough();
+  const pass = new PassThrough();
   if (content != null) {
     pass.write(content);
   }

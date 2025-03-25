@@ -6,25 +6,38 @@
     "url": "https://github.com/gzzhanghao/tuner",
     "directory": "packages/vite"
   },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "git clean -dfx dist && tsc",
-    "dev": "tsc -w",
+    "build": "vite build",
+    "dev": "vite build --watch --mode development",
     "lint": "tsc --noEmit"
   },
   "devDependencies": {
+    "@tsconfig/node22": "^22.0.1",
     "@tuner-proxy/core": "workspace:~",
     "@tuner-proxy/util": "workspace:~",
-    "@types/node": "^20.14.9",
-    "typescript": "^5.5.2",
-    "vite": "^5.3.1"
+    "@types/node": "^22.13.13",
+    "rollup-plugin-node-externals": "^8.0.0",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.3",
+    "vite-plugin-dts": "^4.5.3"
   },
   "peerDependencies": {
     "@tuner-proxy/core": "workspace:~",
-    "vite": "^4"
+    "vite": "^6"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

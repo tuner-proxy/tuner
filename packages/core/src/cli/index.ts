@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import { program } from 'commander';
 
+import { version } from '../../package.json';
 import { log } from '../utils';
 
 import { init } from './actions/init';
@@ -14,9 +15,7 @@ process.on('unhandledRejection', (error: any) => {
   log(chalk.red('Unhandled rejection'), '\n', error.stack);
 });
 
-program
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  .version(require('../../package.json').version);
+program.version(version);
 
 program
   .command('start')

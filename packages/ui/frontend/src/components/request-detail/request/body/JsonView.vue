@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue';
 
 import { useBodyAsText } from '../../../../lib/request-body';
-import { CommonRequestMessage } from '../../../../store/request';
+import type { CommonRequestMessage } from '../../../../store/request';
 import FlexHead from '../../../FlexHead.vue';
 import DetailItem from '../../common/DetailItem.vue';
 import DetailSection from '../../common/DetailSection.vue';

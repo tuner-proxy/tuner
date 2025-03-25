@@ -1,6 +1,7 @@
-import http from 'http';
+import type http from 'node:http';
 
-import { HTTPResponse, httpHandler, HTTPRequest } from '@tuner-proxy/core';
+import type { HTTPResponse, HTTPRequest } from '@tuner-proxy/core';
+import { httpHandler } from '@tuner-proxy/core';
 
 export type TransformResponseHandler = (
   res: HTTPResponse,

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { ColumnDefinition } from '../lib/list-column';
+import type { ColumnDefinition } from '../lib/list-column';
 
 const props = defineProps<{
   column: ColumnDefinition;

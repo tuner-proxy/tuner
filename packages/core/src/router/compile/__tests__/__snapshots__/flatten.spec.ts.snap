@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`flatten common 1`] = `
+exports[`flatten > common 1`] = `
 [
   {
     "handlers": [
@@ -15,7 +15,7 @@ exports[`flatten common 1`] = `
 ]
 `;
 
-exports[`flatten disable fragment 1`] = `
+exports[`flatten > disable fragment 1`] = `
 [
   {
     "handlers": [
@@ -30,9 +30,9 @@ exports[`flatten disable fragment 1`] = `
 ]
 `;
 
-exports[`flatten disable fragment 2`] = `[]`;
+exports[`flatten > disable fragment 2`] = `[]`;
 
-exports[`flatten multiple handlers 1`] = `
+exports[`flatten > multiple handlers 1`] = `
 [
   {
     "handlers": [
@@ -55,7 +55,7 @@ exports[`flatten multiple handlers 1`] = `
 ]
 `;
 
-exports[`flatten with child routes 1`] = `
+exports[`flatten > with child routes 1`] = `
 [
   {
     "handlers": [

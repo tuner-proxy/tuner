@@ -1,10 +1,11 @@
-import path from 'path';
+import path from 'node:path';
 
 import fs from 'fs-extra';
 import inquirer from 'inquirer';
 import klaw from 'klaw';
 
 const cwd = process.cwd();
+
 const templatePath = path.join(import.meta.dirname, '../template');
 
 init();

@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import {
-  parseCookie,
-  parseSetCookie,
-  SetCookieItem,
-} from '../../../lib/header-parser';
+import type { SetCookieItem } from '../../../lib/header-parser';
+import { parseCookie, parseSetCookie } from '../../../lib/header-parser';
 import { getHeaders } from '../../../lib/util';
-import { CommonRequest, UpgradeRequest } from '../../../store/request';
+import type { CommonRequest, UpgradeRequest } from '../../../store/request';
 import DetailItem from '../common/DetailItem.vue';
 import DetailSection from '../common/DetailSection.vue';
 

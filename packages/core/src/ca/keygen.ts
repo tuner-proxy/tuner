@@ -1,11 +1,11 @@
-import * as crypto from 'crypto';
-import * as net from 'net';
-import * as os from 'os';
-import * as util from 'util';
+import * as crypto from 'node:crypto';
+import * as net from 'node:net';
+import * as os from 'node:os';
+import * as util from 'node:util';
 
 import forge from 'node-forge';
 
-import { Certificate } from './types';
+import type { Certificate } from './types';
 
 const generateKeyPair = util.promisify(forge.pki.rsa.generateKeyPair);
 

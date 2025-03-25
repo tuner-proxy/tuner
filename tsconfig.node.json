@@ -1,0 +1,22 @@
+{
+  "extends": "@tsconfig/node22/tsconfig.json",
+  "include": [
+    "eslint.config.*",
+    "packages/*/cypress.config.*",
+    "packages/*/nightwatch.conf.*",
+    "packages/*/playwright.config.*",
+    "packages/*/vite.config.*",
+    "packages/*/vitest.config.*",
+    "types/node.d.ts",
+    "uno.config.*"
+  ],
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "types": [
+      "node"
+    ]
+  }
+}

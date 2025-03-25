@@ -1,10 +1,8 @@
-import { Server } from '../Server';
+import type { Server } from '../Server';
 import { parseHost, stringifyHost } from '../utils';
 
-import {
-  LazyURLSearchParams,
-  LazyURLSearchParamsInit,
-} from './URLSearchParams';
+import type { LazyURLSearchParamsInit } from './URLSearchParams';
+import { LazyURLSearchParams } from './URLSearchParams';
 
 export interface ConnectUpstreamOptions {
   type: string;

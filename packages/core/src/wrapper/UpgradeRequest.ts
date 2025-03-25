@@ -1,8 +1,8 @@
-import * as http from 'http';
-import * as stream from 'stream';
-import * as tls from 'tls';
+import type * as http from 'node:http';
+import type * as stream from 'node:stream';
+import * as tls from 'node:tls';
 
-import { Server } from '../Server';
+import type { Server } from '../Server';
 
 import { BaseRequest } from './BaseRequest';
 

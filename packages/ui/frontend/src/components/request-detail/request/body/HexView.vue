@@ -2,7 +2,7 @@
 import { computed, shallowRef } from 'vue';
 
 import { useWindowEvent } from '../../../../lib/window-event';
-import { CommonRequestMessage } from '../../../../store/request';
+import type { CommonRequestMessage } from '../../../../store/request';
 
 const VIEWPORT_PADDING = 5;
 

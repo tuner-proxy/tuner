@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ErrorInfo } from '@ui/types/message';
+import type { ErrorInfo } from '@ui/types/message';
 
 import DetailItem from './DetailItem.vue';
 import DetailSection from './DetailSection.vue';

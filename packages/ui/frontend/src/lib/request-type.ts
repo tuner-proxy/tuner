@@ -1,4 +1,4 @@
-import { RequestItem } from '../store/request';
+import type { RequestItem } from '../store/request';
 
 import { isCss, isDoc, isImg, isJs, isJson } from './content-type';
 import { parserContentType } from './header-parser';

@@ -1,7 +1,7 @@
 import { upgradeHandler } from '@tuner-proxy/core';
 import { WebSocket, WebSocketServer } from 'ws';
 
-import * as message from '../types/message';
+import type * as message from '../types/message';
 
 export interface TunerUIMessage {
   uid: string;

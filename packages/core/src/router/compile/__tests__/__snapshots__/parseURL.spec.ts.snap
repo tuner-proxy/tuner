@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`parseURL dns wildcard 1`] = `
+exports[`parseURL > dns wildcard 1`] = `
 {
   "hostname": "*.*.example.com",
   "path": undefined,
@@ -11,7 +11,7 @@ exports[`parseURL dns wildcard 1`] = `
 }
 `;
 
-exports[`parseURL full 1`] = `
+exports[`parseURL > full 1`] = `
 {
   "hostname": "*.*.example.com",
   "path": "/example-path/name?foo&bar=baz",
@@ -22,7 +22,7 @@ exports[`parseURL full 1`] = `
 }
 `;
 
-exports[`parseURL hostname 1`] = `
+exports[`parseURL > hostname 1`] = `
 {
   "hostname": "example.com",
   "path": undefined,
@@ -33,7 +33,7 @@ exports[`parseURL hostname 1`] = `
 }
 `;
 
-exports[`parseURL ip 1`] = `
+exports[`parseURL > ip 1`] = `
 {
   "hostname": "0.0.0.0",
   "path": undefined,
@@ -44,7 +44,7 @@ exports[`parseURL ip 1`] = `
 }
 `;
 
-exports[`parseURL ip mask 1`] = `
+exports[`parseURL > ip mask 1`] = `
 {
   "hostname": "[10.0.0.0/16]",
   "path": undefined,
@@ -55,7 +55,7 @@ exports[`parseURL ip mask 1`] = `
 }
 `;
 
-exports[`parseURL ip range 1`] = `
+exports[`parseURL > ip range 1`] = `
 {
   "hostname": "[10.0.0.0-10.1.2.3]",
   "path": undefined,
@@ -66,7 +66,7 @@ exports[`parseURL ip range 1`] = `
 }
 `;
 
-exports[`parseURL ipv6 1`] = `
+exports[`parseURL > ipv6 1`] = `
 {
   "hostname": "[2001::1]",
   "path": undefined,
@@ -77,7 +77,7 @@ exports[`parseURL ipv6 1`] = `
 }
 `;
 
-exports[`parseURL ipv6 range 1`] = `
+exports[`parseURL > ipv6 range 1`] = `
 {
   "hostname": "[2001::abc-2001::1:ffff]",
   "path": undefined,
@@ -88,7 +88,7 @@ exports[`parseURL ipv6 range 1`] = `
 }
 `;
 
-exports[`parseURL multiple protocol 1`] = `
+exports[`parseURL > multiple protocol 1`] = `
 {
   "hostname": undefined,
   "path": undefined,
@@ -99,7 +99,7 @@ exports[`parseURL multiple protocol 1`] = `
 }
 `;
 
-exports[`parseURL pathname 1`] = `
+exports[`parseURL > pathname 1`] = `
 {
   "hostname": undefined,
   "path": "/example-path/name",
@@ -110,7 +110,7 @@ exports[`parseURL pathname 1`] = `
 }
 `;
 
-exports[`parseURL pathname with route params 1`] = `
+exports[`parseURL > pathname with route params 1`] = `
 {
   "hostname": undefined,
   "path": "/example-path/:param/::longParam",
@@ -121,7 +121,7 @@ exports[`parseURL pathname with route params 1`] = `
 }
 `;
 
-exports[`parseURL port 1`] = `
+exports[`parseURL > port 1`] = `
 {
   "hostname": undefined,
   "path": undefined,
@@ -132,7 +132,7 @@ exports[`parseURL port 1`] = `
 }
 `;
 
-exports[`parseURL protocol 1`] = `
+exports[`parseURL > protocol 1`] = `
 {
   "hostname": undefined,
   "path": undefined,
@@ -143,7 +143,7 @@ exports[`parseURL protocol 1`] = `
 }
 `;
 
-exports[`parseURL query 1`] = `
+exports[`parseURL > query 1`] = `
 {
   "hostname": undefined,
   "path": "?foo&bar=baz",

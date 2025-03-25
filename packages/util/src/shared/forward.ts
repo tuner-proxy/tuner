@@ -1,6 +1,7 @@
-import * as net from 'net';
+import * as net from 'node:net';
 
-import { ConnectRequest, Server, connectHandler } from '@tuner-proxy/core';
+import type { ConnectRequest, Server } from '@tuner-proxy/core';
+import { connectHandler } from '@tuner-proxy/core';
 import waitFor from 'event-to-promise';
 import extractSNI from 'sni';
 

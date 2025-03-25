@@ -1,4 +1,4 @@
-import * as ui from '@ui/index';
+import type * as ui from '@ui/index';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 

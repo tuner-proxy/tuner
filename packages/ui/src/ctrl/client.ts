@@ -1,15 +1,14 @@
-import path from 'path';
+import { fileURLToPath } from 'node:url';
 
-import { defineRoute, httpHandler, HTTPResponse } from '@tuner-proxy/core';
-import { decode, ensecure, fileIn, responseAll } from '@tuner-proxy/util';
+import type { HTTPResponse } from '@tuner-proxy/core';
+import { defineRoute, httpHandler } from '@tuner-proxy/core';
+import { decode, ensecure, responseAll } from '@tuner-proxy/util';
 import { vite } from '@tuner-proxy/vite';
 
 import { composeApis } from './compose-apis';
 import { uiMessage } from './server';
 
-const monacoEditorPath = path.dirname(
-  require.resolve('monaco-editor/package.json'),
-);
+const frontendPath = fileURLToPath(import.meta.resolve('../frontend'));
 
 export function uiClient() {
   return defineRoute([
@@ -20,18 +19,9 @@ export function uiClient() {
     uiMessage(),
 
     '/@tuner',
-    [
-      '/::path',
-      forceCache(),
+    ['/::path', forceCache(), '/api/compose', composeApis()],
 
-      '/api/compose',
-      composeApis(),
-
-      '/vs/::path',
-      (req) => fileIn(path.join(monacoEditorPath, 'min/vs'), req.params.path),
-    ],
-
-    vite(path.join(__dirname, '../../frontend')),
+    vite(frontendPath),
 
     '/::path',
     responseAll({ status: 404 }),

@@ -1,8 +1,12 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import { computed, ref } from 'vue';
 
 import { useWindowEvent } from '../lib/window-event';
-import { CommonRequest, RequestItem, UpgradeRequest } from '../store/request';
+import type {
+  CommonRequest,
+  RequestItem,
+  UpgradeRequest,
+} from '../store/request';
 
 import FlexHead from './FlexHead.vue';
 import FlexHeadTab from './FlexHeadTab.vue';

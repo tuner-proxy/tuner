@@ -12,21 +12,25 @@
     "template"
   ],
   "scripts": {
-    "build": "git clean -dfx dist && tsc",
-    "dev": "tsc -w",
+    "build": "vite build",
+    "dev": "vite build --watch --mode development",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
-    "fs-extra": "^11.2.0",
-    "inquirer": "^9.2.23",
+    "fs-extra": "^11.3.0",
+    "inquirer": "^12.5.0",
     "klaw": "^4.1.0"
   },
   "devDependencies": {
+    "@tsconfig/node22": "^22.0.1",
     "@types/fs-extra": "^11.0.4",
     "@types/inquirer": "^9.0.7",
     "@types/klaw": "^3.0.6",
-    "@types/node": "^20.14.9",
-    "typescript": "^5.5.2"
+    "@types/node": "^22.13.13",
+    "rollup-plugin-node-externals": "^8.0.0",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.3",
+    "vite-plugin-dts": "^4.5.3"
   },
   "engines": {
     "node": ">=18"

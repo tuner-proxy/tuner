@@ -5,11 +5,12 @@ import { createPacResolver } from 'pac-resolver';
 import { getQuickJS } from 'quickjs-emscripten';
 
 import { parseHost } from '../utils';
-import { BaseRequest } from '../wrapper/BaseRequest';
+import type { BaseRequest } from '../wrapper/BaseRequest';
 
 import { HTTPProxyAgent } from './HTTPProxyAgent';
 import { HTTPSProxyAgent } from './HTTPSProxyAgent';
-import { connect, ProxyOptions } from './connect';
+import type { ProxyOptions } from './connect';
+import { connect } from './connect';
 
 type PacResolver = ReturnType<typeof createPacResolver>;
 

@@ -1,16 +1,14 @@
-import http from 'http';
+import type http from 'node:http';
 
-import {
+import type {
   HTTPResponse,
   ConnectResult,
-  defineRoute,
   HTTPRequest,
   NextFn,
-  upgradeHandler,
   UpgradeRequest,
-  connectHandler,
   ConnectRequest,
 } from '@tuner-proxy/core';
+import { defineRoute, upgradeHandler, connectHandler } from '@tuner-proxy/core';
 
 export type RequestHandler = (
   req: HTTPRequest | ConnectRequest | UpgradeRequest,

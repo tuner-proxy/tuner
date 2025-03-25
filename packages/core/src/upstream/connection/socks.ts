@@ -1,5 +1,5 @@
-import * as dns from 'dns';
-import { promisify } from 'util';
+import * as dns from 'node:dns';
+import { promisify } from 'node:util';
 
 import { SocksClient } from 'socks';
 

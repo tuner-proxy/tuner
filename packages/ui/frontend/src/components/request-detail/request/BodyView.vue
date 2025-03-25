@@ -1,4 +1,4 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue';
 
 import {
@@ -10,7 +10,7 @@ import {
   isJson,
 } from '../../../lib/content-type';
 import { parserContentType } from '../../../lib/header-parser';
-import { CommonRequestMessage } from '../../../store/request';
+import type { CommonRequestMessage } from '../../../store/request';
 import FlexHead from '../../FlexHead.vue';
 
 import FormView from './body/FormView.vue';

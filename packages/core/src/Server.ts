@@ -1,21 +1,21 @@
-import * as dns from 'dns';
-import * as http from 'http';
-import * as net from 'net';
-import * as os from 'os';
-import { promisify } from 'util';
+import * as dns from 'node:dns';
+import type * as http from 'node:http';
+import * as net from 'node:net';
+import * as os from 'node:os';
+import { promisify } from 'node:util';
 
 import chalk from 'chalk';
 import waitFor from 'event-to-promise';
 
-import { Certificate } from './ca';
-import { ConnectResult, HTTPResult, HandleRequestFn } from './router';
+import type { Certificate } from './ca';
+import type { ConnectResult, HTTPResult, HandleRequestFn } from './router';
 import { Upstream } from './upstream';
 import { log } from './utils';
-import { BaseRequest } from './wrapper/BaseRequest';
-import { ConnectRequest } from './wrapper/ConnectRequest';
-import { HTTPRequest } from './wrapper/HTTPRequest';
+import type { BaseRequest } from './wrapper/BaseRequest';
+import type { ConnectRequest } from './wrapper/ConnectRequest';
+import type { HTTPRequest } from './wrapper/HTTPRequest';
 import { HTTPResponse } from './wrapper/HTTPResponse';
-import { UpgradeRequest } from './wrapper/UpgradeRequest';
+import type { UpgradeRequest } from './wrapper/UpgradeRequest';
 
 export interface ServerOptions {
   /**
@@ -239,8 +239,8 @@ async function isLoopBack(req: BaseRequest) {
   if (!net.isIP(address)) {
     [address] = await resolve(address);
   }
-  const hasLoopBack = Object.values(interfaces).some(
-    (list) => list?.some((item) => item.address === address),
+  const hasLoopBack = Object.values(interfaces).some((list) =>
+    list?.some((item) => item.address === address),
   );
   if (!hasLoopBack) {
     return false;

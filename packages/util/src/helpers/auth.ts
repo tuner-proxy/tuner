@@ -1,10 +1,9 @@
-import {
+import type {
   ConnectRequest,
   HTTPRequest,
   UpgradeRequest,
-  connectHandler,
-  defineRoute,
 } from '@tuner-proxy/core';
+import { connectHandler, defineRoute } from '@tuner-proxy/core';
 
 import { requestHandler } from './request';
 

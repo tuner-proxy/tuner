@@ -1,4 +1,5 @@
-import { SpawnSyncReturns, spawnSync } from 'child_process';
+import type { SpawnSyncReturns } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 
 export function installRootCA(certFile: string) {
   const platform = process.platform;

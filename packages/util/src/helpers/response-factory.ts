@@ -1,14 +1,13 @@
-import { promises as fsp } from 'fs';
-import http from 'http';
-import path from 'path';
+import { promises as fsp } from 'node:fs';
+import http from 'node:http';
+import path from 'node:path';
 
+import type { HTTPProcessFn, HTTPResponseOptions } from '@tuner-proxy/core';
 import {
   connectHandler,
   defineRoute,
   httpHandler,
-  HTTPProcessFn,
   HTTPResponse,
-  HTTPResponseOptions,
   upgradeHandler,
 } from '@tuner-proxy/core';
 import mime from 'mime-types';

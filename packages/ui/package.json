@@ -6,6 +6,13 @@
     "url": "https://github.com/gzzhanghao/tuner",
     "directory": "packages/ui"
   },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -15,46 +22,51 @@
   "scripts": {
     "build": "concurrently npm:build:*",
     "build:frontend": "cd frontend && vite build",
-    "build:proxy": "git clean -dfx dist && tsc",
-    "dev": "tsc -w",
+    "build:proxy": "vite build",
+    "dev": "vite build --watch --mode development",
     "lint": "tsc --noEmit && cd frontend && vue-tsc --noEmit",
     "preview": "vite preview"
   },
   "dependencies": {
     "@tuner-proxy/util": "workspace:~",
     "@tuner-proxy/vite": "workspace:~",
-    "busboy": "^1.6.0",
-    "monaco-editor": "^0.50.0"
+    "busboy": "^1.6.0"
   },
   "devDependencies": {
-    "@codemirror/lang-css": "^6.2.1",
+    "@codemirror/lang-css": "^6.3.1",
     "@codemirror/lang-html": "^6.4.9",
-    "@codemirror/lang-javascript": "^6.2.2",
+    "@codemirror/lang-javascript": "^6.2.3",
     "@codemirror/lang-json": "^6.0.1",
-    "@codemirror/language": "^6.10.2",
-    "@codemirror/state": "^6.4.1",
+    "@codemirror/language": "^6.11.0",
+    "@codemirror/state": "^6.5.2",
     "@codemirror/theme-one-dark": "^6.1.2",
-    "@codemirror/view": "^6.28.2",
+    "@codemirror/view": "^6.36.4",
     "@tuner-proxy/core": "workspace:~",
     "@types/busboy": "^1.5.4",
     "@types/mime-types": "^2.1.4",
-    "@types/node": "^20.14.9",
-    "@types/ws": "^8.5.10",
-    "@vitejs/plugin-vue": "^5.0.5",
-    "@vitejs/plugin-vue-jsx": "^4.0.0",
-    "autoprefixer": "^10.4.19",
-    "concurrently": "^8.2.2",
+    "@types/node": "^22.13.13",
+    "@types/ws": "^8.18.0",
+    "@vitejs/plugin-vue": "^5.2.3",
+    "@vitejs/plugin-vue-jsx": "^4.1.2",
+    "@vue/tsconfig": "^0.7.0",
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^9.1.2",
     "mime-types": "^2.1.35",
-    "pinia": "^2.1.7",
-    "sass": "^1.77.6",
-    "typescript": "^5.5.2",
-    "vite": "^5.3.1",
-    "vscode-loader": "^1.0.2",
-    "vue": "^3.4.30",
-    "vue-tsc": "^2.0.22",
-    "ws": "^8.17.1"
+    "pinia": "^3.0.1",
+    "prettier": "^3.5.3",
+    "rollup-plugin-node-externals": "^8.0.0",
+    "sass": "^1.86.0",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.3",
+    "vite-plugin-dts": "^4.5.3",
+    "vue": "^3.5.13",
+    "vue-tsc": "^2.2.8",
+    "ws": "^8.18.1"
   },
   "peerDependencies": {
     "@tuner-proxy/core": "workspace:~"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

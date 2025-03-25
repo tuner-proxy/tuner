@@ -1,5 +1,6 @@
-import * as stream from 'stream';
-import * as zlib from 'zlib';
+import type { Readable } from 'node:stream';
+import { PassThrough } from 'node:stream';
+import * as zlib from 'node:zlib';
 
 export type ContentEncodingType = 'gzip' | 'deflate' | 'br';
 
@@ -9,7 +10,7 @@ const gzipOptions = {
 };
 
 export function createCompressStream(
-  input: stream.Readable,
+  input: Readable,
   encoding?: ContentEncodingType,
 ) {
   if (encoding === 'gzip') {
@@ -25,15 +26,15 @@ export function createCompressStream(
 }
 
 export function createDecompressStream(
-  input: stream.Readable,
+  input: Readable,
   encoding?: ContentEncodingType,
 ) {
   if (encoding === 'gzip') {
     return input.pipe(zlib.createGunzip(gzipOptions));
   }
   if (encoding === 'deflate') {
-    const output = new stream.PassThrough();
-    const inputClone = input.pipe(new stream.PassThrough());
+    const output = new PassThrough();
+    const inputClone = input.pipe(new PassThrough());
     input.once('data', (chunk) => {
       if ((chunk[0] & 0x0f) === 0x08) {
         inputClone.pipe(zlib.createInflate()).pipe(output);

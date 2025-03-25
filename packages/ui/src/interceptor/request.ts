@@ -1,7 +1,8 @@
-import { IncomingHttpHeaders } from 'http';
-import { TLSSocket } from 'tls';
+import type { IncomingHttpHeaders } from 'node:http';
+import type { TLSSocket } from 'node:tls';
 
-import { HTTPResponse, httpHandler, HTTPRequest } from '@tuner-proxy/core';
+import type { HTTPResponse, HTTPRequest } from '@tuner-proxy/core';
+import { httpHandler } from '@tuner-proxy/core';
 
 import { broadcast, broadcastData } from '../ctrl/server';
 import { genUID, getRemoteInfo } from '../shared';

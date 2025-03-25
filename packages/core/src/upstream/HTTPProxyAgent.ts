@@ -1,16 +1,17 @@
-import * as http from 'http';
-import * as net from 'net';
-import * as tls from 'tls';
+import * as http from 'node:http';
+import * as net from 'node:net';
+import * as tls from 'node:tls';
 
 import waitFor from 'event-to-promise';
 
 import { stringifyHost } from '../utils';
 
-import { ProxyOptions } from './connect';
+import type { ProxyOptions } from './connect';
 import UPSTREAM_TYPE from './connection';
 
 declare module 'http' {
   interface Agent {
+    getName(options: any): string;
     addRequest(req: http.ClientRequest, options: http.RequestOptions): void;
   }
 }
@@ -20,14 +21,6 @@ export interface HTTPProxyAgentRequestOptions extends http.RequestOptions {
 }
 
 export class HTTPProxyAgent extends http.Agent {
-  getName!: (options: any) => string;
-
-  freeSockets!: Record<string, net.Socket[]>;
-
-  constructor(options: http.AgentOptions) {
-    super(options);
-  }
-
   async addRequest(
     req: http.ClientRequest,
     options: HTTPProxyAgentRequestOptions,
@@ -40,14 +33,21 @@ export class HTTPProxyAgent extends http.Agent {
       try {
         super.addRequest(req, await this.connectProxy(req, options, proxy));
         return;
-      } catch (error) {
+      } catch {
         // noop
       }
     }
     super.addRequest(req, options);
   }
 
-  async connectProxy(
+  createConnection(
+    options: http.RequestOptions,
+    callback: (...args: any[]) => any,
+  ) {
+    callback(new Error('Failed to establish proxy connection'));
+  }
+
+  protected async connectProxy(
     req: http.ClientRequest,
     options: HTTPProxyAgentRequestOptions,
     proxy: ProxyOptions,
@@ -63,9 +63,8 @@ export class HTTPProxyAgent extends http.Agent {
       }
       const upstream = UPSTREAM_TYPE[proxy.type] as any;
       const socket: net.Socket = await upstream.connect(proxy, options);
-      if (!this.freeSockets[name]) {
-        this.freeSockets[name] = [];
-      }
+      // @ts-expect-error `freeSockets` is readonly in @types/node
+      this.freeSockets[name] ||= [];
       this.freeSockets[name].push(socket);
       return options;
     }
@@ -126,21 +125,12 @@ export class HTTPProxyAgent extends http.Agent {
         raw._headerSent = true;
       }
     }
-    /* eslint-enable no-underscore-dangle */
 
-    if (!this.freeSockets[name]) {
-      this.freeSockets[name] = [];
-    }
+    // @ts-expect-error `freeSockets` is readonly in @types/node
+    this.freeSockets[name] ||= [];
     this.freeSockets[name].push(socket);
 
     return proxyOptions;
-  }
-
-  createConnection(
-    options: http.RequestOptions,
-    callback: (...args: any[]) => any,
-  ) {
-    callback(new Error('Failed to establish proxy connection'));
   }
 }
 

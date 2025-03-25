@@ -9,7 +9,7 @@ import { computed, ref, watch } from 'vue';
 import { isCss, isDoc, isJs, isJson } from '../../../../lib/content-type';
 import { parserContentType } from '../../../../lib/header-parser';
 import { useBodyAsText } from '../../../../lib/request-body';
-import { CommonRequestMessage } from '../../../../store/request';
+import type { CommonRequestMessage } from '../../../../store/request';
 import FlexHead from '../../../FlexHead.vue';
 import TextView from '../../../TextView.vue';
 

@@ -1,11 +1,12 @@
-import * as stream from 'stream';
+import type { Readable } from 'node:stream';
+import { PassThrough } from 'node:stream';
 
 import waitFor from 'event-to-promise';
 
 export class StreamManager {
-  private static cache = new WeakMap<stream.Readable, StreamManager>();
+  private static cache = new WeakMap<Readable, StreamManager>();
 
-  static get(stream: stream.Readable) {
+  static get(stream: Readable) {
     if (!StreamManager.cache.get(stream)) {
       StreamManager.cache.set(stream, new StreamManager(stream));
     }
@@ -14,11 +15,11 @@ export class StreamManager {
 
   private chunks: Buffer[] | null = [];
 
-  private raw: stream.Readable;
+  private raw: Readable;
 
   private onEnd: Promise<void>;
 
-  private constructor(raw: stream.Readable) {
+  private constructor(raw: Readable) {
     this.raw = raw;
     this.onEnd = waitFor(raw, 'end');
     raw.on('data', (chunk) => {
@@ -32,7 +33,7 @@ export class StreamManager {
     if (!this.chunks) {
       throw new Error('Stream already consumed');
     }
-    const pass = new stream.PassThrough();
+    const pass = new PassThrough();
     for (const chunk of this.chunks) {
       pass.write(chunk);
     }

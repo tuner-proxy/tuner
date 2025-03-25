@@ -1,24 +1,19 @@
-import * as http from 'http';
-import * as http2 from 'http2';
-import * as https from 'https';
-import * as tls from 'tls';
+import * as http from 'node:http';
+import type * as http2 from 'node:http2';
+import * as https from 'node:https';
+import type * as tls from 'node:tls';
 
 import waitFor from 'event-to-promise';
 
-import { Server } from '../Server';
-import { ContentEncodingType, normalizeContentEncoding } from '../encoding';
-import {
-  BodyContent,
-  BodyInfo,
-  ReadOptions,
-  readBuffer,
-  readJson,
-  readStream,
-  readText,
-} from '../stream';
+import type { Server } from '../Server';
+import type { ContentEncodingType } from '../encoding';
+import { normalizeContentEncoding } from '../encoding';
+import type { BodyContent, BodyInfo, ReadOptions } from '../stream';
+import { readBuffer, readJson, readStream, readText } from '../stream';
 
 import { BaseRequest } from './BaseRequest';
-import { HTTPResponse, HTTPResponseOptions } from './HTTPResponse';
+import type { HTTPResponseOptions } from './HTTPResponse';
+import { HTTPResponse } from './HTTPResponse';
 
 export interface HTTPSendOptions {
   /**

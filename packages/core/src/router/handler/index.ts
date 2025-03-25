@@ -1,9 +1,12 @@
-import { Duplex } from 'stream';
+import type { Duplex } from 'node:stream';
 
-import { ConnectRequest } from '../../wrapper/ConnectRequest';
-import { HTTPRequest } from '../../wrapper/HTTPRequest';
-import { HTTPResponse, HTTPResponseOptions } from '../../wrapper/HTTPResponse';
-import { UpgradeRequest } from '../../wrapper/UpgradeRequest';
+import type { ConnectRequest } from '../../wrapper/ConnectRequest';
+import type { HTTPRequest } from '../../wrapper/HTTPRequest';
+import type {
+  HTTPResponse,
+  HTTPResponseOptions,
+} from '../../wrapper/HTTPResponse';
+import type { UpgradeRequest } from '../../wrapper/UpgradeRequest';
 
 export type RouteElement = string | RouteHandler | RouteElement[];
 

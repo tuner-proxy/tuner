@@ -2,9 +2,9 @@ import flatMap from 'lodash.flatmap';
 
 import { DEFAULT_PORT } from '../utils';
 
-import { CompiledRoute } from './compile';
-import { MatchInfo } from './compile/matcher';
-import { RouteHandler } from './handler';
+import type { CompiledRoute } from './compile';
+import type { MatchInfo } from './compile/matcher';
+import type { RouteHandler } from './handler';
 
 export interface MatchedRoute {
   params: any;

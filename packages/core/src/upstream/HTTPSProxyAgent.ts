@@ -1,7 +1,8 @@
-import * as https from 'https';
-import * as tls from 'tls';
+import * as https from 'node:https';
+import * as tls from 'node:tls';
 
-import { connect, ProxyOptions } from './connect';
+import type { ProxyOptions } from './connect';
+import { connect } from './connect';
 
 declare module 'https' {
   interface Agent {
@@ -17,10 +18,6 @@ export interface HTTPSProxyAgentRequestOptions extends https.RequestOptions {
 }
 
 export class HTTPSProxyAgent extends https.Agent {
-  constructor(options: https.AgentOptions) {
-    super(options);
-  }
-
   createConnection(
     options: HTTPSProxyAgentRequestOptions,
     callback: (...args: any[]) => any,

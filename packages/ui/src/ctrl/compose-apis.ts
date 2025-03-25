@@ -1,7 +1,7 @@
-import http from 'http';
-import https from 'https';
-import { AddressInfo } from 'net';
-import { Readable } from 'stream';
+import http from 'node:http';
+import https from 'node:https';
+import type { AddressInfo } from 'node:net';
+import type { Readable } from 'node:stream';
 
 import { defineRoute } from '@tuner-proxy/core';
 import busboy from 'busboy';
@@ -72,7 +72,7 @@ export const composeApis = () =>
 
       const clientReq = client.request({
         hostname: hostParser.hostname,
-        port: hostParser.port ?? params!.encrypted ? 443 : 80,
+        port: (hostParser.port ?? params!.encrypted) ? 443 : 80,
         method: params!.method,
         path: params!.url,
         headers,

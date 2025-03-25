@@ -1,6 +1,6 @@
 import flatMap from 'lodash.flatmap';
 
-import { RouteElement, RouteHandler } from '../handler';
+import type { RouteElement, RouteHandler } from '../handler';
 
 export interface RouteItem {
   patterns: string[];

@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 
 import { getRequestHref } from '../../lib/request-href';
-import { UpgradeRequest } from '../../store/request';
+import type { UpgradeRequest } from '../../store/request';
 
 import DetailItem from './common/DetailItem.vue';
 import DetailSection from './common/DetailSection.vue';

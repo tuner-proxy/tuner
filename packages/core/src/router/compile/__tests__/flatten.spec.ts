@@ -1,4 +1,6 @@
-import { RouteElement } from '../../handler';
+import { describe, expect, it } from 'vitest';
+
+import type { RouteElement } from '../../handler';
 import { flattenRoutes } from '../flatten';
 
 describe('flatten', () => {

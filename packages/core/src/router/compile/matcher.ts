@@ -1,4 +1,4 @@
-import * as net from 'net';
+import * as net from 'node:net';
 
 import { getMatch } from 'ip-matching';
 

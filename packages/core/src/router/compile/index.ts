@@ -1,7 +1,8 @@
-import { RouteElement, RouteHandler } from '../handler';
+import type { RouteElement, RouteHandler } from '../handler';
 
 import { flattenRoutes } from './flatten';
-import { MatchInfo, createURLMatcher } from './matcher';
+import type { MatchInfo } from './matcher';
+import { createURLMatcher } from './matcher';
 
 export interface CompiledRoute {
   matchers: Array<{ pattern: string; match(info: MatchInfo): any }>;

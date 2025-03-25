@@ -2,7 +2,7 @@ import { inject, provide, reactive, ref } from 'vue';
 
 import { copyTextData } from '../../../../lib/clipboard';
 import { useWindowEvent } from '../../../../lib/window-event';
-import ContextMenu from '../../../ContextMenu.vue';
+import type ContextMenu from '../../../ContextMenu.vue';
 
 const jsonMgrKey = Symbol('json-value-context');
 

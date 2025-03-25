@@ -1,11 +1,11 @@
-import EventEmitter from 'events';
-import fs from 'fs';
-import * as http from 'http';
-import path from 'path';
+import EventEmitter from 'node:events';
+import fs from 'node:fs';
+import type * as http from 'node:http';
+import path from 'node:path';
 
 import { defineRoute, httpHandler, upgradeHandler } from '@tuner-proxy/core';
 import { file } from '@tuner-proxy/util';
-import { ViteDevServer } from 'vite';
+import type { ViteDevServer } from 'vite';
 
 const devServerMap = new Map<
   string,

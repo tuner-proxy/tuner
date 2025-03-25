@@ -1,6 +1,7 @@
-import * as https from 'https';
+import * as https from 'node:https';
 
-import { HTTPRequest, UpgradeRequest, Server } from '@tuner-proxy/core';
+import type { Server } from '@tuner-proxy/core';
+import { HTTPRequest, UpgradeRequest } from '@tuner-proxy/core';
 import chalk from 'chalk';
 
 import { forwardHttpSvr } from '../shared/forward';

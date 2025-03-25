@@ -51,7 +51,7 @@ export function formatBodySize(size: number) {
     if (size < 1024) {
       return `${formatNumber(size)} ${unit}`;
     }
-    // eslint-disable-next-line no-param-reassign
+
     size /= 1024;
   }
   return `${formatNumber(size)} TB`;

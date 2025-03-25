@@ -1,4 +1,4 @@
-import * as path from 'path';
+import * as path from 'node:path';
 
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
@@ -16,6 +16,9 @@ export default defineConfig({
     alias: {
       '@ui': path.resolve('../src'),
     },
+  },
+  server: {
+    allowedHosts: true,
   },
   plugins: [vue(), vueJsx()],
 });

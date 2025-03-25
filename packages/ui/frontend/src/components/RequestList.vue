@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { computed, onMounted, onUpdated, ref, watch } from 'vue';
 
-import { ColumnDefinition, COLUMNS } from '../lib/list-column';
+import type { ColumnDefinition } from '../lib/list-column';
+import { COLUMNS } from '../lib/list-column';
 import { formatRequestList } from '../lib/request-list';
 import { useWindowEvent } from '../lib/window-event';
-import { RequestItem } from '../store/request';
+import type { RequestItem } from '../store/request';
 
 import RequestListColumn from './RequestListColumn.vue';
 

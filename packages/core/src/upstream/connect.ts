@@ -1,4 +1,4 @@
-import * as net from 'net';
+import type * as net from 'node:net';
 
 import UPSTREAM_TYPE from './connection';
 import type { HTTPProxyOptions } from './connection/http';

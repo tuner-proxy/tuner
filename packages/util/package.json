@@ -6,32 +6,46 @@
     "url": "https://github.com/gzzhanghao/tuner",
     "directory": "packages/util"
   },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "git clean -dfx dist && tsc",
-    "dev": "tsc -w",
+    "build": "vite build",
+    "dev": "vite build --watch --mode development",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
-    "chalk": "^4.1.2",
+    "chalk": "^5.4.1",
     "event-to-promise": "^0.8.0",
     "mime-types": "^2.1.35",
     "sni": "^1.0.0",
-    "ws": "^8.17.1"
+    "ws": "^8.18.1"
   },
   "devDependencies": {
+    "@tsconfig/node22": "^22.0.1",
     "@tuner-proxy/core": "workspace:~",
     "@types/event-to-promise": "^0.7.5",
     "@types/mime-types": "^2.1.4",
-    "@types/node": "^20.14.9",
-    "@types/ws": "^8.5.10",
-    "typescript": "^5.5.2"
+    "@types/node": "^22.13.13",
+    "@types/ws": "^8.18.0",
+    "rollup-plugin-node-externals": "^8.0.0",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.3",
+    "vite-plugin-dts": "^4.5.3"
   },
   "peerDependencies": {
     "@tuner-proxy/core": "workspace:~"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

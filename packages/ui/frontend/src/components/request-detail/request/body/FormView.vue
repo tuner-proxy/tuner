@@ -4,7 +4,7 @@ import { computed } from 'vue';
 import { parserContentType } from '../../../../lib/header-parser';
 import { parseMultipart } from '../../../../lib/multipart-parser';
 import { useBodyAsText } from '../../../../lib/request-body';
-import { CommonRequestMessage } from '../../../../store/request';
+import type { CommonRequestMessage } from '../../../../store/request';
 import DetailItem from '../../common/DetailItem.vue';
 import DetailSection from '../../common/DetailSection.vue';
 

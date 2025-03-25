@@ -1,7 +1,7 @@
-import { Socket } from 'net';
-import { Duplex } from 'stream';
+import type { Socket } from 'node:net';
+import type { Duplex } from 'node:stream';
 
-import { RemoteInfo } from './types/message';
+import type { RemoteInfo } from './types/message';
 
 export function getRemoteInfo(
   stream?: Duplex | null | void,
@@ -23,7 +23,6 @@ export function genUID() {
   const timestamp = Date.now().toString(36);
   const rand = Math.random().toString(36).slice(2);
 
-  // eslint-disable-next-line no-plusplus
   const uid = (uidIndex++).toString(36);
 
   return `tuner.${timestamp}.${uid}.${rand}`;

@@ -1,4 +1,4 @@
-import { RouteElement } from './router/handler';
+import type { RouteElement } from './router/handler';
 
 export * from './encoding';
 export * from './router';

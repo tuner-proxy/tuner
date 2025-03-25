@@ -1,4 +1,4 @@
-import { RequestItem } from '../store/request';
+import type { RequestItem } from '../store/request';
 
 import { isWebSocketUpgrade, stringifyHost } from './util';
 

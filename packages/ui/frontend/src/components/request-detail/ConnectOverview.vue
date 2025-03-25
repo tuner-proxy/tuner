@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 
 import { stringifyHost } from '../../lib/util';
-import { ConnectRequest } from '../../store/request';
+import type { ConnectRequest } from '../../store/request';
 
 import DetailItem from './common/DetailItem.vue';
 import DetailSection from './common/DetailSection.vue';

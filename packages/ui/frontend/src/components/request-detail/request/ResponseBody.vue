@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { CommonRequest } from '../../../store/request';
+import type { CommonRequest } from '../../../store/request';
 
 import BodyView from './BodyView.vue';
 

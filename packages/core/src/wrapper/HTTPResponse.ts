@@ -1,16 +1,10 @@
-import * as http from 'http';
-import * as stream from 'stream';
+import type * as http from 'node:http';
+import type * as stream from 'node:stream';
 
-import { ContentEncodingType, normalizeContentEncoding } from '../encoding';
-import {
-  BodyContent,
-  BodyInfo,
-  ReadOptions,
-  readBuffer,
-  readJson,
-  readStream,
-  readText,
-} from '../stream';
+import type { ContentEncodingType } from '../encoding';
+import { normalizeContentEncoding } from '../encoding';
+import type { BodyContent, BodyInfo, ReadOptions } from '../stream';
+import { readBuffer, readJson, readStream, readText } from '../stream';
 
 export interface HTTPResponseOptions {
   raw?: http.IncomingMessage;
