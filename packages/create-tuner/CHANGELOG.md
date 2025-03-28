@@ -1,5 +1,11 @@
 # create-tuner
 
+## 0.5.0
+
+### Minor Changes
+
+- f54ade2: Switch to esm modules
+
 ## 0.4.1
 
 ### Patch Changes
