@@ -72,7 +72,7 @@ export const composeApis = () =>
 
       const clientReq = client.request({
         hostname: hostParser.hostname,
-        port: (hostParser.port ?? params!.encrypted) ? 443 : 80,
+        port: hostParser.port ?? (params!.encrypted ? 443 : 80),
         method: params!.method,
         path: params!.url,
         headers,
