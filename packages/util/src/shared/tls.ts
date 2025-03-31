@@ -1,4 +1,4 @@
-import * as tls from 'node:tls';
+import tls from 'node:tls';
 
 import { generateHostCertificate } from '@tuner-proxy/core';
 import type { Server } from '@tuner-proxy/core';

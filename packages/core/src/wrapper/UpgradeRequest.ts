@@ -1,8 +1,10 @@
-import type * as http from 'node:http';
-import type * as stream from 'node:stream';
-import * as tls from 'node:tls';
+import type http from 'node:http';
+import type net from 'node:net';
+import type stream from 'node:stream';
+import tls from 'node:tls';
 
 import type { Server } from '../Server';
+import { isLoopBack } from '../shared/loopback';
 
 import { BaseRequest } from './BaseRequest';
 
@@ -20,6 +22,16 @@ export class UpgradeRequest extends BaseRequest {
    * Options for the TLSSocket
    */
   tlsOptions: tls.TLSSocketOptions = {};
+
+  /**
+   * Whether the response headers has been sent
+   */
+  responseHeaderSent = false;
+
+  /**
+   * Upstream socket object
+   */
+  upstreamSocket?: net.Socket;
 
   constructor(
     svr: Server,
@@ -62,6 +74,19 @@ export class UpgradeRequest extends BaseRequest {
 
   set protocol(value) {
     this.encrypted = ['wss:', 'https:'].includes(value);
+  }
+
+  async finalize() {
+    if (this.upstreamSocket) {
+      return;
+    }
+    if (!(await isLoopBack(this))) {
+      this.upstreamSocket = await this.connect();
+      return;
+    }
+    this.socket.write('HTTP/1.1 200 OK\r\n\r\n');
+    this.socket.end();
+    this.responseHeaderSent = true;
   }
 
   /**

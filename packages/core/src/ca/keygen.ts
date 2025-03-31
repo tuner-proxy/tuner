@@ -1,7 +1,7 @@
-import * as crypto from 'node:crypto';
-import * as net from 'node:net';
-import * as os from 'node:os';
-import * as util from 'node:util';
+import crypto from 'node:crypto';
+import net from 'node:net';
+import os from 'node:os';
+import util from 'node:util';
 
 import forge from 'node-forge';
 

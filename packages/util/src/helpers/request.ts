@@ -1,24 +1,14 @@
 import type http from 'node:http';
 
-import type {
-  HTTPResponse,
-  ConnectResult,
-  HTTPRequest,
-  NextFn,
-  UpgradeRequest,
-  ConnectRequest,
-} from '@tuner-proxy/core';
+import type { RequestProcessFn, TunerRequest } from '@tuner-proxy/core';
 import { defineRoute, upgradeHandler, connectHandler } from '@tuner-proxy/core';
 
-export type RequestHandler = (
-  req: HTTPRequest | ConnectRequest | UpgradeRequest,
-  next: NextFn<HTTPResponse | ConnectResult>,
-) => any;
+export type CommonRequestHandlerFn = RequestProcessFn<TunerRequest>;
 
 /**
  * Define request handler for all kinds of requests
  */
-export const requestHandler = (handler: RequestHandler) =>
+export const requestHandler = (handler: CommonRequestHandlerFn) =>
   defineRoute([handler, connectHandler(handler), upgradeHandler(handler)]);
 
 /**

@@ -1,5 +1,5 @@
 import type { Server } from '../Server';
-import { parseHost, stringifyHost } from '../utils';
+import { parseHost, stringifyHost } from '../shared/utils';
 
 import type { LazyURLSearchParamsInit } from './URLSearchParams';
 import { LazyURLSearchParams } from './URLSearchParams';
@@ -101,6 +101,11 @@ export abstract class BaseRequest {
     this.host = options.host;
     this.path = options.path || '';
   }
+
+  /**
+   * Finalize the request
+   */
+  abstract finalize(): Promise<void>;
 
   /**
    * A stringifier that returns a string containing the whole request URL

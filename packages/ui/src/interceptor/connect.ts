@@ -16,16 +16,16 @@ export function createConnectInterceptor() {
     });
 
     try {
-      const res = await next();
+      await next();
+
+      const socket = req.upstreamSocket;
 
       broadcast(uid, {
         type: 'connect-end',
-        remote: getRemoteInfo(res),
-        accepted: !res,
+        remote: getRemoteInfo(socket),
+        accepted: !socket,
         hidden: req.hidden,
       });
-
-      return res;
     } catch (error: any) {
       broadcast(uid, {
         type: 'connect-error',

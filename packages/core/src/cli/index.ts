@@ -2,7 +2,7 @@ import chalk from 'chalk';
 import { program } from 'commander';
 
 import { version } from '../../package.json';
-import { log } from '../utils';
+import { log } from '../shared/utils';
 
 import { init } from './actions/init';
 import { start } from './actions/start';

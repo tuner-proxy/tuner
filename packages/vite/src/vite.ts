@@ -1,6 +1,6 @@
 import EventEmitter from 'node:events';
 import fs from 'node:fs';
-import type * as http from 'node:http';
+import type http from 'node:http';
 import path from 'node:path';
 
 import { defineRoute, httpHandler, upgradeHandler } from '@tuner-proxy/core';
@@ -44,15 +44,16 @@ function getDevViteRoute(vitePath: string) {
 
 function getProdViteRoute(vitePath: string) {
   const basepath = path.join(vitePath, 'dist');
-  return httpHandler((req) => {
+  return httpHandler((req, next) => {
     if (req.pathname === '/') {
-      return file(path.join(basepath, 'index.html'));
+      return next([file(path.join(basepath, 'index.html'))]);
     }
     const targetPath = path.join(basepath, req.pathname.slice(1));
     if (path.relative(basepath, targetPath).startsWith('..')) {
-      return { statusCode: 404 };
+      req.response = { statusCode: 404 };
+      return;
     }
-    return file(targetPath);
+    return next([file(targetPath)]);
   });
 }
 

@@ -2,7 +2,7 @@ import { promises as fsp } from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
 
-import type { HTTPProcessFn, HTTPResponseOptions } from '@tuner-proxy/core';
+import type { HTTPResponseOptions } from '@tuner-proxy/core';
 import {
   connectHandler,
   defineRoute,
@@ -17,7 +17,9 @@ import mime from 'mime-types';
  */
 export const responseAll = (options: HTTPResponseOptions) =>
   defineRoute([
-    () => options,
+    (req) => {
+      req.response = options;
+    },
     responseConnect(options),
     responseUpgrade(options),
   ]);
@@ -35,18 +37,26 @@ export const responseUpgrade = (options: HTTPResponseOptions) =>
   upgradeHandler(responseSocket(options));
 
 /**
+ * Respond with HTTP response
+ */
+export const response = (response: HTTPResponseOptions) =>
+  httpHandler((req) => {
+    req.response = response;
+  });
+
+/**
  * Respond with local file
  */
 export const file = (path: string) =>
   httpHandler(async (req, next) => {
     try {
-      return {
+      req.response = {
         headers: {
           'content-type': mime.lookup(path) || 'application/octet-stream',
         },
         body: await fsp.readFile(path),
       };
-    } catch (error) {
+    } catch {
       return next();
     }
   });
@@ -54,53 +64,56 @@ export const file = (path: string) =>
 /**
  * Respond with files in directory
  */
-export const fileIn =
-  (basePath: string, fileName: string): HTTPProcessFn =>
-  () => {
+export const fileIn = (basePath: string, fileName: string) =>
+  httpHandler(async (req, next) => {
     if (path.normalize(fileName).startsWith('..')) {
-      return { status: 403 };
+      req.response = { status: 403 };
+      return;
     }
-    return file(path.join(basePath, fileName));
-  };
+    return next([file(path.join(basePath, fileName))]);
+  });
 
 /**
  * Respond with html content
  */
-export const html =
-  (html: string | Buffer): HTTPProcessFn =>
-  () => ({
-    headers: {
-      'content-type': 'text/html',
-    },
-    body: html,
+export const html = (html: string | Buffer) =>
+  httpHandler((req) => {
+    req.response = {
+      headers: {
+        'content-type': 'text/html',
+      },
+      body: html,
+    };
   });
 
 /**
  * Respond with json content
  */
-export const json =
-  (json: any): HTTPProcessFn =>
-  () => ({
-    headers: {
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(json),
+export const json = (json: any) =>
+  httpHandler((req) => {
+    req.response = {
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(json),
+    };
   });
 
 /**
  * Redirect HTTP to HTTPS
  */
-export const ensecure = (): HTTPProcessFn => (req, next) => {
-  if (req.encrypted) {
-    return next();
-  }
-  return {
-    status: 302,
-    headers: {
-      Location: req.href.replace(/^http:/, 'https:'),
-    },
-  };
-};
+export const ensecure = () =>
+  httpHandler((req, next) => {
+    if (req.encrypted) {
+      return next();
+    }
+    req.response = {
+      status: 302,
+      headers: {
+        Location: req.href.replace(/^http:/, 'https:'),
+      },
+    };
+  });
 
 function responseSocket(options: HTTPResponseOptions) {
   return (req: any) => {

@@ -1,10 +1,10 @@
 import flatMap from 'lodash.flatmap';
 
-import type { RouteElement, RouteHandler } from '../handler';
+import type { RouteElement, RouteHandleElement } from '../handler';
 
 export interface RouteItem {
   patterns: string[];
-  handlers: RouteHandler[];
+  handler: RouteHandleElement;
 }
 
 export function flattenRoutes(routes: RouteElement[]) {
@@ -21,8 +21,8 @@ export function flattenRoutes(routes: RouteElement[]) {
     if (!activeFragments.length) {
       continue;
     }
-    const handler = routes[i] as RouteHandler;
-    let children: RouteItem[] = [{ patterns: [''], handlers: [handler] }];
+    const handler = routes[i] as RouteHandleElement;
+    let children: RouteItem[] = [{ patterns: [''], handler }];
     if (Array.isArray(handler)) {
       children = flattenRoutes(handler);
     }
@@ -31,7 +31,7 @@ export function flattenRoutes(routes: RouteElement[]) {
         patterns: flatMap(child.patterns, (childPattern) =>
           activeFragments.map((frag) => frag + childPattern),
         ),
-        handlers: child.handlers,
+        handler: child.handler,
       });
     }
   }

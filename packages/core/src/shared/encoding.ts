@@ -1,6 +1,6 @@
 import type { Readable } from 'node:stream';
 import { PassThrough } from 'node:stream';
-import * as zlib from 'node:zlib';
+import zlib from 'node:zlib';
 
 export type ContentEncodingType = 'gzip' | 'deflate' | 'br';
 

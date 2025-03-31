@@ -3,11 +3,7 @@
 exports[`flatten > common 1`] = `
 [
   {
-    "handlers": [
-      {
-        "status": 200,
-      },
-    ],
+    "handler": [Function],
     "patterns": [
       "//example.com",
     ],
@@ -18,11 +14,7 @@ exports[`flatten > common 1`] = `
 exports[`flatten > disable fragment 1`] = `
 [
   {
-    "handlers": [
-      {
-        "status": 200,
-      },
-    ],
+    "handler": [Function],
     "patterns": [
       "//example.com",
     ],
@@ -35,19 +27,13 @@ exports[`flatten > disable fragment 2`] = `[]`;
 exports[`flatten > multiple handlers 1`] = `
 [
   {
-    "handlers": [
-      [Function],
-    ],
+    "handler": [Function],
     "patterns": [
       "//example.com",
     ],
   },
   {
-    "handlers": [
-      {
-        "status": 404,
-      },
-    ],
+    "handler": [Function],
     "patterns": [
       "//example.com",
     ],
@@ -58,22 +44,14 @@ exports[`flatten > multiple handlers 1`] = `
 exports[`flatten > with child routes 1`] = `
 [
   {
-    "handlers": [
-      {
-        "status": 200,
-      },
-    ],
+    "handler": [Function],
     "patterns": [
       "//example.com",
       "//demo.com",
     ],
   },
   {
-    "handlers": [
-      {
-        "status": 404,
-      },
-    ],
+    "handler": [Function],
     "patterns": [
       "//example.com/not-found",
       "//demo.com/not-found",

@@ -72,11 +72,10 @@ export function createHostnameMatcher(pattern?: string) {
       return match.matches(info.hostname);
     };
   }
-  const domain = pattern.replace(/^\*(\.\*)?/, '');
-  const strict = !pattern.startsWith('*.*.');
-  const wildcard = pattern.startsWith('*.');
+  const wildcard = pattern.match(/^(\*+\.)*/)?.[0] || '';
+  const domain = pattern.slice(wildcard.length);
+  const strictLength = !wildcard || wildcard[0] === '*.';
   const patternLength = pattern.split('.').length;
-
   return function matchHostname(info: MatchInfo) {
     if (info.hostname === pattern) {
       return true;
@@ -84,10 +83,10 @@ export function createHostnameMatcher(pattern?: string) {
     if (!info.hostname.endsWith(domain)) {
       return false;
     }
-    if (strict && info.hostname.split('.').length !== patternLength) {
+    if (strictLength && info.hostname.split('.').length !== patternLength) {
       return false;
     }
-    return wildcard;
+    return !!wildcard;
   };
 }
 

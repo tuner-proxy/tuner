@@ -3,12 +3,12 @@ import { PassThrough } from 'node:stream';
 
 import waitFor from 'event-to-promise';
 
-import type { ContentEncodingType } from '../encoding';
+import type { ContentEncodingType } from '../shared/encoding';
 import {
   createCompressStream,
   createDecompressStream,
   normalizeContentEncoding,
-} from '../encoding';
+} from '../shared/encoding';
 
 import { StreamManager } from './StreamManager';
 

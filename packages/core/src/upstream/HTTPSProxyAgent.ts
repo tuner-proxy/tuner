@@ -1,5 +1,5 @@
-import * as https from 'node:https';
-import * as tls from 'node:tls';
+import https from 'node:https';
+import tls from 'node:tls';
 
 import type { ProxyOptions } from './connect';
 import { connect } from './connect';

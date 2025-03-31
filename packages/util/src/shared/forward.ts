@@ -1,4 +1,4 @@
-import * as net from 'node:net';
+import net from 'node:net';
 
 import type { ConnectRequest, Server } from '@tuner-proxy/core';
 import { connectHandler } from '@tuner-proxy/core';
@@ -79,7 +79,7 @@ export const forwardHttpSvr = (
     }
 
     await waitFor(socket, 'connect');
-    return socket;
+    req.upstreamSocket = socket;
   });
 
 function getServerName(req: ConnectRequest) {

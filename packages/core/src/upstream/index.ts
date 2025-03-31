@@ -4,8 +4,8 @@ import { LRUCache } from 'lru-cache';
 import { createPacResolver } from 'pac-resolver';
 import { getQuickJS } from 'quickjs-emscripten';
 
-import { parseHost } from '../utils';
-import type { BaseRequest } from '../wrapper/BaseRequest';
+import type { TunerRequest } from '../shared/types';
+import { parseHost } from '../shared/utils';
 
 import { HTTPProxyAgent } from './HTTPProxyAgent';
 import { HTTPSProxyAgent } from './HTTPSProxyAgent';
@@ -23,7 +23,7 @@ export class Upstream {
 
   pacCache = new LRUCache<string, PacResolver>({ max: 20 });
 
-  async resolveProxyList(req: BaseRequest): Promise<ProxyOptions[]> {
+  async resolveProxyList(req: TunerRequest): Promise<ProxyOptions[]> {
     const { href, hostname } = req;
     let { upstream } = req;
     if (!Array.isArray(upstream)) {

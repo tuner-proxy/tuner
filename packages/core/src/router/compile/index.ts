@@ -1,4 +1,4 @@
-import type { RouteElement, RouteHandler } from '../handler';
+import type { RouteElement, RouteHandleElement } from '../handler';
 
 import { flattenRoutes } from './flatten';
 import type { MatchInfo } from './matcher';
@@ -6,7 +6,7 @@ import { createURLMatcher } from './matcher';
 
 export interface CompiledRoute {
   matchers: Array<{ pattern: string; match(info: MatchInfo): any }>;
-  handlers: RouteHandler[];
+  handler: RouteHandleElement;
 }
 
 export function buildRoutes(routes: RouteElement[]): CompiledRoute[] {
@@ -18,6 +18,6 @@ export function buildRoutes(routes: RouteElement[]): CompiledRoute[] {
       pattern,
       match: createURLMatcher(pattern),
     })),
-    handlers: item.handlers,
+    handler: item.handler,
   }));
 }

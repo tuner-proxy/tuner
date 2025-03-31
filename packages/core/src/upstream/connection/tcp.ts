@@ -1,4 +1,4 @@
-import * as net from 'node:net';
+import net from 'node:net';
 
 import waitFor from 'event-to-promise';
 

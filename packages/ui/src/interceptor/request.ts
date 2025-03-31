@@ -56,7 +56,9 @@ export function createRequestInterceptor() {
     );
 
     try {
-      const res: HTTPResponse | undefined = await next();
+      await next();
+
+      const res = req.response;
       if (!res) {
         broadcast(uid, { type: 'request-accepted' });
         return res;
@@ -77,8 +79,6 @@ export function createRequestInterceptor() {
         'response-body-end',
         'response-error',
       );
-
-      return res;
     } catch (error: any) {
       broadcast(uid, {
         type: 'request-error',

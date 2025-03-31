@@ -83,6 +83,6 @@ export const composeApis = () =>
 
       body.pipe(clientReq);
 
-      return { status: 200 };
+      req.response = { status: 200 };
     },
   ]);

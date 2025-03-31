@@ -1,4 +1,4 @@
-import * as dns from 'node:dns';
+import dns from 'node:dns';
 import { promisify } from 'node:util';
 
 import { SocksClient } from 'socks';

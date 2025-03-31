@@ -1,10 +1,10 @@
-import * as http from 'node:http';
-import * as net from 'node:net';
-import * as tls from 'node:tls';
+import http from 'node:http';
+import net from 'node:net';
+import tls from 'node:tls';
 
 import waitFor from 'event-to-promise';
 
-import { stringifyHost } from '../utils';
+import { stringifyHost } from '../shared/utils';
 
 import type { ProxyOptions } from './connect';
 import UPSTREAM_TYPE from './connection';

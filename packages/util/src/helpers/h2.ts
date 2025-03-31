@@ -1,4 +1,4 @@
-import * as http2 from 'node:http2';
+import http2 from 'node:http2';
 
 import type { Server } from '@tuner-proxy/core';
 import { HTTPRequest } from '@tuner-proxy/core';

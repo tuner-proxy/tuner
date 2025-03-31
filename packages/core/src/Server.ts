@@ -1,21 +1,18 @@
-import * as dns from 'node:dns';
-import type * as http from 'node:http';
-import * as net from 'node:net';
-import * as os from 'node:os';
-import { promisify } from 'node:util';
+import type http from 'node:http';
+import type net from 'node:net';
 
 import chalk from 'chalk';
 import waitFor from 'event-to-promise';
 
 import type { Certificate } from './ca';
-import type { ConnectResult, HTTPResult, HandleRequestFn } from './router';
+import type { TunerRequest } from './shared/types';
+import { log } from './shared/utils';
 import { Upstream } from './upstream';
-import { log } from './utils';
-import type { BaseRequest } from './wrapper/BaseRequest';
 import type { ConnectRequest } from './wrapper/ConnectRequest';
 import type { HTTPRequest } from './wrapper/HTTPRequest';
-import { HTTPResponse } from './wrapper/HTTPResponse';
 import type { UpgradeRequest } from './wrapper/UpgradeRequest';
+
+export type HandleRequestFn = (req: TunerRequest) => Promise<void>;
 
 export interface ServerOptions {
   /**
@@ -31,8 +28,6 @@ export interface ServerOptions {
    */
   handleRequest: HandleRequestFn;
 }
-
-const resolve = promisify(dns.resolve);
 
 export class Server {
   /**
@@ -73,13 +68,10 @@ export class Server {
     try {
       req.socket.pause();
 
-      const upstreamSocket = await this.handleRequest<ConnectResult>(
-        'connect',
-        req.originalUrl,
-        req,
-        () => req.connect(),
-      );
+      await this.handleRequest(req);
+      const upstreamSocket = req.upstreamSocket;
 
+      // the request is handled by the handler
       if (!upstreamSocket) {
         log(chalk.blue('CONNECT'), chalk.cyan('accepted'), req.originalUrl);
         return;
@@ -94,15 +86,18 @@ export class Server {
       req.socket.once('error', () => upstreamSocket.destroy());
       upstreamSocket.once('error', () => req.socket.destroy());
 
+      // send proxy connect success -> client
       if (!responseHeaderSent) {
         responseHeaderSent = true;
         req.socket.write('HTTP/1.1 200 OK\r\n\r\n');
       }
 
-      upstreamSocket.pipe(req.socket);
+      // flush client head -> upstream
       upstreamSocket.write(req.head);
-      req.socket.pipe(upstreamSocket);
 
+      // pipe client <-> upstream
+      upstreamSocket.pipe(req.socket);
+      req.socket.pipe(upstreamSocket);
       req.socket.resume();
 
       log(chalk.green('CONNECT'), req.originalUrl);
@@ -125,41 +120,22 @@ export class Server {
     log(chalk.cyan(req.method), req.originalUrl);
 
     try {
-      const routerRes = await this.handleRequest<HTTPResult>(
-        'common',
-        req.originalUrl,
-        req,
-        async () => {
-          if (!(await isLoopBack(req))) {
-            return req.send();
-          }
-          log(chalk.red(req.method), chalk.red('loop back'), req.originalUrl);
-          return HTTPResponse.from({
-            status: 404,
-            body: 'Tuner Server - Not Found',
-          });
-        },
-        (res) => {
-          if (!res) {
-            return res;
-          }
-          return HTTPResponse.from(res);
-        },
-      );
+      await this.handleRequest(req);
+      const res = req.response;
 
-      if (!routerRes) {
+      // the request is handled by the handler
+      if (!res) {
         log(chalk.blue(req.method), chalk.cyan('accepted'), req.originalUrl);
         return;
       }
 
-      const res = HTTPResponse.from(routerRes);
+      // respond with provided response
       log(
         chalk.green(req.method),
         chalk.blueBright(res.statusCode),
         req.originalUrl,
       );
-
-      await req.respondWith(res, { consume: true });
+      await req.sendResponse(res, { consume: true });
 
       log(
         chalk.green(req.method),
@@ -183,20 +159,12 @@ export class Server {
     log(chalk.cyan('UPGRADE'), req.originalUrl);
 
     try {
-      const upstreamSocket = await this.handleRequest<ConnectResult>(
-        'upgrade',
-        req.originalUrl,
-        req,
-        async () => {
-          if (!(await isLoopBack(req))) {
-            return req.connect();
-          }
-          log(chalk.red('UPGRADE'), chalk.red('loop back'), req.originalUrl);
-          req.socket.write('HTTP/1.1 200 OK\r\n\r\n');
-          req.socket.end();
-        },
-      );
+      req.socket.pause();
 
+      await this.handleRequest(req);
+      const upstreamSocket = req.upstreamSocket;
+
+      // the request is handled by the handler
       if (!upstreamSocket) {
         log(chalk.blue('UPGRADE'), chalk.cyan('accepted'), req.originalUrl);
         return;
@@ -205,12 +173,10 @@ export class Server {
       if ((upstreamSocket as net.Socket).connecting) {
         await waitFor(upstreamSocket, 'connect');
       }
-
       req.socket.once('error', () => upstreamSocket!.destroy());
       upstreamSocket.once('error', () => req.socket.destroy());
 
-      upstreamSocket.pipe(req.socket);
-
+      // send upgrade head -> upstream
       upstreamSocket.write(
         `${req.method} ${req.path} HTTP/${req.raw.httpVersion}\r\n`,
       );
@@ -222,7 +188,10 @@ export class Server {
       upstreamSocket.write('\r\n');
       upstreamSocket.write(req.head);
 
+      // pipe client <-> upstream
+      upstreamSocket.pipe(req.socket);
       req.socket.pipe(upstreamSocket);
+      req.socket.resume();
 
       log(chalk.green('UPGRADE'), req.originalUrl);
     } catch (error) {
@@ -231,23 +200,4 @@ export class Server {
       req.socket.destroy();
     }
   }
-}
-
-async function isLoopBack(req: BaseRequest) {
-  const interfaces = os.networkInterfaces();
-  let address = req.hostname;
-  if (!net.isIP(address)) {
-    [address] = await resolve(address);
-  }
-  const hasLoopBack = Object.values(interfaces).some((list) =>
-    list?.some((item) => item.address === address),
-  );
-  if (!hasLoopBack) {
-    return false;
-  }
-  const addr = req.svr.proxySvr.address();
-  if (!addr || typeof addr === 'string') {
-    return false;
-  }
-  return addr.port === req.port;
 }

@@ -1,6 +1,5 @@
 import type { TLSSocket } from 'node:tls';
 
-import type { ConnectResult } from '@tuner-proxy/core';
 import { upgradeHandler } from '@tuner-proxy/core';
 
 import { broadcast } from '../ctrl/server';
@@ -20,16 +19,16 @@ export function createUpgradeInterceptor() {
     });
 
     try {
-      const res: ConnectResult = await next();
+      await next();
+
+      const socket = req.upstreamSocket;
 
       broadcast(uid, {
         type: 'upgrade-end',
-        remote: getRemoteInfo(res),
-        encrypted: !!(res as TLSSocket | undefined)?.encrypted,
-        accepted: !res,
+        remote: getRemoteInfo(socket),
+        encrypted: !!(socket as TLSSocket | undefined)?.encrypted,
+        accepted: !socket,
       });
-
-      return res;
     } catch (error: any) {
       broadcast(uid, {
         type: 'upgrade-error',

@@ -15,7 +15,7 @@ export const basicAuth = (
       if (await verify(req.headers['proxy-authorization'])) {
         return next();
       }
-      return authRequired(req);
+      authRequired(req);
     }),
     requestHandler(async (req, next) => {
       if (req.encrypted || req.type === 'connect') {
@@ -24,13 +24,13 @@ export const basicAuth = (
       if (await verify(req.raw.headers['proxy-authorization'])) {
         return next();
       }
-      return authRequired(req);
+      authRequired(req);
     }),
   ]);
 
 function authRequired(req: HTTPRequest | UpgradeRequest | ConnectRequest) {
   if (req.type === 'common') {
-    req.respondWith({
+    req.sendResponse({
       status: 407,
       headers: { 'Proxy-Authenticate': 'Basic' },
     });

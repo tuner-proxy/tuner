@@ -1,4 +1,4 @@
-import type * as net from 'node:net';
+import type net from 'node:net';
 
 import UPSTREAM_TYPE from './connection';
 import type { HTTPProxyOptions } from './connection/http';
@@ -24,7 +24,7 @@ export async function connect(
     try {
       const { connect } = UPSTREAM_TYPE[proxy.type] as any;
       return await connect(proxy, options);
-    } catch (error) {
+    } catch {
       // noop
     }
   }

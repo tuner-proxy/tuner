@@ -1,6 +1,5 @@
-import type { RouteElement } from './router/handler';
-
-export * from './encoding';
+export * from './shared/encoding';
+export * from './shared/types';
 export * from './router';
 export * from './Server';
 export * from './stream';
@@ -12,7 +11,3 @@ export * from './wrapper/HTTPRequest';
 export * from './wrapper/HTTPResponse';
 export * from './wrapper/UpgradeRequest';
 export * from './wrapper/URLSearchParams';
-
-export function defineRoute(route: RouteElement[]) {
-  return route;
-}

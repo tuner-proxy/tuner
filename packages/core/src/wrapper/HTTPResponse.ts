@@ -1,8 +1,8 @@
-import type * as http from 'node:http';
-import type * as stream from 'node:stream';
+import type http from 'node:http';
+import type stream from 'node:stream';
 
-import type { ContentEncodingType } from '../encoding';
-import { normalizeContentEncoding } from '../encoding';
+import type { ContentEncodingType } from '../shared/encoding';
+import { normalizeContentEncoding } from '../shared/encoding';
 import type { BodyContent, BodyInfo, ReadOptions } from '../stream';
 import { readBuffer, readJson, readStream, readText } from '../stream';
 

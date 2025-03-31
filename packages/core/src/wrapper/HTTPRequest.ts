@@ -1,13 +1,14 @@
-import * as http from 'node:http';
-import type * as http2 from 'node:http2';
-import * as https from 'node:https';
-import type * as tls from 'node:tls';
+import http from 'node:http';
+import type http2 from 'node:http2';
+import https from 'node:https';
+import type tls from 'node:tls';
 
 import waitFor from 'event-to-promise';
 
 import type { Server } from '../Server';
-import type { ContentEncodingType } from '../encoding';
-import { normalizeContentEncoding } from '../encoding';
+import type { ContentEncodingType } from '../shared/encoding';
+import { normalizeContentEncoding } from '../shared/encoding';
+import { isLoopBack } from '../shared/loopback';
 import type { BodyContent, BodyInfo, ReadOptions } from '../stream';
 import { readBuffer, readJson, readStream, readText } from '../stream';
 
@@ -43,6 +44,8 @@ export class HTTPRequest extends BaseRequest {
   protected body: BodyInfo;
 
   protected customAgent?: http.Agent | false;
+
+  protected responseObject?: HTTPResponse;
 
   constructor(
     svr: Server,
@@ -122,12 +125,41 @@ export class HTTPRequest extends BaseRequest {
   }
 
   /**
+   * HTTP response for the request
+   */
+  get response(): HTTPResponse | undefined {
+    return this.responseObject;
+  }
+
+  set response(response: HTTPResponse | HTTPResponseOptions | undefined) {
+    if (!response) {
+      this.responseObject = undefined;
+    } else {
+      this.responseObject = HTTPResponse.from(response);
+    }
+  }
+
+  async finalize() {
+    if (this.responseObject) {
+      return;
+    }
+    if (!(await isLoopBack(this))) {
+      this.responseObject = await this.send();
+      return;
+    }
+    this.responseObject = HTTPResponse.from({
+      status: 404,
+      body: 'Tuner Server - Not Found',
+    });
+  }
+
+  /**
    * Send the request to target server
    */
   async send(options: HTTPSendOptions = {}) {
-    const client = this.encrypted ? https : http;
-
     const proxyList = await this.svr.upstream.resolveProxyList(this);
+
+    const client = this.encrypted ? https : http;
 
     const requestOptions = {
       servername: this.hostname,
@@ -148,13 +180,13 @@ export class HTTPRequest extends BaseRequest {
   }
 
   /**
-   * Respond to the request
+   * Send the response to client
    */
-  async respondWith(
-    responseOptions: HTTPResponse | HTTPResponseOptions,
+  async sendResponse(
+    response: HTTPResponse | HTTPResponseOptions,
     options?: ReadOptions,
   ) {
-    const res = HTTPResponse.from(responseOptions);
+    const res = HTTPResponse.from(response);
     const headers = { ...res.headers };
     if (this.raw.httpVersionMajor === 2) {
       delete headers['keep-alive'];

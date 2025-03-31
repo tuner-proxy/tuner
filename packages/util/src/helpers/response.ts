@@ -1,23 +1,29 @@
 import type http from 'node:http';
 
-import type { HTTPResponse, HTTPRequest } from '@tuner-proxy/core';
+import type {
+  HTTPResponse,
+  HTTPRequest,
+  HTTPResponseOptions,
+  Awaitable,
+} from '@tuner-proxy/core';
 import { httpHandler } from '@tuner-proxy/core';
 
 export type TransformResponseHandler = (
   res: HTTPResponse,
   req: HTTPRequest,
-) => any;
+) => Awaitable<HTTPResponseOptions | HTTPResponse | void>;
 
 /**
  * Transform response object
  */
 export const transformRes = (handler: TransformResponseHandler) =>
   httpHandler(async (req, next) => {
-    const res = await next();
-    if (!res) {
-      return res;
+    await next();
+    if (!req.response) {
+      return;
     }
-    return handler(res, req);
+    const res = await handler(req.response, req);
+    req.response = res || undefined;
   });
 
 /**

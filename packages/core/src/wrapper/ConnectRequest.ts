@@ -1,6 +1,7 @@
-import type * as http from 'node:http';
-import type * as stream from 'node:stream';
-import type * as tls from 'node:tls';
+import type http from 'node:http';
+import type net from 'node:net';
+import type stream from 'node:stream';
+import type tls from 'node:tls';
 
 import type { Server } from '../Server';
 
@@ -20,7 +21,7 @@ export class ConnectRequest extends BaseRequest {
   headers: http.IncomingHttpHeaders;
 
   /**
-   * Whether the request should be hidden from the request list in tuner/ui
+   * Whether the request should be hidden from the request list in `@tuner-proxy/ui`
    */
   hidden = false;
 
@@ -28,6 +29,11 @@ export class ConnectRequest extends BaseRequest {
    * Whether the response headers has been sent
    */
   responseHeaderSent = false;
+
+  /**
+   * Upstream socket object
+   */
+  upstreamSocket?: net.Socket;
 
   constructor(
     svr: Server,
@@ -48,6 +54,12 @@ export class ConnectRequest extends BaseRequest {
 
   get protocol() {
     return 'connect:';
+  }
+
+  async finalize() {
+    if (!this.upstreamSocket) {
+      this.upstreamSocket = await this.connect();
+    }
   }
 
   /**

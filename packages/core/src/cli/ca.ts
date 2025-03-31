@@ -1,10 +1,10 @@
-import * as fs from 'node:fs';
-import * as path from 'node:path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 import chalk from 'chalk';
 
 import { generateRootCA } from '../ca';
-import { log } from '../utils';
+import { log } from '../shared/utils';
 
 export interface ResolveOptions {
   cert: string;
@@ -20,7 +20,7 @@ export async function resolveRootCA(options: ResolveOptions) {
     ]);
     log(chalk.gray(`Root CA already exists in ${options.cert}`));
     return { cert, key };
-  } catch (error) {
+  } catch {
     log(
       chalk.gray(`Failed to load root CA in ${options.cert}, regenerating...`),
     );

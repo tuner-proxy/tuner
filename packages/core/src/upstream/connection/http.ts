@@ -1,7 +1,7 @@
-import * as http from 'node:http';
-import * as https from 'node:https';
+import http from 'node:http';
+import https from 'node:https';
 
-import { stringifyHost } from '../../utils';
+import { stringifyHost } from '../../shared/utils';
 import type { ConnectOptions } from '../connect';
 
 export interface HTTPProxyOptions {

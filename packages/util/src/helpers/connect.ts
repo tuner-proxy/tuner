@@ -1,4 +1,4 @@
-import * as https from 'node:https';
+import https from 'node:https';
 
 import type { Server } from '@tuner-proxy/core';
 import { HTTPRequest, UpgradeRequest } from '@tuner-proxy/core';
