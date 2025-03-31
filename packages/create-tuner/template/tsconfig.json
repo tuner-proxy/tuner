@@ -1,12 +1,9 @@
 {
+  "extends": "@tsconfig/node22/tsconfig.json",
+  "include": ["src/**/*"],
   "compilerOptions": {
-    "allowJs": true,
-    "esModuleInterop": true,
+    "strict": true,
     "module": "ESNext",
-    "moduleResolution": "bundler",
-    "strict": true
-  },
-  "include": [
-    "./src/**/*"
-  ]
+    "moduleResolution": "bundler"
+  }
 }

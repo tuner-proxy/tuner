@@ -4,6 +4,7 @@
   "compilerOptions": {
     "tsBuildInfoFile": "node_modules/.tmp/tsconfig.tsbuildinfo",
     "composite": true,
+    "strict": true,
     "rootDir": "./src",
     "module": "ESNext",
     "moduleResolution": "bundler",
