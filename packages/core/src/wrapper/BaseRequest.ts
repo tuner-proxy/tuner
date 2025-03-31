@@ -46,7 +46,7 @@ export abstract class BaseRequest {
   abstract readonly type: string;
 
   /**
-   * Original request URL
+   * The original URL of the request
    */
   abstract readonly originalUrl: string;
 
@@ -56,7 +56,7 @@ export abstract class BaseRequest {
   abstract protocol: string;
 
   /**
-   * Upstream proxy list
+   * Upstream proxy list for the request
    */
   upstream?: UpstreamType | UpstreamType[];
 
@@ -71,17 +71,23 @@ export abstract class BaseRequest {
   encrypted: boolean;
 
   /**
-   * Request hostname
+   * The hostname part of the request URL
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/URL/hostname)
    */
   hostname!: string;
 
   /**
-   * Request port
+   * The port number of the request URL
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/URL/port)
    */
   port!: number;
 
   /**
-   * Pathname of the request URL
+   * The pathname part of the request URL
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/URL/pathname)
    */
   pathname!: string;
 
@@ -103,19 +109,34 @@ export abstract class BaseRequest {
   }
 
   /**
-   * Finalize the request
+   * Finalize the request with default action
    */
   abstract finalize(): Promise<void>;
 
   /**
-   * A stringifier that returns a string containing the whole request URL
+   * A string containing the whole URL
+   *
+   * @alias href
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/URL/href)
+   */
+  get url() {
+    return this.href;
+  }
+
+  /**
+   * A string containing the whole URL
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/URL/href)
    */
   get href() {
     return `${this.protocol}//${this.host}${this.path}`;
   }
 
   /**
-   * Request host
+   * The host part of the request URL
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/URL/host)
    */
   get host() {
     return stringifyHost(this.hostname, this.port, this.encrypted ? 443 : 80);
@@ -128,7 +149,9 @@ export abstract class BaseRequest {
   }
 
   /**
-   * Request path
+   * The concatenation of the pathname and search of the request URL
+   *
+   * [Node.js Reference](https://nodejs.org/api/url.html#urlobjectpath)
    */
   get path() {
     return this.pathname + this.search;
@@ -141,7 +164,9 @@ export abstract class BaseRequest {
   }
 
   /**
-   * Search string section of the request URL
+   * The search string section of the request URL
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/URL/search)
    */
   get search() {
     return String(this.lazySearchParams);
@@ -153,6 +178,8 @@ export abstract class BaseRequest {
 
   /**
    * The URLSearchParams object representing the query parameters of the request URL
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/URL/searchParams)
    */
   get searchParams(): LazyURLSearchParams {
     return this.lazySearchParams;
@@ -164,6 +191,8 @@ export abstract class BaseRequest {
 
   /**
    * The query object representing the query parameters of the request URL
+   *
+   * [Node.js Reference](https://nodejs.org/api/url.html#urlobjectquery)
    */
   get query() {
     const result: Record<string, string> = {};

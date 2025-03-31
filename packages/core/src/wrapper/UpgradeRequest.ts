@@ -14,7 +14,9 @@ export class UpgradeRequest extends BaseRequest {
   readonly originalUrl: string;
 
   /**
-   * Request headers
+   * The request headers object
+   *
+   * [Node.js Reference](https://nodejs.org/api/http.html#messageheaders)
    */
   headers: http.IncomingHttpHeaders;
 
@@ -29,7 +31,7 @@ export class UpgradeRequest extends BaseRequest {
   responseHeaderSent = false;
 
   /**
-   * Upstream socket object
+   * The upstream socket object
    */
   upstreamSocket?: net.Socket;
 
@@ -60,6 +62,8 @@ export class UpgradeRequest extends BaseRequest {
 
   /**
    * Value of the `Upgrade` header
+   *
+   * [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Upgrade)
    */
   get upgradeType() {
     return this.headers.upgrade!.toUpperCase();

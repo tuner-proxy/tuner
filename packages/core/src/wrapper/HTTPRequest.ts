@@ -32,12 +32,14 @@ export class HTTPRequest extends BaseRequest {
   readonly originalUrl: string;
 
   /**
-   * Request headers
+   * The request headers object
+   *
+   * [Node.js Reference](https://nodejs.org/api/http.html#messageheaders)
    */
   headers: http.IncomingHttpHeaders | http2.IncomingHttpHeaders;
 
   /**
-   * The server certificate is verified against the list of supplied CAs if the value is not `false`.
+   * If the value is not `false`, the server certificate is verified against the list of supplied CAs
    */
   rejectUnauthorized = true;
 
@@ -98,7 +100,7 @@ export class HTTPRequest extends BaseRequest {
   }
 
   /**
-   * Default Agent for the request
+   * Default HTTP Agent
    */
   get defaultAgent() {
     if (!this.encrypted) {
@@ -108,7 +110,10 @@ export class HTTPRequest extends BaseRequest {
   }
 
   /**
-   * Customized Agent
+   * The actual Agent to be used when sending the request
+   *
+   * - if the value is `false`, the [http.globalAgent](https://nodejs.org/api/http.html#class-httpagent) will be used
+   * - if the value is `undefined`, the `defaultAgent` will be used
    */
   get agent() {
     if (this.customAgent) {
@@ -126,6 +131,8 @@ export class HTTPRequest extends BaseRequest {
 
   /**
    * HTTP response for the request
+   *
+   * It will be sent after the `handleRequest` function is resolved
    */
   get response(): HTTPResponse | undefined {
     return this.responseObject;
@@ -154,7 +161,7 @@ export class HTTPRequest extends BaseRequest {
   }
 
   /**
-   * Send the request to target server
+   * Send request to the upstream server
    */
   async send(options: HTTPSendOptions = {}) {
     const proxyList = await this.svr.upstream.resolveProxyList(this);
@@ -180,7 +187,7 @@ export class HTTPRequest extends BaseRequest {
   }
 
   /**
-   * Send the response to client
+   * Send response to the client
    */
   async sendResponse(
     response: HTTPResponse | HTTPResponseOptions,
@@ -196,7 +203,7 @@ export class HTTPRequest extends BaseRequest {
   }
 
   /**
-   * Replace the request body
+   * Set the request body
    */
   setBody(content: BodyContent, encoding?: ContentEncodingType) {
     this.body = {
@@ -216,7 +223,7 @@ export class HTTPRequest extends BaseRequest {
   }
 
   /**
-   * Obtain the request body as a Buffer
+   * Obtain the request body as a node.js Buffer
    */
   buffer(options: ReadOptions = {}) {
     return readBuffer(this.body, {

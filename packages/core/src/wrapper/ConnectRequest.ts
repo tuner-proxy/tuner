@@ -16,7 +16,9 @@ export class ConnectRequest extends BaseRequest {
   readonly originalUrl: string;
 
   /**
-   * Request headers
+   * The request headers object
+   *
+   * [Node.js Reference](https://nodejs.org/api/http.html#messageheaders)
    */
   headers: http.IncomingHttpHeaders;
 
@@ -31,7 +33,7 @@ export class ConnectRequest extends BaseRequest {
   responseHeaderSent = false;
 
   /**
-   * Upstream socket object
+   * The upstream socket object
    */
   upstreamSocket?: net.Socket;
 
@@ -63,7 +65,7 @@ export class ConnectRequest extends BaseRequest {
   }
 
   /**
-   * Create socket connection with target server
+   * Connect to the upstream server
    */
   async connect() {
     const proxyList = await this.svr.upstream.resolveProxyList(this);
