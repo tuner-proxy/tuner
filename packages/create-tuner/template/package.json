@@ -2,19 +2,14 @@
   "name": "tuner-routes",
   "version": "0.3.2",
   "private": true,
+  "type": "module",
   "scripts": {
-    "build": "swc src -d dist --copy-files",
-    "dev": "swc src -d dist -w --copy-files",
     "init": "tuner init --install",
-    "mock": "tuner start dist",
-    "start": "npm run build && concurrently -k -r npm:dev npm:mock"
+    "start": "tuner start entry.js"
   },
   "dependencies": {
-    "@swc/cli": "^0.6.0",
-    "@swc/core": "^1.11.13",
     "@tuner-proxy/core": "workspace:~",
     "@tuner-proxy/util": "workspace:~",
-    "chokidar": "^4.0.3",
-    "concurrently": "^9.1.2"
+    "tsx": "^4.19.3"
   }
 }
