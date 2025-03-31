@@ -3,20 +3,18 @@ import flatMap from 'lodash.flatmap';
 import type { TunerRequest } from '../shared/types';
 import { DEFAULT_PORT } from '../shared/utils';
 
-import type { CompiledRoute } from './compile';
-import type { MatchInfo } from './compile/matcher';
 import type {
   RouteNextFn,
   RouteHandler,
   RouteHandleElement,
   HTTPProcessFn,
-  Awaitable,
 } from './handler';
+import type { NormalizedRoute } from './normalize';
+import type { MatchInfo } from './normalize/matcher';
 
 export function execRoutes<T extends TunerRequest>(
   req: T,
-  routes: CompiledRoute[],
-  finalize: (req: T) => Awaitable<void>,
+  routes: NormalizedRoute[],
 ): Promise<void> {
   const reqUrl = new URL(req.originalUrl);
 
@@ -40,7 +38,7 @@ export function execRoutes<T extends TunerRequest>(
 
   const dispatch = async (index: number): Promise<void> => {
     if (index >= matchedRoutes.length) {
-      return finalize(req);
+      return req.finalize();
     }
     const next: RouteNextFn = (handlers) => {
       if (handlers?.length) {

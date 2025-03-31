@@ -1,9 +1,8 @@
 import type { RouteElement } from './handler';
 
-export * from './compile';
+export * from './build';
 export * from './handler';
-export * from './routes';
 
-export function defineRoute(route: RouteElement[]) {
-  return route;
+export function defineRoutes(routes: RouteElement[]) {
+  return routes;
 }

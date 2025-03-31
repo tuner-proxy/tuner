@@ -180,9 +180,22 @@ importers:
       '@tuner-proxy/util':
         specifier: workspace:~
         version: link:../../util
+      chokidar:
+        specifier: ^4.0.3
+        version: 4.0.3
+      lodash.debounce:
+        specifier: ^4.0.8
+        version: 4.0.8
       tsx:
         specifier: ^4.19.3
         version: 4.19.3
+    devDependencies:
+      '@types/lodash.debounce':
+        specifier: ^4.0.9
+        version: 4.0.9
+      typescript:
+        specifier: ^5.8.2
+        version: 5.8.2
 
   packages/ui:
     dependencies:
@@ -1312,6 +1325,9 @@ packages:
 
   '@types/klaw@3.0.6':
     resolution: {integrity: sha512-BErW5TrTz4nzt/c3VRGf0Bug4JyQJ1o807F4mAfXfvOzFZ8SKgFeHJ0T28Y1KtqlMEB+cUgN7S7CsyQDQ/qxqg==}
+
+  '@types/lodash.debounce@4.0.9':
+    resolution: {integrity: sha512-Ma5JcgTREwpLRwMM+XwBR7DaWe96nC38uCBDFKZWbNKD+osjVzdpnUSwBcqCptrp16sSOLBAUb50Car5I0TCsQ==}
 
   '@types/lodash.flatmap@4.5.9':
     resolution: {integrity: sha512-rACVyVCkf+YRthjL7wKb2e96nnZw+bRIEo2nl2ewP0GZLOuRP9QcB7FnyOj7aXI5Vrs6qONnc1lg66FdHVqCmQ==}
@@ -2692,6 +2708,9 @@ packages:
 
   lodash.camelcase@4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
+
+  lodash.debounce@4.0.8:
+    resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
 
   lodash.flatmap@4.5.0:
     resolution: {integrity: sha512-/OcpcAGWlrZyoHGeHh3cAoa6nGdX6QYtmzNP84Jqol6UEQQ2gIaU3H+0eICcjcKGl0/XF8LWOujNn9lffsnaOg==}
@@ -4773,6 +4792,10 @@ snapshots:
     dependencies:
       '@types/node': 22.13.13
 
+  '@types/lodash.debounce@4.0.9':
+    dependencies:
+      '@types/lodash': 4.17.16
+
   '@types/lodash.flatmap@4.5.9':
     dependencies:
       '@types/lodash': 4.17.16
@@ -6353,6 +6376,8 @@ snapshots:
       p-locate: 6.0.0
 
   lodash.camelcase@4.3.0: {}
+
+  lodash.debounce@4.0.8: {}
 
   lodash.flatmap@4.5.0: {}
 

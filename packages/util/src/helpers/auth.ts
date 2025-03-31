@@ -3,14 +3,14 @@ import type {
   HTTPRequest,
   UpgradeRequest,
 } from '@tuner-proxy/core';
-import { connectHandler, defineRoute } from '@tuner-proxy/core';
+import { connectHandler, defineRoutes } from '@tuner-proxy/core';
 
 import { requestHandler } from './request';
 
 export const basicAuth = (
   verify: (auth?: string) => boolean | Promise<boolean>,
 ) =>
-  defineRoute([
+  defineRoutes([
     connectHandler(async (req, next) => {
       if (await verify(req.headers['proxy-authorization'])) {
         return next();

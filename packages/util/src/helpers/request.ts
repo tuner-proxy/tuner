@@ -1,7 +1,7 @@
 import type http from 'node:http';
 
 import type { RequestProcessFn, TunerRequest } from '@tuner-proxy/core';
-import { defineRoute, upgradeHandler, connectHandler } from '@tuner-proxy/core';
+import { defineRoutes, upgradeHandler, connectHandler } from '@tuner-proxy/core';
 
 export type CommonRequestHandlerFn = RequestProcessFn<TunerRequest>;
 
@@ -9,7 +9,7 @@ export type CommonRequestHandlerFn = RequestProcessFn<TunerRequest>;
  * Define request handler for all kinds of requests
  */
 export const requestHandler = (handler: CommonRequestHandlerFn) =>
-  defineRoute([handler, connectHandler(handler), upgradeHandler(handler)]);
+  defineRoutes([handler, connectHandler(handler), upgradeHandler(handler)]);
 
 /**
  * Set request host

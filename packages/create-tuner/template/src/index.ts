@@ -1,9 +1,9 @@
 import path from 'node:path';
 
-import { defineRoute } from '@tuner-proxy/core';
+import { defineRoutes } from '@tuner-proxy/core';
 import { file, html } from '@tuner-proxy/util';
 
-export default defineRoute([
+export default defineRoutes([
   '//tuner.fun',
   [
     '/',

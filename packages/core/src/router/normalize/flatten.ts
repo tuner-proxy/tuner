@@ -2,13 +2,13 @@ import flatMap from 'lodash.flatmap';
 
 import type { RouteElement, RouteHandleElement } from '../handler';
 
-export interface RouteItem {
+export interface FlattenRoute {
   patterns: string[];
   handler: RouteHandleElement;
 }
 
 export function flattenRoutes(routes: RouteElement[]) {
-  const result: RouteItem[] = [];
+  const result: FlattenRoute[] = [];
   for (let i = 0, ii = routes.length; i < ii; i += 1) {
     const fragments: string[] = [];
     for (; i < ii && typeof routes[i] === 'string'; i += 1) {
@@ -22,7 +22,7 @@ export function flattenRoutes(routes: RouteElement[]) {
       continue;
     }
     const handler = routes[i] as RouteHandleElement;
-    let children: RouteItem[] = [{ patterns: [''], handler }];
+    let children: FlattenRoute[] = [{ patterns: [''], handler }];
     if (Array.isArray(handler)) {
       children = flattenRoutes(handler);
     }

@@ -1,10 +1,10 @@
-import { defineRoute } from '@tuner-proxy/core';
+import { defineRoutes } from '@tuner-proxy/core';
 import { decode, ensecure, responseAll } from '@tuner-proxy/util';
 
 import { getViteRoute } from './vite';
 
 export function vite(vitePath: string) {
-  return defineRoute([
+  return defineRoutes([
     decode(),
     ensecure(),
     getViteRoute(vitePath),

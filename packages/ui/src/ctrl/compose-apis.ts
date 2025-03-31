@@ -3,11 +3,11 @@ import https from 'node:https';
 import type { AddressInfo } from 'node:net';
 import type { Readable } from 'node:stream';
 
-import { defineRoute } from '@tuner-proxy/core';
+import { defineRoutes } from '@tuner-proxy/core';
 import busboy from 'busboy';
 
 export const composeApis = () =>
-  defineRoute([
+  defineRoutes([
     '/send',
     async (req) => {
       let params: {

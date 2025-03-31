@@ -10,6 +10,12 @@
   "dependencies": {
     "@tuner-proxy/core": "workspace:~",
     "@tuner-proxy/util": "workspace:~",
+    "chokidar": "^4.0.3",
+    "lodash.debounce": "^4.0.8",
     "tsx": "^4.19.3"
+  },
+  "devDependencies": {
+    "@types/lodash.debounce": "^4.0.9",
+    "typescript": "^5.8.2"
   }
 }

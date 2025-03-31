@@ -4,20 +4,20 @@ import { flattenRoutes } from './flatten';
 import type { MatchInfo } from './matcher';
 import { createURLMatcher } from './matcher';
 
-export interface CompiledRoute {
+export interface NormalizedRoute {
   matchers: Array<{ pattern: string; match(info: MatchInfo): any }>;
   handler: RouteHandleElement;
 }
 
-export function buildRoutes(routes: RouteElement[]): CompiledRoute[] {
+export function normalizeRoutes(routes: RouteElement[]): NormalizedRoute[] {
   if (!Array.isArray(routes)) {
     throw new TypeError('Proxy rules must be an array');
   }
-  return flattenRoutes(routes).map((item) => ({
-    matchers: item.patterns.map((pattern) => ({
+  return flattenRoutes(routes).map((route) => ({
+    matchers: route.patterns.map((pattern) => ({
       pattern,
       match: createURLMatcher(pattern),
     })),
-    handler: item.handler,
+    handler: route.handler,
   }));
 }

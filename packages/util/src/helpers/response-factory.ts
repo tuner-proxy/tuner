@@ -5,7 +5,7 @@ import path from 'node:path';
 import type { HTTPResponseOptions } from '@tuner-proxy/core';
 import {
   connectHandler,
-  defineRoute,
+  defineRoutes,
   httpHandler,
   HTTPResponse,
   upgradeHandler,
@@ -16,7 +16,7 @@ import mime from 'mime-types';
  * Send HTTP response to all kinds of requests
  */
 export const responseAll = (options: HTTPResponseOptions) =>
-  defineRoute([
+  defineRoutes([
     (req) => {
       req.response = options;
     },

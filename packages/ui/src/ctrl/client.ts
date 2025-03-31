@@ -1,7 +1,7 @@
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { defineRoute, httpHandler } from '@tuner-proxy/core';
+import { defineRoutes, httpHandler } from '@tuner-proxy/core';
 import { decode, ensecure, responseAll } from '@tuner-proxy/util';
 import { vite } from '@tuner-proxy/vite';
 
@@ -13,7 +13,7 @@ const frontendPath = dirname(
 );
 
 export function uiClient() {
-  return defineRoute([
+  return defineRoutes([
     decode(),
     ensecure(),
 

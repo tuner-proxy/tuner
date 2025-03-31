@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import type http from 'node:http';
 import path from 'node:path';
 
-import { defineRoute, httpHandler, upgradeHandler } from '@tuner-proxy/core';
+import { defineRoutes, httpHandler, upgradeHandler } from '@tuner-proxy/core';
 import { file } from '@tuner-proxy/util';
 import type { ViteDevServer } from 'vite';
 
@@ -22,7 +22,7 @@ function getDevViteRoute(vitePath: string) {
   if (!devServerMap.has(vitePath)) {
     devServerMap.set(vitePath, createViteDevServer(vitePath));
   }
-  return defineRoute([
+  return defineRoutes([
     async (req) => {
       const server = await devServerMap.get(vitePath)!;
       server.vite.middlewares(

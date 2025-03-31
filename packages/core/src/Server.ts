@@ -5,14 +5,12 @@ import chalk from 'chalk';
 import waitFor from 'event-to-promise';
 
 import type { Certificate } from './ca';
-import type { TunerRequest } from './shared/types';
+import type { HandleRequestFn } from './shared/types';
 import { log } from './shared/utils';
 import { Upstream } from './upstream';
 import type { ConnectRequest } from './wrapper/ConnectRequest';
 import type { HTTPRequest } from './wrapper/HTTPRequest';
 import type { UpgradeRequest } from './wrapper/UpgradeRequest';
-
-export type HandleRequestFn = (req: TunerRequest) => Promise<void>;
 
 export interface ServerOptions {
   /**
