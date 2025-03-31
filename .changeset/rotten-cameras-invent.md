@@ -2,4 +2,4 @@
 'create-tuner': patch
 ---
 
-Add tsx & HMR support
+Add tsx & HMR entry
