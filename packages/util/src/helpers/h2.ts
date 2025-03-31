@@ -3,20 +3,20 @@ import http2 from 'node:http2';
 import type { Server } from '@tuner-proxy/core';
 import { HTTPRequest } from '@tuner-proxy/core';
 
-import { forwardHttpSvr } from '../shared/forward';
+import { forwardSvr } from '../shared/forward';
 import { getTlsOptions } from '../shared/tls';
 
 /**
  * Decode http/2 request
  */
 export const h2 = () =>
-  forwardHttpSvr(
-    async (svr) => bindH2Svr(svr, http2.createServer()),
-    async (svr, servername) => {
-      const tlsOptions = await getTlsOptions(svr, servername);
-      return bindH2Svr(svr, http2.createSecureServer(tlsOptions));
-    },
-  );
+  forwardSvr('tls', async (svr, secure, servername) => {
+    if (!secure) {
+      return bindH2Svr(svr, http2.createServer());
+    }
+    const tlsOptions = await getTlsOptions(svr, servername);
+    return bindH2Svr(svr, http2.createSecureServer(tlsOptions));
+  });
 
 function bindH2Svr(svr: Server, h2Svr: http2.Http2Server) {
   h2Svr.on('request', (req, res) => {

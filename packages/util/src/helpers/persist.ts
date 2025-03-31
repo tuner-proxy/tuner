@@ -1,36 +1,46 @@
 import type { Server } from '@tuner-proxy/core';
 
+declare module '@tuner-proxy/core' {
+  interface Server {
+    persist: Map<string, PersistItem>;
+  }
+}
+
 interface PersistItem {
   version?: string | number;
   value: any;
+  onDispose?: () => void;
 }
 
-const persistMap = new WeakMap<Server, Map<string, PersistItem>>();
-
-export interface PersistOptions<T> {
+export interface PersistOptions {
   version?: string | number;
-  dispose?: (value: T, svr: Server) => void;
 }
 
-export function persist<T>(
+export function definePersist<T>(
   key: string,
-  create: (svr: Server) => T,
-  options?: PersistOptions<T>,
+  create: (svr: Server, onDispose: (cb: () => void) => void) => T,
+  options?: PersistOptions,
 ) {
   return (svr: Server): T => {
-    if (!persistMap.has(svr)) {
-      persistMap.set(svr, new Map());
+    if (!svr.persist) {
+      svr.persist = new Map();
     }
-    const valueMap = persistMap.get(svr)!;
-    const item = valueMap.get(key);
+    const item = svr.persist.get(key);
     if (item && item.version === options?.version) {
       return item.value;
     }
-    if (item) {
-      options?.dispose?.(item.value, svr);
+    if (item?.onDispose) {
+      item.onDispose();
     }
-    const value = create(svr);
-    valueMap.set(key, { version: options?.version, value });
+    let onDispose: (() => void) | undefined;
+    const value = create(svr, (cb) => {
+      onDispose = cb;
+    });
+    svr.persist.set(key, {
+      version: options?.version,
+      value,
+      onDispose,
+    });
     return value;
   };
 }

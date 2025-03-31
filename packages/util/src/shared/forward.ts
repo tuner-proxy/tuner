@@ -5,38 +5,35 @@ import { connectHandler } from '@tuner-proxy/core';
 import waitFor from 'event-to-promise';
 import extractSNI from 'sni';
 
-import { persist } from '../helpers/persist';
+import { definePersist } from '../helpers/persist';
 
 export type CreateSvrFn = (
   svr: Server,
+  secure: boolean,
   servername: string | undefined,
 ) => Promise<net.Server>;
 
-const getSvrFactory = persist('tuner-util:tls-svr-factory', (svr) => {
-  const svrCache = new WeakMap<
-    CreateSvrFn,
-    Map<string | undefined, Promise<net.Server>>
-  >();
-  return (createSvrFn: CreateSvrFn, servername: string | undefined) => {
-    if (!svrCache.has(createSvrFn)) {
-      svrCache.set(createSvrFn, new Map());
-    }
-    const cache = svrCache.get(createSvrFn)!;
-    if (!cache.has(servername)) {
-      const promise = createSvrFn(svr, servername);
+const getSvrFactory = definePersist('tuner-util:tls-svr-factory', (svr) => {
+  const svrPromiseCache = new Map<string, Promise<net.Server>>();
+  return (
+    createSvrFn: CreateSvrFn,
+    type: string,
+    secure: boolean,
+    servername: string | undefined,
+  ) => {
+    const cacheKey = JSON.stringify({ type, secure, servername });
+    if (!svrPromiseCache.has(cacheKey)) {
+      const promise = createSvrFn(svr, secure, servername);
       promise.catch(() => {
-        cache.delete(servername);
+        svrPromiseCache.delete(cacheKey);
       });
-      cache.set(servername, promise);
+      svrPromiseCache.set(cacheKey, promise);
     }
-    return cache.get(servername)!;
+    return svrPromiseCache.get(cacheKey)!;
   };
 });
 
-export const forwardHttpSvr = (
-  createSvrFn: CreateSvrFn,
-  createTlsSvrFn: CreateSvrFn,
-) =>
+export const forwardSvr = (type: string, createSvrFn: CreateSvrFn) =>
   connectHandler(async (req, next) => {
     req.hidden = true;
 
@@ -54,7 +51,9 @@ export const forwardHttpSvr = (
     const getSvr = getSvrFactory(req.svr);
 
     const targetSvr = await getSvr(
-      isTLS(req.head) ? createTlsSvrFn : createSvrFn,
+      createSvrFn,
+      type,
+      isTLS(req.head),
       servername,
     );
 
