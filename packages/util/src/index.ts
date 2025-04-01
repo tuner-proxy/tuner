@@ -1,7 +1,6 @@
 export * from './helpers/auth';
 export * from './helpers/connect';
 export * from './helpers/flow';
-export * from './helpers/h2';
 export * from './helpers/persist';
 export * from './helpers/request';
 export * from './helpers/response-factory';

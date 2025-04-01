@@ -35,20 +35,7 @@ const getTLSCertificateGenerator = definePersist(
   },
 );
 
-export async function getTlsOptions(
-  svr: Server,
-  servername: string | undefined,
-): Promise<tls.TlsOptions> {
-  const getCertificate = getTLSCertificateGenerator(svr);
-  if (servername) {
-    const { cert, key } = await getCertificate(servername);
-    return { cert, key };
-  }
-  return {
-    SNICallback(servername, callback) {
-      getCertificate(servername).then((res) => {
-        callback(null, res.context);
-      }, callback);
-    },
-  };
+export function getCertificate(svr: Server, servername: string) {
+  const getCert = getTLSCertificateGenerator(svr);
+  return getCert(servername);
 }
