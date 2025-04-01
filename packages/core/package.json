@@ -4,7 +4,7 @@
   "description": "A programmable debugging proxy",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gzzhanghao/tuner",
+    "url": "https://github.com/tuner-proxy/tuner",
     "directory": "packages/core"
   },
   "type": "module",

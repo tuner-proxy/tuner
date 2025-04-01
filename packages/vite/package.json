@@ -3,7 +3,7 @@
   "version": "0.5.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gzzhanghao/tuner",
+    "url": "https://github.com/tuner-proxy/tuner",
     "directory": "packages/vite"
   },
   "type": "module",
