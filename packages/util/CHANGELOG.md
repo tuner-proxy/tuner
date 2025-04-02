@@ -1,5 +1,11 @@
 # @tuner-proxy/util
 
+## 0.5.1
+
+### Patch Changes
+
+- a78342c: Allow customize decode server type
+
 ## 0.5.0
 
 ### Minor Changes
