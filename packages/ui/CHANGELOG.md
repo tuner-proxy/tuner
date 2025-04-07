@@ -1,5 +1,12 @@
 # @tuner-proxy/ui
 
+## 0.5.2
+
+### Patch Changes
+
+- Updated dependencies [8c18335]
+  - @tuner-proxy/vite@0.5.2
+
 ## 0.5.1
 
 ### Patch Changes
