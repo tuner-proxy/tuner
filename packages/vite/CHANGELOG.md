@@ -1,5 +1,13 @@
 # @tuner-proxy/vite
 
+## 0.5.1
+
+### Patch Changes
+
+- Updated dependencies [b2dc77e]
+- Updated dependencies [392537c]
+  - @tuner-proxy/core@0.5.1
+
 ## 0.5.0
 
 ### Minor Changes
