@@ -1,5 +1,18 @@
 # @tuner-proxy/ui
 
+## 0.5.1
+
+### Patch Changes
+
+- Updated dependencies [6d409cf]
+- Updated dependencies [e4fdaa6]
+- Updated dependencies [b2dc77e]
+- Updated dependencies [392537c]
+- Updated dependencies [a78342c]
+  - @tuner-proxy/util@0.5.1
+  - @tuner-proxy/core@0.5.1
+  - @tuner-proxy/vite@0.5.1
+
 ## 0.5.0
 
 ### Minor Changes
