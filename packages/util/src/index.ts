@@ -7,3 +7,4 @@ export * from './helpers/response-factory';
 export * from './helpers/response';
 export * from './helpers/transform-body';
 export * from './helpers/upgrade';
+export * from './shared/tls';
