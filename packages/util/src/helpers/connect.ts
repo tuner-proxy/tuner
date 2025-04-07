@@ -1,12 +1,11 @@
 import http2 from 'node:http2';
 import https from 'node:https';
-import net from 'node:net';
+import type net from 'node:net';
 import type tls from 'node:tls';
 
 import type { Server } from '@tuner-proxy/core';
 import { connectHandler, HTTPRequest, UpgradeRequest } from '@tuner-proxy/core';
 import chalk from 'chalk';
-import waitFor from 'event-to-promise';
 
 import { log } from '../shared/log';
 import { getCertificate } from '../shared/tls';
@@ -31,12 +30,11 @@ const getDecodeServer = definePersist('tuner-util:decode-server', (svr) => {
 export const decode = (type: DecoderServerType = 'https') =>
   connectHandler(async (req) => {
     const server = getDecodeServer(req.svr)(type);
-    if (!server.listening) {
-      await waitFor(server, 'listening');
+    server.emit('connection', req.socket);
+    if (!req.responseHeaderSent) {
+      req.socket.write('HTTP/1.1 200 OK\r\n\r\n');
     }
-    const addr = server.address() as net.AddressInfo;
-    const socket = net.connect(addr.port, addr.address);
-    req.upstreamSocket = socket;
+    req.socket.resume();
   });
 
 function createDecodeServer(svr: Server, type: DecoderServerType) {
@@ -44,7 +42,13 @@ function createDecodeServer(svr: Server, type: DecoderServerType) {
     return svr.proxySvr;
   }
   if (type === 'h2c') {
-    return bindH2Svr(svr, http2.createServer());
+    const server = http2.createServer();
+
+    server.on('request', (req, res) => {
+      svr.handleHTTPRequest(new HTTPRequest(svr, req, res));
+    });
+
+    return server;
   }
   const tlsOptions: tls.TlsOptions = {
     SNICallback(servername, callback) {
@@ -56,11 +60,15 @@ function createDecodeServer(svr: Server, type: DecoderServerType) {
   if (type === 'h2') {
     const server = http2.createSecureServer(tlsOptions);
 
+    server.on('request', (req, res) => {
+      svr.handleHTTPRequest(new HTTPRequest(svr, req, res));
+    });
+
     server.on('sessionError', (error) => {
       log(chalk.red('HTTP/2 session error'), '\n', error);
     });
 
-    return bindH2Svr(svr, server);
+    return server;
   }
   const server = https.createServer(tlsOptions);
 
@@ -76,15 +84,5 @@ function createDecodeServer(svr: Server, type: DecoderServerType) {
     log(chalk.red('TLS client error'), '\n', error);
   });
 
-  server.listen(0, 'localhost');
-
   return server;
-}
-
-function bindH2Svr(svr: Server, h2Svr: http2.Http2Server) {
-  h2Svr.on('request', (req, res) => {
-    svr.handleHTTPRequest(new HTTPRequest(svr, req, res));
-  });
-  h2Svr.listen(0, 'localhost');
-  return h2Svr;
 }
