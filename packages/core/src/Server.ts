@@ -46,14 +46,14 @@ export class Server {
   /**
    * Request handler
    */
-  handleRequest: HandleRequestFn;
+  protected handleRequest: HandleRequestFn;
 
   constructor(options: ServerOptions) {
     this.rootCA = options.rootCA;
     this.proxySvr = options.proxySvr;
+    this.handleRequest = options.handleRequest;
 
     this.upstream = new Upstream();
-    this.handleRequest = options.handleRequest;
   }
 
   /**
