@@ -1,5 +1,4 @@
 import type http from 'node:http';
-import type net from 'node:net';
 import type stream from 'node:stream';
 import tls from 'node:tls';
 
@@ -33,7 +32,7 @@ export class UpgradeRequest extends BaseRequest {
   /**
    * The upstream socket object
    */
-  upstreamSocket?: net.Socket;
+  upstreamSocket?: stream.Duplex;
 
   constructor(
     svr: Server,

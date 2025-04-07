@@ -1,5 +1,4 @@
 import type http from 'node:http';
-import type net from 'node:net';
 import type stream from 'node:stream';
 import type tls from 'node:tls';
 
@@ -35,7 +34,7 @@ export class ConnectRequest extends BaseRequest {
   /**
    * The upstream socket object
    */
-  upstreamSocket?: net.Socket;
+  upstreamSocket?: stream.Duplex;
 
   constructor(
     svr: Server,
