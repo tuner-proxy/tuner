@@ -1,5 +1,11 @@
 # @tuner-proxy/vite
 
+## 0.5.2
+
+### Patch Changes
+
+- 8c18335: Upgrade vite to 6.2.5
+
 ## 0.5.1
 
 ### Patch Changes
