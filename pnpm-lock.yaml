@@ -175,11 +175,11 @@ importers:
   packages/create-tuner/template:
     dependencies:
       '@tuner-proxy/core':
-        specifier: workspace:~
-        version: link:../../core
+        specifier: ~0.5.1
+        version: 0.5.1
       '@tuner-proxy/util':
-        specifier: workspace:~
-        version: link:../../util
+        specifier: ~0.5.1
+        version: 0.5.1(@tuner-proxy/core@0.5.1)
       chokidar:
         specifier: ^4.0.3
         version: 4.0.3
@@ -190,9 +190,15 @@ importers:
         specifier: ^4.19.3
         version: 4.19.3
     devDependencies:
+      '@tsconfig/node22':
+        specifier: ^22.0.1
+        version: 22.0.1
       '@types/lodash.debounce':
         specifier: ^4.0.9
         version: 4.0.9
+      '@types/node':
+        specifier: ^22.15.16
+        version: 22.15.16
       typescript:
         specifier: ^5.8.2
         version: 5.8.2
@@ -1440,6 +1446,17 @@ packages:
   '@tsconfig/node22@22.0.1':
     resolution: {integrity: sha512-VkgOa3n6jvs1p+r3DiwBqeEwGAwEvnVCg/hIjiANl5IEcqP3G0u5m8cBJspe1t9qjZRlZ7WFgqq5bJrGdgAKMg==}
 
+  '@tuner-proxy/core@0.5.1':
+    resolution: {integrity: sha512-2+l0d6IZ+Ot5cIb45wpsgNFaVX+O9ZdKry+0euBrl8SrM+Yx8CYtZ/7yjdP/HGxGCele7DecdH4LbL1yBh9OLQ==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  '@tuner-proxy/util@0.5.1':
+    resolution: {integrity: sha512-mH9iPxAHsLFQmotWhK7A+SAobJM9A57CVOAC/nL5QjfCZDp0UlBuZ5qQIejXrJBMgnKUuEwqo8TlWHbIF7j4PA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@tuner-proxy/core': ~0.5.1
+
   '@types/argparse@1.0.38':
     resolution: {integrity: sha512-ebDJ9b0e702Yr7pWgB0jzm+CX4Srzz8RcXtLJDJB+BSccqMa36uyH/zUsSYao5+BD1ytv3k3rPYCq4mAE1hsXA==}
 
@@ -1496,6 +1513,9 @@ packages:
 
   '@types/node@22.13.13':
     resolution: {integrity: sha512-ClsL5nMwKaBRwPcCvH8E7+nU4GxHVx1axNvMZTFHMEfNI7oahimt26P5zjVCRrjiIWj6YFXfE1v3dEp94wLcGQ==}
+
+  '@types/node@22.15.16':
+    resolution: {integrity: sha512-3pr+KjwpVujqWqOKT8mNR+rd09FqhBLwg+5L/4t0cNYBzm/yEiYGCxWttjaPBsLtAo+WFNoXzGJfolM1JuRXoA==}
 
   '@types/through@0.0.33':
     resolution: {integrity: sha512-HsJ+z3QuETzP3cswwtzt2vEIiHBk/dCcHGhbmG5X3ecnwFD/lPrMpliGXxSCg03L9AhrdwA4Oz/qfspkDW+xGQ==}
@@ -3626,6 +3646,9 @@ packages:
   undici-types@6.20.0:
     resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
 
+  undici-types@6.21.0:
+    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
+
   unicorn-magic@0.1.0:
     resolution: {integrity: sha512-lRfVq8fE8gz6QMBuDM6a+LO3IAzTi05H6gCVaUpir2E1Rwpo4ZUog45KpNXKC/Mn3Yb9UDuHumeFTo9iV/D9FQ==}
     engines: {node: '>=18'}
@@ -4979,15 +5002,44 @@ snapshots:
 
   '@tsconfig/node22@22.0.1': {}
 
+  '@tuner-proxy/core@0.5.1':
+    dependencies:
+      axios: 1.8.4
+      chalk: 5.4.1
+      commander: 13.1.0
+      event-to-promise: 0.8.0
+      ip-matching: 2.1.2
+      lodash.flatmap: 4.5.0
+      lodash.flatten: 4.4.0
+      lru-cache: 11.0.2
+      node-forge: 1.3.1
+      pac-resolver: 7.0.1
+      quickjs-emscripten: 0.31.0
+      socks: 2.8.4
+    transitivePeerDependencies:
+      - debug
+
+  '@tuner-proxy/util@0.5.1(@tuner-proxy/core@0.5.1)':
+    dependencies:
+      '@tuner-proxy/core': 0.5.1
+      chalk: 5.4.1
+      event-to-promise: 0.8.0
+      mime-types: 2.1.35
+      sni: 1.0.0
+      ws: 8.18.1
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
   '@types/argparse@1.0.38': {}
 
   '@types/busboy@1.5.4':
     dependencies:
-      '@types/node': 22.13.13
+      '@types/node': 22.15.16
 
   '@types/conventional-commits-parser@5.0.1':
     dependencies:
-      '@types/node': 22.13.13
+      '@types/node': 22.15.16
 
   '@types/estree@1.0.7': {}
 
@@ -5011,7 +5063,7 @@ snapshots:
 
   '@types/jsonfile@6.1.4':
     dependencies:
-      '@types/node': 22.13.13
+      '@types/node': 22.15.16
 
   '@types/klaw@3.0.6':
     dependencies:
@@ -5043,13 +5095,17 @@ snapshots:
     dependencies:
       undici-types: 6.20.0
 
+  '@types/node@22.15.16':
+    dependencies:
+      undici-types: 6.21.0
+
   '@types/through@0.0.33':
     dependencies:
-      '@types/node': 22.13.13
+      '@types/node': 22.15.16
 
   '@types/ws@8.18.0':
     dependencies:
-      '@types/node': 22.13.13
+      '@types/node': 22.15.16
 
   '@typescript-eslint/eslint-plugin@8.27.0(@typescript-eslint/parser@8.27.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2))(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2)':
     dependencies:
@@ -7379,6 +7435,8 @@ snapshots:
       which-boxed-primitive: 1.1.1
 
   undici-types@6.20.0: {}
+
+  undici-types@6.21.0: {}
 
   unicorn-magic@0.1.0: {}
 

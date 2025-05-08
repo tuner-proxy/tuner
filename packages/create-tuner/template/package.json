@@ -1,6 +1,6 @@
 {
   "name": "tuner-routes",
-  "version": "0.3.2",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,14 +8,16 @@
     "start": "tuner start entry.js"
   },
   "dependencies": {
-    "@tuner-proxy/core": "workspace:~",
-    "@tuner-proxy/util": "workspace:~",
+    "@tuner-proxy/core": "~0.5.1",
+    "@tuner-proxy/util": "~0.5.1",
     "chokidar": "^4.0.3",
     "lodash.debounce": "^4.0.8",
     "tsx": "^4.19.3"
   },
   "devDependencies": {
+    "@tsconfig/node22": "^22.0.1",
     "@types/lodash.debounce": "^4.0.9",
+    "@types/node": "^22.15.16",
     "typescript": "^5.8.2"
   }
 }
