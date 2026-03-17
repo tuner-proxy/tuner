@@ -1,5 +1,16 @@
 # @tuner-proxy/util
 
+## 1.0.0
+
+### Minor Changes
+
+- 0f8b83c: Update deps
+
+### Patch Changes
+
+- Updated dependencies [0f8b83c]
+  - @tuner-proxy/core@0.6.0
+
 ## 0.5.1
 
 ### Patch Changes
