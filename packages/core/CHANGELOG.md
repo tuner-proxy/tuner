@@ -1,5 +1,11 @@
 # @tuner-proxy/core
 
+## 0.6.0
+
+### Minor Changes
+
+- 0f8b83c: Update deps
+
 ## 0.5.1
 
 ### Patch Changes
