@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tuner-proxy/tuner",
+    "url": "git+https://github.com/tuner-proxy/tuner.git",
     "directory": "packages/util"
   },
+  "license": "MIT",
   "type": "module",
   "exports": {
     ".": {

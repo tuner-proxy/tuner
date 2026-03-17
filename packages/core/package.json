@@ -4,9 +4,10 @@
   "description": "A programmable debugging proxy",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tuner-proxy/tuner",
+    "url": "git+https://github.com/tuner-proxy/tuner.git",
     "directory": "packages/core"
   },
+  "license": "MIT",
   "type": "module",
   "exports": {
     ".": {
