@@ -1,11 +1,13 @@
 import chalk from 'chalk';
 import { program } from 'commander';
 
-import pkg from '../../package.json' with { type: 'json' };
 import { log } from '../shared/utils.js';
 
 import { init } from './actions/init.js';
 import { start } from './actions/start.js';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
 
 process.on('uncaughtException', (error: any) => {
   log(chalk.red('Uncaught exception'), '\n', error.stack);
@@ -15,7 +17,7 @@ process.on('unhandledRejection', (error: any) => {
   log(chalk.red('Unhandled rejection'), '\n', error.stack);
 });
 
-program.version(pkg.version);
+program.version(require('../package.json').version);
 
 program
   .command('start')
