@@ -1,7 +1,7 @@
-import type { TunerRequest } from '../shared/types';
-import type { ConnectRequest } from '../wrapper/ConnectRequest';
-import type { HTTPRequest } from '../wrapper/HTTPRequest';
-import type { UpgradeRequest } from '../wrapper/UpgradeRequest';
+import type { TunerRequest } from '../shared/types.js';
+import type { ConnectRequest } from '../wrapper/ConnectRequest.js';
+import type { HTTPRequest } from '../wrapper/HTTPRequest.js';
+import type { UpgradeRequest } from '../wrapper/UpgradeRequest.js';
 
 export type Awaitable<T> = T | PromiseLike<T>;
 

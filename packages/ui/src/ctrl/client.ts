@@ -5,8 +5,8 @@ import { defineRoutes, httpHandler } from '@tuner-proxy/core';
 import { decode, ensecure, responseAll } from '@tuner-proxy/util';
 import { vite } from '@tuner-proxy/vite';
 
-import { composeApis } from './compose-apis';
-import { uiMessage } from './server';
+import { composeApis } from './compose-apis.js';
+import { uiMessage } from './server.js';
 
 const frontendPath = dirname(
   fileURLToPath(import.meta.resolve('../frontend/vite.config.ts')),

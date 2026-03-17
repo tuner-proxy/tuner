@@ -1,11 +1,11 @@
 import { defineRoutes } from '@tuner-proxy/core';
 
-import { uiClient } from './ctrl/client';
-import { uiInterceptor } from './ctrl/interceptor';
+import { uiClient } from './ctrl/client.js';
+import { uiInterceptor } from './ctrl/interceptor.js';
 
-export * from './ctrl/client';
-export * from './ctrl/server';
-export * from './types/message';
+export * from './ctrl/client.js';
+export * from './ctrl/server.js';
+export * from './types/message.js';
 
 export { uiClient, uiInterceptor };
 

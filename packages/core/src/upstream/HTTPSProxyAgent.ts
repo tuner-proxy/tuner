@@ -1,17 +1,8 @@
 import https from 'node:https';
 import tls from 'node:tls';
 
-import type { ProxyOptions } from './connect';
-import { connect } from './connect';
-
-declare module 'https' {
-  interface Agent {
-    createConnection(
-      options: https.RequestOptions,
-      callback: (...args: any[]) => any,
-    ): void;
-  }
-}
+import type { ProxyOptions } from './connect.js';
+import { connect } from './connect.js';
 
 export interface HTTPSProxyAgentRequestOptions extends https.RequestOptions {
   proxyList: ProxyOptions[];

@@ -1,3 +1,3 @@
-export * from './install';
-export * from './keygen';
-export * from './types';
+export * from './install.js';
+export * from './keygen.js';
+export * from './types.js';

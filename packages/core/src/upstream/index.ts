@@ -2,15 +2,16 @@ import axios from 'axios';
 import flatten from 'lodash.flatten';
 import { LRUCache } from 'lru-cache';
 import { createPacResolver } from 'pac-resolver';
+import type { QuickJSWASMModule } from 'quickjs-emscripten';
 import { getQuickJS } from 'quickjs-emscripten';
 
-import type { TunerRequest } from '../shared/types';
-import { parseHost } from '../shared/utils';
+import type { TunerRequest } from '../shared/types.js';
+import { parseHost } from '../shared/utils.js';
 
-import { HTTPProxyAgent } from './HTTPProxyAgent';
-import { HTTPSProxyAgent } from './HTTPSProxyAgent';
-import type { ProxyOptions } from './connect';
-import { connect } from './connect';
+import { HTTPProxyAgent } from './HTTPProxyAgent.js';
+import { HTTPSProxyAgent } from './HTTPSProxyAgent.js';
+import type { ProxyOptions } from './connect.js';
+import { connect } from './connect.js';
 
 type PacResolver = ReturnType<typeof createPacResolver>;
 
@@ -94,5 +95,30 @@ async function getPacResolver(url: string) {
     axios.get<string>(url, { responseType: 'text' }),
     getQuickJS(),
   ]);
-  return createPacResolver(qjs, res.data);
+  return createPacResolver(wrapQJSCompat(qjs), res.data);
+}
+
+function wrapQJSCompat(qjs: QuickJSWASMModule) {
+  const context = qjs.newContext();
+  return {
+    executePendingJobs: context.runtime.executePendingJobs,
+    callFunction: context.callFunction,
+    dump: context.dump,
+    evalCode: context.evalCode,
+    false: context.false,
+    global: context.global,
+    newBigInt: context.newBigInt,
+    newError: context.newError,
+    newFunction: context.newFunction,
+    newNumber: context.newNumber,
+    newPromise: context.newPromise,
+    newString: context.newString,
+    null: context.null,
+    resolvePromise: context.resolvePromise,
+    setProp: context.setProp,
+    true: context.true,
+    typeof: context.typeof,
+    undefined: context.undefined,
+    unwrapResult: context.unwrapResult,
+  } as any;
 }

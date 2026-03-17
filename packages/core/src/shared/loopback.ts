@@ -3,7 +3,7 @@ import dns from 'node:dns';
 import { promisify } from 'node:util';
 import os from 'os';
 
-import type { TunerRequest } from './types';
+import type { TunerRequest } from './types.js';
 
 const resolve = promisify(dns.resolve);
 

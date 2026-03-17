@@ -10,14 +10,14 @@
   "dependencies": {
     "@tuner-proxy/core": "~0.5.1",
     "@tuner-proxy/util": "~0.5.1",
-    "chokidar": "^4.0.3",
+    "chokidar": "^5.0.0",
     "lodash.debounce": "^4.0.8",
-    "tsx": "^4.19.3"
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
-    "@tsconfig/node22": "^22.0.1",
+    "@tsconfig/node22": "^22.0.5",
     "@types/lodash.debounce": "^4.0.9",
-    "@types/node": "^22.15.16",
-    "typescript": "^5.8.2"
+    "@types/node": "^25.5.0",
+    "typescript": "^5.9.3"
   }
 }

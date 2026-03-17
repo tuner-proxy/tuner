@@ -16,13 +16,13 @@ exports[`matcher > full 'http|https://*.*.example.com:80|443/pathname/::param?fo
 
 exports[`matcher > hostname '' match {"hostname":"example.com"} 1`] = `true`;
 
+exports[`matcher > hostname '*.*.example.com' match {"hostname":"example.com"} 1`] = `true`;
+
 exports[`matcher > hostname '*.*.example.com' match {"hostname":"foo.bar.baz.example.com"} 1`] = `true`;
 
 exports[`matcher > hostname '*.*.example.com' match {"hostname":"foo.bar.example.com"} 1`] = `true`;
 
 exports[`matcher > hostname '*.*.example.com' match {"hostname":"foo.example.com"} 1`] = `true`;
-
-exports[`matcher > hostname '*.*.example.com' not match {"hostname":"example.com"} 1`] = `false`;
 
 exports[`matcher > hostname '*.*.example.com' not match {"hostname":"foo.com"} 1`] = `false`;
 

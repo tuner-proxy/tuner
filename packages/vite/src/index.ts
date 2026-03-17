@@ -1,7 +1,7 @@
 import { defineRoutes } from '@tuner-proxy/core';
 import { decode, ensecure, responseAll } from '@tuner-proxy/util';
 
-import { getViteRoute } from './vite';
+import { getViteRoute } from './vite.js';
 
 export function vite(vitePath: string) {
   return defineRoutes([

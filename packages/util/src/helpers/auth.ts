@@ -5,7 +5,7 @@ import type {
 } from '@tuner-proxy/core';
 import { connectHandler, defineRoutes } from '@tuner-proxy/core';
 
-import { requestHandler } from './request';
+import { requestHandler } from './request.js';
 
 export const basicAuth = (
   verify: (auth?: string) => boolean | Promise<boolean>,

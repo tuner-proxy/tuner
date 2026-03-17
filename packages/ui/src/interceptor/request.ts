@@ -4,8 +4,8 @@ import type { TLSSocket } from 'node:tls';
 import type { HTTPResponse, HTTPRequest } from '@tuner-proxy/core';
 import { httpHandler } from '@tuner-proxy/core';
 
-import { broadcast, broadcastData } from '../ctrl/server';
-import { genUID, getRemoteInfo } from '../shared';
+import { broadcast, broadcastData } from '../ctrl/server.js';
+import { genUID, getRemoteInfo } from '../shared.js';
 
 export function createRequestInterceptor() {
   function bindEvent(

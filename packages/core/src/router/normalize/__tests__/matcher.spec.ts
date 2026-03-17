@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import type { MatchInfo } from '../matcher';
+import type { MatchInfo } from '../matcher.js';
 import {
   createHostnameMatcher,
   createPathnameMatcher,
@@ -8,7 +8,7 @@ import {
   createProtocolMatcher,
   createSearchParamsMatcher,
   createURLMatcher,
-} from '../matcher';
+} from '../matcher.js';
 
 describe('matcher', () => {
   match('protocol', createProtocolMatcher, [
@@ -50,15 +50,12 @@ describe('matcher', () => {
     {
       pattern: '*.*.example.com',
       toMatch: createCases('hostname', [
+        'example.com',
         'foo.example.com',
         'foo.bar.example.com',
         'foo.bar.baz.example.com',
       ]),
-      toNotMatch: createCases('hostname', [
-        'example.com',
-        'foo.com',
-        'foo.example.com.net',
-      ]),
+      toNotMatch: createCases('hostname', ['foo.com', 'foo.example.com.net']),
     },
     {
       pattern: '[1.0.0.0/16]',

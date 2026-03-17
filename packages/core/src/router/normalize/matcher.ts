@@ -2,7 +2,7 @@ import * as net from 'node:net';
 
 import { getMatch } from 'ip-matching';
 
-import { parseURL } from './parseURL';
+import { parseURL } from './parseURL.js';
 
 export interface MatchInfo {
   readonly protocol: string;
@@ -74,7 +74,7 @@ export function createHostnameMatcher(pattern?: string) {
   }
   const wildcard = pattern.match(/^(\*+\.)*/)?.[0] || '';
   const domain = pattern.slice(wildcard.length);
-  const strictLength = !wildcard || wildcard[0] === '*.';
+  const strictLength = !wildcard || wildcard === '*.';
   const patternLength = pattern.split('.').length;
   return function matchHostname(info: MatchInfo) {
     if (info.hostname === pattern) {

@@ -1,8 +1,8 @@
 import http from 'node:http';
 import https from 'node:https';
 
-import { stringifyHost } from '../../shared/utils';
-import type { ConnectOptions } from '../connect';
+import { stringifyHost } from '../../shared/utils.js';
+import type { ConnectOptions } from '../connect.js';
 
 export interface HTTPProxyOptions {
   type: 'http' | 'https' | 'proxy';

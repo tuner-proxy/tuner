@@ -5,7 +5,7 @@ import util from 'node:util';
 
 import forge from 'node-forge';
 
-import type { Certificate } from './types';
+import type { Certificate } from './types.js';
 
 const generateKeyPair = util.promisify(forge.pki.rsa.generateKeyPair);
 
@@ -53,7 +53,7 @@ interface GenerateCertificateOptions {
   subject: forge.pki.CertificateField[];
   issuer: forge.pki.CertificateField[];
   extensions: any[];
-  privateKey?: forge.pki.PrivateKey;
+  privateKey?: forge.pki.rsa.PrivateKey;
 }
 
 function generateCertificate({

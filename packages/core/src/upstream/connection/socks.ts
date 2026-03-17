@@ -3,7 +3,7 @@ import { promisify } from 'node:util';
 
 import { SocksClient } from 'socks';
 
-import type { ConnectOptions } from '../connect';
+import type { ConnectOptions } from '../connect.js';
 
 const resolve4 = promisify(dns.resolve4);
 

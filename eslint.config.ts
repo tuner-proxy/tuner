@@ -3,7 +3,6 @@ import {
   defineConfigWithVueTs,
   vueTsConfigs,
 } from '@vue/eslint-config-typescript';
-import pluginImport from 'eslint-plugin-import';
 import pluginOxlint from 'eslint-plugin-oxlint';
 import pluginVue from 'eslint-plugin-vue';
 
@@ -21,9 +20,6 @@ export default defineConfigWithVueTs(
   pluginOxlint.configs['flat/recommended'],
   vuePrettier,
   {
-    plugins: {
-      import: pluginImport,
-    },
     rules: {
       'vue/require-prop-types': 'off',
       'vue/one-component-per-file': 'off',
@@ -46,15 +42,6 @@ export default defineConfigWithVueTs(
 
       'arrow-body-style': ['warn', 'as-needed'],
       'object-shorthand': ['warn', 'properties'],
-
-      'import/order': [
-        'error',
-        {
-          'newlines-between': 'always',
-          alphabetize: { order: 'asc' },
-          pathGroupsExcludedImportTypes: ['builtin'],
-        },
-      ],
     },
   },
 );

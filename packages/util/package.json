@@ -9,38 +9,37 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
     }
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.mts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "vite build",
-    "dev": "vite build --watch --mode development",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
-    "chalk": "^5.4.1",
+    "chalk": "^5.6.2",
     "event-to-promise": "^0.8.0",
-    "mime-types": "^2.1.35",
+    "mime-types": "^3.0.2",
     "sni": "^1.0.0",
-    "ws": "^8.18.1"
+    "ws": "^8.19.0"
   },
   "devDependencies": {
-    "@tsconfig/node22": "^22.0.1",
+    "@tsconfig/node-lts": "^24.0.0",
     "@tuner-proxy/core": "workspace:~",
     "@types/event-to-promise": "^0.7.5",
-    "@types/mime-types": "^2.1.4",
-    "@types/node": "^22.13.13",
-    "@types/ws": "^8.18.0",
-    "rollup-plugin-node-externals": "^8.0.0",
-    "typescript": "^5.8.2",
-    "vite": "^6.3.5",
-    "vite-plugin-dts": "^4.5.3"
+    "@types/mime-types": "^3.0.1",
+    "@types/node": "^25.5.0",
+    "@types/ws": "^8.18.1",
+    "@typescript/native-preview": "7.0.0-dev.20260317.1",
+    "tsdown": "^0.21.4",
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "@tuner-proxy/core": "workspace:~"

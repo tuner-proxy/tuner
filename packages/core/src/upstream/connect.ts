@@ -1,9 +1,9 @@
 import type net from 'node:net';
 
-import UPSTREAM_TYPE from './connection';
-import type { HTTPProxyOptions } from './connection/http';
-import type { SocksProxyOptions } from './connection/socks';
-import type { TCPProxyOptions } from './connection/tcp';
+import UPSTREAM_TYPE from './connection/index.js';
+import type { HTTPProxyOptions } from './connection/http.js';
+import type { SocksProxyOptions } from './connection/socks.js';
+import type { TCPProxyOptions } from './connection/tcp.js';
 
 export type ProxyOptions =
   | HTTPProxyOptions

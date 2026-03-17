@@ -2,10 +2,10 @@ import type http from 'node:http';
 import type stream from 'node:stream';
 import tls from 'node:tls';
 
-import type { Server } from '../Server';
-import { isLoopBack } from '../shared/loopback';
+import type { Server } from '../Server.js';
+import { isLoopBack } from '../shared/loopback.js';
 
-import { BaseRequest } from './BaseRequest';
+import { BaseRequest } from './BaseRequest.js';
 
 export class UpgradeRequest extends BaseRequest {
   readonly type = 'upgrade';

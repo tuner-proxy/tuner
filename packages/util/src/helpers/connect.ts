@@ -7,10 +7,10 @@ import type { Server } from '@tuner-proxy/core';
 import { connectHandler, HTTPRequest, UpgradeRequest } from '@tuner-proxy/core';
 import chalk from 'chalk';
 
-import { log } from '../shared/log';
-import { getCertificate } from '../shared/tls';
+import { log } from '../shared/log.js';
+import { getCertificate } from '../shared/tls.js';
 
-import { definePersist } from './persist';
+import { definePersist } from './persist.js';
 
 export type DecoderServerType = 'http' | 'https' | 'h2c' | 'h2';
 

@@ -4,13 +4,13 @@ import type net from 'node:net';
 import chalk from 'chalk';
 import waitFor from 'event-to-promise';
 
-import type { Certificate } from './ca';
-import type { HandleRequestFn } from './shared/types';
-import { log } from './shared/utils';
-import { Upstream } from './upstream';
-import type { ConnectRequest } from './wrapper/ConnectRequest';
-import type { HTTPRequest } from './wrapper/HTTPRequest';
-import type { UpgradeRequest } from './wrapper/UpgradeRequest';
+import type { Certificate } from './ca/index.js';
+import type { HandleRequestFn } from './shared/types.js';
+import { log } from './shared/utils.js';
+import { Upstream } from './upstream/index.js';
+import type { ConnectRequest } from './wrapper/ConnectRequest.js';
+import type { HTTPRequest } from './wrapper/HTTPRequest.js';
+import type { UpgradeRequest } from './wrapper/UpgradeRequest.js';
 
 export interface ServerOptions {
   /**
@@ -144,7 +144,8 @@ export class Server {
       log(chalk.red(req.method), req.originalUrl, '\n', error);
 
       if (req.res.writable) {
-        req.res.writeHead(502);
+        const httpRes = req.res as http.ServerResponse;
+        httpRes.writeHead(502);
       }
       req.res.end();
     }

@@ -1,6 +1,6 @@
-import * as httpUpstream from './http';
-import * as socksUpstream from './socks';
-import * as tcpUpstream from './tcp';
+import * as httpUpstream from './http.js';
+import * as socksUpstream from './socks.js';
+import * as tcpUpstream from './tcp.js';
 
 export default {
   direct: tcpUpstream,

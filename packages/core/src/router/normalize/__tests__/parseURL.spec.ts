@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { parseURL } from '../parseURL';
+import { parseURL } from '../parseURL.js';
 
 describe('parseURL', () => {
   parse('protocol', 'https://');

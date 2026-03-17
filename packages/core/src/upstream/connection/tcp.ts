@@ -2,7 +2,7 @@ import net from 'node:net';
 
 import waitFor from 'event-to-promise';
 
-import type { ConnectOptions } from '../connect';
+import type { ConnectOptions } from '../connect.js';
 
 export interface TCPProxyOptions {
   type: 'direct';

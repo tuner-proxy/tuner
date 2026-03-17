@@ -1,6 +1,6 @@
-import type { ConnectRequest } from '../wrapper/ConnectRequest';
-import type { HTTPRequest } from '../wrapper/HTTPRequest';
-import type { UpgradeRequest } from '../wrapper/UpgradeRequest';
+import type { ConnectRequest } from '../wrapper/ConnectRequest.js';
+import type { HTTPRequest } from '../wrapper/HTTPRequest.js';
+import type { UpgradeRequest } from '../wrapper/UpgradeRequest.js';
 
 export type TunerRequest = ConnectRequest | HTTPRequest | UpgradeRequest;
 

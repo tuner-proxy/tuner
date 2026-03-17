@@ -15,6 +15,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@ui': path.resolve('../src'),
+      path: path.resolve('./src/shim/path'),
     },
   },
   server: {

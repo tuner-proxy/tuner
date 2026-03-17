@@ -4,10 +4,10 @@ import tls from 'node:tls';
 
 import waitFor from 'event-to-promise';
 
-import { stringifyHost } from '../shared/utils';
+import { stringifyHost } from '../shared/utils.js';
 
-import type { ProxyOptions } from './connect';
-import UPSTREAM_TYPE from './connection';
+import type { ProxyOptions } from './connect.js';
+import UPSTREAM_TYPE from './connection/index.js';
 
 declare module 'http' {
   interface Agent {
@@ -43,7 +43,7 @@ export class HTTPProxyAgent extends http.Agent {
   createConnection(
     options: http.RequestOptions,
     callback: (...args: any[]) => any,
-  ) {
+  ): undefined {
     callback(new Error('Failed to establish proxy connection'));
   }
 

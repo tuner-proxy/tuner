@@ -3,14 +3,14 @@ import { PassThrough } from 'node:stream';
 
 import waitFor from 'event-to-promise';
 
-import type { ContentEncodingType } from '../shared/encoding';
+import type { ContentEncodingType } from '../shared/encoding.js';
 import {
   createCompressStream,
   createDecompressStream,
   normalizeContentEncoding,
-} from '../shared/encoding';
+} from '../shared/encoding.js';
 
-import { StreamManager } from './StreamManager';
+import { StreamManager } from './StreamManager.js';
 
 export type BodyContent = string | Buffer | Readable;
 

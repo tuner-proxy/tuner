@@ -3,8 +3,8 @@ import path from 'node:path';
 
 import chalk from 'chalk';
 
-import { generateRootCA } from '../ca';
-import { log } from '../shared/utils';
+import { generateRootCA } from '../ca/index.js';
+import { log } from '../shared/utils.js';
 
 export interface ResolveOptions {
   cert: string;

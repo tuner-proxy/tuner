@@ -5,7 +5,7 @@ import type { HTTPResponse, HTTPRequest } from '@tuner-proxy/core';
 import { httpHandler } from '@tuner-proxy/core';
 import waitFor from 'event-to-promise';
 
-import { transformRes } from './response';
+import { transformRes } from './response.js';
 
 export type TransformRequestBodyHandler<T> = (
   data: T,

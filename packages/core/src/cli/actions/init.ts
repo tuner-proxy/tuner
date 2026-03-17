@@ -1,7 +1,7 @@
 import path from 'node:path';
 
-import { installRootCA } from '../../ca';
-import { resolveRootCA } from '../ca';
+import { installRootCA } from '../../ca/index.js';
+import { resolveRootCA } from '../ca.js';
 
 export interface InitParams {
   cert: string;

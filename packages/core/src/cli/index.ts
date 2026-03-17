@@ -1,11 +1,11 @@
 import chalk from 'chalk';
 import { program } from 'commander';
 
-import { version } from '../../package.json';
-import { log } from '../shared/utils';
+import pkg from '../../package.json' with { type: 'json' };
+import { log } from '../shared/utils.js';
 
-import { init } from './actions/init';
-import { start } from './actions/start';
+import { init } from './actions/init.js';
+import { start } from './actions/start.js';
 
 process.on('uncaughtException', (error: any) => {
   log(chalk.red('Uncaught exception'), '\n', error.stack);
@@ -15,7 +15,7 @@ process.on('unhandledRejection', (error: any) => {
   log(chalk.red('Unhandled rejection'), '\n', error.stack);
 });
 
-program.version(version);
+program.version(pkg.version);
 
 program
   .command('start')

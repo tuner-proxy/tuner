@@ -5,16 +5,16 @@ import type tls from 'node:tls';
 
 import waitFor from 'event-to-promise';
 
-import type { Server } from '../Server';
-import type { ContentEncodingType } from '../shared/encoding';
-import { normalizeContentEncoding } from '../shared/encoding';
-import { isLoopBack } from '../shared/loopback';
-import type { BodyContent, BodyInfo, ReadOptions } from '../stream';
-import { readBuffer, readJson, readStream, readText } from '../stream';
+import type { Server } from '../Server.js';
+import type { ContentEncodingType } from '../shared/encoding.js';
+import { normalizeContentEncoding } from '../shared/encoding.js';
+import { isLoopBack } from '../shared/loopback.js';
+import type { BodyContent, BodyInfo, ReadOptions } from '../stream/index.js';
+import { readBuffer, readJson, readStream, readText } from '../stream/index.js';
 
-import { BaseRequest } from './BaseRequest';
-import type { HTTPResponseOptions } from './HTTPResponse';
-import { HTTPResponse } from './HTTPResponse';
+import { BaseRequest } from './BaseRequest.js';
+import type { HTTPResponseOptions } from './HTTPResponse.js';
+import { HTTPResponse } from './HTTPResponse.js';
 
 export interface HTTPSendOptions {
   /**
@@ -198,7 +198,8 @@ export class HTTPRequest extends BaseRequest {
     if (this.raw.httpVersionMajor === 2) {
       delete headers['keep-alive'];
     }
-    this.res.writeHead(res.statusCode, headers);
+    const httpRes = this.res as http.ServerResponse;
+    httpRes.writeHead(res.statusCode, headers);
     await waitFor(res.stream(options).pipe(this.res), 'close');
   }
 

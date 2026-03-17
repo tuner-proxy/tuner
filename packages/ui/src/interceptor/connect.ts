@@ -1,7 +1,7 @@
 import { connectHandler } from '@tuner-proxy/core';
 
-import { broadcast } from '../ctrl/server';
-import { genUID, getRemoteInfo } from '../shared';
+import { broadcast } from '../ctrl/server.js';
+import { genUID, getRemoteInfo } from '../shared.js';
 
 export function createConnectInterceptor() {
   return connectHandler(async (req, next) => {

@@ -3,7 +3,7 @@ import tls from 'node:tls';
 import { generateHostCertificate } from '@tuner-proxy/core';
 import type { Server } from '@tuner-proxy/core';
 
-import { definePersist } from '../helpers/persist';
+import { definePersist } from '../helpers/persist.js';
 
 interface SecureContextInfo {
   cert: string;

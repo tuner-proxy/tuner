@@ -1,8 +1,8 @@
-import type { RouteElement, RouteHandleElement } from '../handler';
+import type { RouteElement, RouteHandleElement } from '../handler.js';
 
-import { flattenRoutes } from './flatten';
-import type { MatchInfo } from './matcher';
-import { createURLMatcher } from './matcher';
+import { flattenRoutes } from './flatten.js';
+import type { MatchInfo } from './matcher.js';
+import { createURLMatcher } from './matcher.js';
 
 export interface NormalizedRoute {
   matchers: Array<{ pattern: string; match(info: MatchInfo): any }>;

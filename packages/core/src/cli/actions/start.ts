@@ -4,12 +4,12 @@ import path from 'node:path';
 
 import chalk from 'chalk';
 
-import { Server } from '../../Server';
-import { log } from '../../shared/utils';
-import { ConnectRequest } from '../../wrapper/ConnectRequest';
-import { HTTPRequest } from '../../wrapper/HTTPRequest';
-import { UpgradeRequest } from '../../wrapper/UpgradeRequest';
-import { resolveRootCA } from '../ca';
+import { Server } from '../../Server.js';
+import { log } from '../../shared/utils.js';
+import { ConnectRequest } from '../../wrapper/ConnectRequest.js';
+import { HTTPRequest } from '../../wrapper/HTTPRequest.js';
+import { UpgradeRequest } from '../../wrapper/UpgradeRequest.js';
+import { resolveRootCA } from '../ca.js';
 
 export interface StartParams {
   cert: string;

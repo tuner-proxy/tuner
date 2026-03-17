@@ -1,16 +1,16 @@
 import flatMap from 'lodash.flatmap';
 
-import type { TunerRequest } from '../shared/types';
-import { DEFAULT_PORT } from '../shared/utils';
+import type { TunerRequest } from '../shared/types.js';
+import { DEFAULT_PORT } from '../shared/utils.js';
 
 import type {
   RouteNextFn,
   RouteHandler,
   RouteHandleElement,
   HTTPProcessFn,
-} from './handler';
-import type { NormalizedRoute } from './normalize';
-import type { MatchInfo } from './normalize/matcher';
+} from './handler.js';
+import type { NormalizedRoute } from './normalize/index.js';
+import type { MatchInfo } from './normalize/matcher.js';
 
 export function execRoutes<T extends TunerRequest>(
   req: T,

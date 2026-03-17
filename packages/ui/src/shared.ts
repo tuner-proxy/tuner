@@ -1,7 +1,7 @@
 import type { Socket } from 'node:net';
 import type { Duplex } from 'node:stream';
 
-import type { RemoteInfo } from './types/message';
+import type { RemoteInfo } from './types/message.js';
 
 export function getRemoteInfo(
   stream?: Duplex | null | void,

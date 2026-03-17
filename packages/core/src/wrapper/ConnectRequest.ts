@@ -2,9 +2,9 @@ import type http from 'node:http';
 import type stream from 'node:stream';
 import type tls from 'node:tls';
 
-import type { Server } from '../Server';
+import type { Server } from '../Server.js';
 
-import { BaseRequest } from './BaseRequest';
+import { BaseRequest } from './BaseRequest.js';
 
 /**
  * HTTP connect request instance

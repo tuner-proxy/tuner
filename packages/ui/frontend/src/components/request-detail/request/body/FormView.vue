@@ -20,7 +20,7 @@ interface FormItem {
   file?: {
     filename?: string;
     type?: string;
-    buffer: Uint8Array;
+    buffer: Uint8Array<ArrayBuffer>;
   };
 }
 
@@ -65,7 +65,9 @@ const data = computed<FormItem[]>(() => {
 
 function downloadFile(item: FormItem) {
   const file = item.file!;
-  const blob = new Blob([file.buffer], { type: file.type });
+  const blob = new Blob([file.buffer], {
+    type: file.type,
+  });
   const url = URL.createObjectURL(blob);
   const el = document.createElement('a');
   el.setAttribute('href', url);

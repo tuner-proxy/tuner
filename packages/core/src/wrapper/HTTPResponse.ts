@@ -1,10 +1,10 @@
 import type http from 'node:http';
 import type stream from 'node:stream';
 
-import type { ContentEncodingType } from '../shared/encoding';
-import { normalizeContentEncoding } from '../shared/encoding';
-import type { BodyContent, BodyInfo, ReadOptions } from '../stream';
-import { readBuffer, readJson, readStream, readText } from '../stream';
+import type { ContentEncodingType } from '../shared/encoding.js';
+import { normalizeContentEncoding } from '../shared/encoding.js';
+import type { BodyContent, BodyInfo, ReadOptions } from '../stream/index.js';
+import { readBuffer, readJson, readStream, readText } from '../stream/index.js';
 
 export interface HTTPResponseOptions {
   raw?: http.IncomingMessage;
