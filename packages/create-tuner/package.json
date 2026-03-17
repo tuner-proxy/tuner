@@ -2,6 +2,11 @@
   "name": "create-tuner",
   "version": "0.6.0",
   "description": "Scaffolding your Tuner project",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tuner-proxy/tuner",
+    "directory": "packages/create-tuner"
+  },
   "type": "module",
   "bin": {
     "create-tuner": "./bin/index.mjs"
