@@ -1,5 +1,14 @@
 # @tuner-proxy/vite
 
+## 0.6.1
+
+### Patch Changes
+
+- b744af5: Revert major version bump caused by changeset
+- Updated dependencies [b744af5]
+  - @tuner-proxy/core@0.6.1
+  - @tuner-proxy/util@0.6.1
+
 ## 1.0.0
 
 ### Minor Changes
