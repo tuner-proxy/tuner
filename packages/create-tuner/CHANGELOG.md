@@ -1,5 +1,11 @@
 # create-tuner
 
+## 0.6.1
+
+### Patch Changes
+
+- b744af5: Revert major version bump caused by changeset
+
 ## 0.6.0
 
 ### Minor Changes
